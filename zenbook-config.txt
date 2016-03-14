@@ -1,0 +1,175 @@
+﻿11.Mar
+Kernel upgrade to 4.4 trashed bumblebee……?
+Yum install $(nvidia-detecT)
+Wifi issues
+/etc/sysconfig/wpa_supplicant
+
+
+
+
+10.Mar
+work
+[   63.430406] iwlwifi 0000:02:00.0: Direct firmware load for iwlwifi-7265D-18.ucode failed with error -2
+noch einmai langsam-wifi aufmal nachdem kernel upgrade to 4.4...
+
+
+
+
+
+
+7.March
+java console jre from orcale
+sudo yum localinstall 
+
+
+7.March
+/boot/efi/EFI/centos/ + /etc/default/grub
+rm /boot/grub2/grubenv; recreate it, set default 0, okay, boots into 4.4 kernel..
+
+
+.. grep menuentry /etc/grub2-efi.cfg
+Grub2-set-default 0 ## corresponds to kernel 4.4
+Grub2-editenv list
+
+
+synclient, made changes + saved to /usr/share/X11/xorg.conf.d/50-synpatics.conf, but didn’t stick...
+sudo cp /usr/share/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/ + reboot; no change
+sudo yum erase kcm-touchpad + reboot ## fixed it, now respects 50-synaptics…
+sudo mv /etc/X11/xorg.conf.d/50-synpatics away + reboot
+
+
+Test all changes inline with “synclient FingerLow=25”
+
+
+            Option "FingerLow" "25"
+            Option "FingerHigh" "30"
+   Option      "VertScrollDelta"          "-20"    # Natural/Windows10 scrolling
+   Option      "HorizScrollDelta"         "-20"   # Natural/Widnows10 scrolling
+
+
+            Option "PalmDetect" "1"
+            Option "PalmMinWidth" "6"
+            Option "PalmMinZ" "20"
+        Option “TapButton2=3”    # turn on right click for two-finger touch
+
+
+Touchpad doesnt get disabled when typing……
+Xinput -list
+Xinput list-props <touchpad>
+Xinput watch-props <touchpad>
+
+
+
+
+
+
+
+
+
+
+
+
+also wifi issues ; seemingly fixed with either sudo nmtui a few times or “nmcli r wifi off/on”
+dave@localhost ~]$ sudo nmcli n off             
+[dave@localhost ~]$ sudo nmcli n connectivity
+none
+[dave@localhost ~]$ sudo nmcli n on
+[dave@localhost ~]$ sudo nmcli n connectivity
+
+
+
+
+
+
+http://www.x.org/archive/X11R7.5/doc/man/man4/synaptics.4.html
+
+
+5.March
+home craptop
+boot with ‘i915.preliminary_hw_support’, select KDE Plasma and it just worked.  Make sure are connected to the wifi/wireless.
+
+
+https://www.linux.ncsu.ediu/bumblebee/#how-tell
+https://elrepo.org/tiki/bumblebee
+
+
+ n
+USB 3 128Gb stick prep:
+gparted - nuke - create GPT partition table, create 64GB NTFS, make partition bootable
+reboot - make sure craptop can see usb stick, hit escape during splash 
+unetbootin on Windows:
+select .iso to copy to usb stick ; do it;  THEN copy the .iso over to the stick; ce ntos having trouble finding the install on the stick; need to get to the usb stick in the centos install screen….
+ 
+nmtui - networkmanager-tui
+
+
+/etc/default/grub:
+GRUB_CMDLINE_LINUX="rhgb nouveau.modeset=0 rd.driver.blacklist=nouveau"
+GRUB_CMDLINE_LINUX_DEFAULT="rhgb rcutree.rcu_idle_gp_delay=1 i915.modeset=1 i915.preliminary_hw_support=1 pci=noaer"
+
+
+grub2-mkconfig -o /boot/efi/EFI/centos/grub.cfg
+
+
+/etc/bumblebee/bumblebee.conf:
+[driver-nvidia]
+# Module name to load, defaults to Driver if empty or unset
+KernelDriver=nvidia
+PMMethod=auto
+# colon-separated path to the nvidia libraries
+LibraryPath=/usr/lib64/nvidia:/usr/lib64/xorg/modules/extensions/nvidia
+# comma-separated path of the directory containing nvidia_drv.so and the
+# default Xorg modules path
+XorgModulePath=/usr/lib64/xorg/modules/extensions/nvidia,/usr/lib64/xorg/modules/drivers,/usr/lib64/xorg/modules,/usr/lib64/xorg/modules/input
+XorgConfFile=/etc/bumblebee/xorg.conf.nvidia
+
+
+
+
+________________
+
+
+Work Craptop
+
+
+https://help.ubuntu.com/community/AsusZenbook
+
+
+https://wiki.archlinux.org/index.php/ASUS_Zenbook_UX303
+
+
+https://wiki.ubuntu.com/DebuggingTouchpadDetection#In_case_your_Touchpad_doesn.27t_work_at_all_.28No_response_from_the_Touchpad.29
+
+
+
+
+SSSD - TRIM ?
+Touchpad - synaptics
+
+
+cat /proc/bus/input/devices
+.. just not found at all.. basic kernel issue.. needs kernel v.4 ..
+
+
+http://linoxide.com/how-tos/install-linux-kernel-4-0-elrepo-source/
+<<< hmm somehow got 4.4 kernel installed ………. ?
+install evtest; git clone git://people.freedesktop.org/~whot/evtest
+
+
+KDE touchpad is now enabled.  Settings are all messed up.  Tapping doesn’t work.  Scrolling too slow.
+
+
+For some reason the libEGL library did not get pulled in : kwin could not run : was missing window-borders around windows.
+yum install mesa-libEGL
+
+
+needed to add this to get bumbleed running on boot:
+cd /etc/systemd/system/multi-user.target.wants
+sudo ln -sf /usr/lib/systemd/system/bumblebeed.service .
+Repeat for the graphical.target:
+cd /etc/systemd/system/graphical.target.wants
+sudo ln -sf /usr/lib/systemd/system/bumblebeed.service .
+
+
+USB webcam
+yum install -y cheese
