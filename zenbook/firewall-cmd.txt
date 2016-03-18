@@ -1,0 +1,17 @@
+sudo firewall-cmd --list-all	# still there ..
+sudo firewall-cmd --reload
+sudo firewall-cmd --complete-reload
+sudo firewall-cmd --list-all	# gone ..
+
+# completely turn off ssh
+sudo firewall-cmd --remove-service=ssh --permanent
+
+# Add a rich rule to turn on ssh for this IP
+sudo firewall-cmd --add-rich-rule 'rule family="ipv4" source address="x.x.x.x" service name="ssh" accept' --permanent
+
+sudo firewall-cmd --remove-rich-rule 'rule family="ipv4" source address="x.x.x.x" service name="ssh" accept' --permanent
+
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-all-rules
+
+
