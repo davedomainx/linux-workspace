@@ -1,3 +1,3 @@
-Rename repo:
-Settings -> rename
+To rename a github repo:
+Dashboardy - Settings -> rename
 
