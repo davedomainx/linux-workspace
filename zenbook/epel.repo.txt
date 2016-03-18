@@ -3,9 +3,28 @@ yum repolist
 yum search fail2ban
 yum info fail2ban
 
-## Download + verify GPG key from EPEL repo 1st :
+== GPG KEY ==
 sudo yum install --downloadonly --downloaddir=/tmp epel-release
 rpm -K ./epel-release-7-5.noarch.rpm
 	./epel-release-7-5.noarch.rpm: rsa sha1 (md5) pgp md5 OK
+
+https://getfedora.org/keys/
+..
+wget https://getfedora.org/static/352C64E5.txt
+mv 352C64E5.txt /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+
+rpm -qa gpg*
+
+For greater sanity can also search with a 3rd party site:
+http://keys.gnupg.net
+352C64E5
+Fedora EPEL
+
+###
+
+sudo rpm --import /tmp/RPM-GPG-KEY-remi
+rpm -q gpg-pubkey --qf '%{name}-%{version}-%{release} --> %{summary}\n'
+rpm -qi gpg-pubkey-00f97f56-467e318a
 
 sudo yum install fail2ban
