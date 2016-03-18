@@ -8,3 +8,5 @@ It would appear best way is via git..
 To rename a github repo:
 Dashboardy - Settings -> rename
 
+To ammend git commit message:
+git commit --amend
