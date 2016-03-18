@@ -1,5 +1,11 @@
 ssh-keygen -o -p -f ~/.ssh/id_rsa
 ssh-agent
 ssh-add
-#
-assaasd
+ssh-add -L
+
+# modify ~ssh/.config for github
+git config --local -l
+git remote -v
+git remote set-url origin ssh://davedomainx@github.com/davedomainx/linux-workspace.git
+git remote -v
+git config --local -l
