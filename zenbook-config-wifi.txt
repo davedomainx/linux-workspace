@@ -3,9 +3,9 @@
 Nmcli dev
 Nmcli dev wifi connect <SSID>
  
-[root@cl-darnold2 wpa_supplicant]# readlink -f ./wpa_supplicant.conf
+readlink -f ./wpa_supplicant.conf
 /etc/wpa_supplicant/wpa_supplicant.conf
-[root@cl-darnold2 wpa_supplicant]# cat !$
+wpa_supplicant]# cat !$
 cat ./wpa_supplicant.conf
 ctrl_interface=/var/run/wpa_supplicant
 ctrl_interface_group=wheel
@@ -40,7 +40,7 @@ IEEE_8021X_INNER_AUTH_METHODS=MSCHAPV2
 PEERDNS=yes
 PEERROUTES=yes
 
-[root@cl-darnold2 network-scripts]# cat keys-<SSID>
+network-scripts]# cat keys-<SSID>
 IEEE_8021X_PASSWORD=XXXXXXX
 WPA_PSK=''
 
