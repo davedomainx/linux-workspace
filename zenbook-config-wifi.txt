@@ -13,7 +13,7 @@ ctrl_interface_group=wheel
 # reading passphrase from stdin
 network={
     ssid="<SSID>"
-    #psk=a2bdc5c7d65bb15f186c69d351319490bc5c34c3eccd14aaf8113771a5bc42f6
+    #psk=<hash of credentials>
     identity=<external work email address>
 }
 
