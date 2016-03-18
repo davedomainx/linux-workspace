@@ -1,7 +1,7 @@
-sudo firewall-cmd --list-all	# still there ..
-sudo firewall-cmd --reload
-sudo firewall-cmd --complete-reload
-sudo firewall-cmd --list-all	# gone ..
+sudo firewall-cmd --list-all
+sudo firewall-cmd --reload              # keep connections
+sudo firewall-cmd --complete-reload     # drop connections
+sudo firewall-cmd --list-all
 
 # completely turn off ssh
 sudo firewall-cmd --remove-service=ssh --permanent
