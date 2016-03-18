@@ -1,0 +1,15 @@
+TargetBox : CentOS Linux release 7.2.1511 (Core)
+
+sudo yum install -y qt-devel libgcrypt-devel
+sudo yum groupinstall -y "Development Tools"
+curl https://www.keepassx.org/releases/2.0.2/keepassx-2.0.2.tar.gz|tar zx
+mkdir keepassx-2.0.2/build
+cd !$
+cmake ..
+make
+sudo make install   ## /usr/local
+
+/usr/local/bin/keepassx
+Database - Import keepass1 DB - Save
+
+Test - all good
