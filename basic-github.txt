@@ -1,3 +1,10 @@
+I need to be able to work on areas across the following:
+
+Home : Laptop + Server
+Work : Laptop + Deskop
+
+It would appear best way is via git..
+
 To rename a github repo:
 Dashboardy - Settings -> rename
 

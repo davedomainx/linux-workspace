@@ -1,11 +1,8 @@
 ﻿Craptop-wifi
 
-
 Nmcli dev
-Nmcli dev wifi connect mdc-intern
+Nmcli dev wifi connect <SSID>
  
-
-
 [root@cl-darnold2 wpa_supplicant]# readlink -f ./wpa_supplicant.conf
 /etc/wpa_supplicant/wpa_supplicant.conf
 [root@cl-darnold2 wpa_supplicant]# cat !$
@@ -13,48 +10,41 @@ cat ./wpa_supplicant.conf
 ctrl_interface=/var/run/wpa_supplicant
 ctrl_interface_group=wheel
 
-
 # reading passphrase from stdin
 network={
-    ssid="mdc-intern"
+    ssid="<SSID>"
     #psk=a2bdc5c7d65bb15f186c69d351319490bc5c34c3eccd14aaf8113771a5bc42f6
-    identity=darnold@mdc-berlin.de
+    identity=<external work email address>
 }
 
-
-readlink -f ifcfg-mdc-intern
-/etc/sysconfig/network-scripts/ifcfg-mdc-intern
+readlink -f ifcfg-<SSID>
+/etc/sysconfig/network-scripts/ifcfg-<SSID>
 [root@cl-darnold2 network-scripts]# cat !$
-cat ifcfg-mdc-intern
-ESSID="mdc-intern"
+cat ifcfg-<SSID>
+ESSID=<SSID>
 MODE=Managed
 KEY_MGMT=WPA-EAP
 TYPE=Wireless
 IEEE_8021X_EAP_METHODS=PEAP
-IEEE_8021X_IDENTITY=darnold
+IEEE_8021X_IDENTITY=<username>
 IEEE_8021X_PRIVATE_KEY_PASSWORD_FLAGS=user
 IEEE_8021X_INNER_PRIVATE_KEY_PASSWORD_FLAGS=user
 BOOTPROTO=dhcp
 DEFROUTE=yes
 IPV4_FAILURE_FATAL=yes
 IPV6INIT=no
-NAME=mdc-intern
+NAME=<SSID>
 UUID=d9420487-fd0f-426d-80d9-7477f28bc75d
 ONBOOT=yes
 IEEE_8021X_INNER_AUTH_METHODS=MSCHAPV2
 PEERDNS=yes
 PEERROUTES=yes
 
-
-
-
-[root@cl-darnold2 network-scripts]# cat keys-mdc-intern
+[root@cl-darnold2 network-scripts]# cat keys-<SSID>
 IEEE_8021X_PASSWORD=XXXXXXX
 WPA_PSK=''
 
-
 Tail -f /var/log/wpa_supplicant.log
-
 
 Nmtui - activate + deactivate…
 Systemctl restart network
