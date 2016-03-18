@@ -1,0 +1,11 @@
+sudo yum install epel-release
+yum repolist
+yum search fail2ban
+yum info fail2ban
+
+## Download + verify GPG key from EPEL repo 1st :
+sudo yum install --downloadonly --downloaddir=/tmp epel-release
+rpm -K ./epel-release-7-5.noarch.rpm
+	./epel-release-7-5.noarch.rpm: rsa sha1 (md5) pgp md5 OK
+
+sudo yum install fail2ban
