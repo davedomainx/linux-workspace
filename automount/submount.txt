@@ -1,0 +1,94 @@
+Hi,
+
+are there some limitations to how automount can handle submount-maps ?
+
+I'm using CentOS 6.5 with automount information delivered via SSSD, 
+talking to an Active Directory server.  Automount works fine with
+direct + indirect maps.
+
+But I cannot seem to automount a stanza like so:
+
+/gnu                -> automounts okay
+/gnu/var/guix/pro   -> does not automount
+
+I can direct-mount the directories no problems.
+
+Everything I have read tells me that I should be able to automount
+the above stanza, if they have _direct map_ entries (see below)
+
+I CAN _indirect_ automount a stanza like below, where each of the 
+below directories is handled by a single nisMapEntry in AD:
+
+/data
+/data/test
+/data/test/here
+
+nisMapEntry:
+/test 192.168.1.100:/export/test /test/here 192.168.1.100:/export/here
+
+Some obscured config info below.  Any assistance greatly appreciated!
+I'll ask the sssd folks next, but at the moment this feels more of an 
+autofs question..
+
+-------
+
+cat /etc/auto.master:
++auto.master                ## lookup SSSD..
+
+In auto.master: 
+dn: CN=/-,CN=auto.master ...
+objectClass: top
+objectClass: nisObject
+nisMapEntry: auto.direct
+nisMapName: auto.master
+
+In auto.direct:
+# /gnu, auto.direct
+dn: CN=/gnu,CN=auto.direct
+objectClass: top
+objectClass: nisObject
+nisMapEntry: 192.168.1.20:/export/guix_store
+nisMapName: auto.direct
+
+# /gnu/var/guix/pro, auto.direct
+dn: CN=/gnu/var/guix/pro,CN=auto.direct
+objectClass: top
+objectClass: nisObject
+nisMapEntry: 192.168.1.20:/export/guix_profiles
+nisMapName: auto.direct
+
+-------
+/etc/sssd/sssd.conf:        ## relevant bits only
+autofs_provider = ldap
+ldap_autofs_entry_key = cn
+ldap_autofs_entry_object_class = nisObject
+ldap_autofs_entry_value = nisMapEntry
+ldap_autofs_map_name = nisMapName
+ldap_autofs_map_object_class = nisMap
+ldap_autofs_search_base = XXX
+
+[sssd]
+services = nss, pam, autofs
+
+------
+grep auto /etc/nsswitch.conf    ## relevant bits only
+automount:  files sss
+
+------
+
+sudo rpm -qa |grep sssd
+
+sssd-client-1.12.4-47.el6_7.7.x86_64
+sssd-ldap-1.12.4-47.el6_7.7.x86_64
+sssd-common-pac-1.12.4-47.el6_7.7.x86_64
+sssd-common-1.12.4-47.el6_7.7.x86_64
+sssd-krb5-1.12.4-47.el6_7.7.x86_64
+sssd-krb5-common-1.12.4-47.el6_7.7.x86_64
+sssd-ad-1.12.4-47.el6_7.7.x86_64
+sssd-1.12.4-47.el6_7.7.x86_64
+python-sssdconfig-1.12.4-47.el6_7.7.noarch
+sssd-ipa-1.12.4-47.el6_7.7.x86_64
+sssd-proxy-1.12.4-47.el6_7.7.x86_64
+
+sudo rpm -qa |grep autofs
+autofs-5.0.5-113.el6.x86_64
