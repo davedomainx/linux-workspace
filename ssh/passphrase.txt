@@ -6,7 +6,9 @@ ssh-add -L
 # modify ~ssh/.config for github
 git config --local -l
 git remote -v
-git remote set-url origin ssh://davedomainx@github.com/davedomainx/linux-workspace.git
+# Wrong - needs to connect as 'git' user ..
+#git remote set-url origin ssh://davedomainx@github.com/davedomainx/linux-workspace.git
+git remote set-url origin ssh://git@github.com/davedomainx/linux-workspace.git
 git remote -v
 git config --local -l
 
