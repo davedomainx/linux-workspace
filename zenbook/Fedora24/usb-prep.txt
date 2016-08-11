@@ -1,0 +1,7 @@
+sudo yum install e2fsprogs
+sudo yum install ntfsprogs
+gparted
+destroy all 
+create new ntfs + format ntfs
+#mount /dev/sdb1 /mnt/stick
+sudo /bin/dd if=./Fedora-Workstation-Live-x86_64-24-1.2.iso of=/dev/sdb bs=1024M
