@@ -1,4 +1,5 @@
-﻿11.Mar
+﻿sdf
+11.Mar
 Kernel upgrade to 4.4 trashed bumblebee……?
 Yum install $(nvidia-detecT)
 Wifi issues
