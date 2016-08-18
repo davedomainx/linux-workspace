@@ -1,0 +1,42 @@
+systemctl disable NetworkManager
+systemctl enable systemd-resolved
+    fails on startup ; journalctl -xel
+    appears to fail to be able to write to system
+    https://bugzilla.redhat.com/show_bug.cgi?id=1353536
+    setenforce 0    # hack
+    # proper fix
+    grep resolved_t /var/log/audit.log |audit2allow -m resolved >/root/resolved.te
+    grep resolved_t /var/log/audit.log |audit2allow -M resolved 
+    semodule -i resolved.pp
+    semodule -l |grep resolve
+    reboot
+    journalctl -ur systemd-resolved
+
+# better proper fix
+# https://wiki.centos.org/HowTos/SELinux
+
+/root/resolved.te:
+====
+require {
+  type systemd_resolved_t;
+  type system_dbusd_t;
+  type chronyd_t;
+  type unconfined_t;
+  class dbus { acquire_svc send_msg };
+}
+
+#============= systemd_resolved_t ==============
+allow systemd_resolved_t system_dbusd_t:dbus acquire_svc;
+allow chronyd_t systemd_resolved_t:dbus send_msg;
+allow systemd_resolved_t chronyd_t:dbus send_msg;
+allow systemd_resolved_t unconfined_t:dbus send_msg;
+====
+
+checkmodule -M -m -o resolved.mod resolved.te
+semodule_package -o resolved.pp -m resolved.mod
+semodule -i resolved.pp
+semodule -l |grep resolved
+reboot
+    
+good /etc/resolv.conf and can now ping google.com
+
