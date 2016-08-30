@@ -1,17 +1,20 @@
 http://http://flight-manual.atom.io/
 
-ctrl shift p
-  git status ..
-
 Settings : install
   language-puppet
   language-git
   git-plus
   git-<various>
+  git-time-machine
+
+Packages : <package> has more info ..
+
+ctrl shift p
+  git status ..
 
 git-plus:
   ctrl shift h > git commit ..asfd
-  
+
   ctrl shift b > open untracked/modified files
   cmd-alt-z. This keybinding checks out the HEAD revision of the file in the editor.
 
