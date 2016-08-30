@@ -6,7 +6,20 @@ ctrl shift p
 Settings : install
   language-puppet
   language-git
+  git-plus
   git-<various>
+
+git-plus:
+  ctrl shift h > git commit ..asfd
+  
+  ctrl shift b > open untracked/modified files
+  cmd-alt-z. This keybinding checks out the HEAD revision of the file in the editor.
+
+~/.atom/styles.less:
+  .tree-view .entry.directory.status-modified > .header
+  .tree-view .entry.file.status-modified {
+    font-weight: bold;
+  }
 
 Make atom the default git-editor:
 git config --global core.editor "atom --wait"
