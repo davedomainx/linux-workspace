@@ -1,0 +1,3 @@
+http://www.tecmint.com/things-to-do-after-fedora-24-workstation-installation/
+rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-24.noarch.rpm
+

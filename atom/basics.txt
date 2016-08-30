@@ -1,0 +1,12 @@
+http://http://flight-manual.atom.io/
+
+ctrl shift p
+  git status ..
+
+Settings : install
+  language-puppet
+  language-git
+  git-<various>
+
+Make atom the default git-editor:
+git config --global core.editor "atom --wait"

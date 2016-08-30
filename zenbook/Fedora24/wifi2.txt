@@ -40,3 +40,6 @@ reboot
     
 good /etc/resolv.conf and can now ping google.com
 
+
+=============
+/usr/lib/systemd/system/wpa_supplicant-wlp2s0.service

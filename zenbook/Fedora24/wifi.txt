@@ -1,0 +1,6 @@
+== Manually works with ==
+wpa_supplicant -f /var/log/wpa_supplicant.log -dd -P /var/run/wpa_supplicant.pid -c wpa_supplicant.conf -Dwext -iwlp2s0
+
+dhclient wlp2s0
+
+== Cannot get it working via systemctl/NM ==
