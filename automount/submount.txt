@@ -1,8 +1,10 @@
 Hi,
 
+xx
+
 are there some limitations to how automount can handle submount-maps ?
 
-I'm using CentOS 6.5 with automount information delivered via SSSD, 
+I'm using CentOS 6.5 with automount information delivered via SSSD,
 talking to an Active Directory server.  Automount works fine with
 direct + indirect maps.
 
@@ -16,7 +18,7 @@ I can direct-mount the directories no problems.
 Everything I have read tells me that I should be able to automount
 the above stanza, if they have _direct map_ entries (see below)
 
-I CAN _indirect_ automount a stanza like below, where each of the 
+I CAN _indirect_ automount a stanza like below, where each of the
 below directories is handled by a single nisMapEntry in AD:
 
 /data
@@ -27,7 +29,7 @@ nisMapEntry:
 /test 192.168.1.100:/export/test /test/here 192.168.1.100:/export/here
 
 Some obscured config info below.  Any assistance greatly appreciated!
-I'll ask the sssd folks next, but at the moment this feels more of an 
+I'll ask the sssd folks next, but at the moment this feels more of an
 autofs question..
 
 -------
@@ -35,7 +37,7 @@ autofs question..
 cat /etc/auto.master:
 +auto.master                ## lookup SSSD..
 
-In auto.master: 
+In auto.master:
 dn: CN=/-,CN=auto.master ...
 objectClass: top
 objectClass: nisObject
