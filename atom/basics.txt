@@ -1,5 +1,8 @@
 http://http://flight-manual.atom.io/
 
+Windows - Atom - Git
+  seems to work okay
+
 Settings : install
   language-puppet
   language-git
