@@ -1,6 +1,7 @@
 http://http://flight-manual.atom.io/
 
 Windows - Atom - Git
+  need to figure out the git atom folder stuff
   seems to work okay
 
 Settings : install
