@@ -1,5 +1,7 @@
 http://http://flight-manual.atom.io/
 
+test from windows atom git
+
 Settings : install
   language-puppet
   language-git
