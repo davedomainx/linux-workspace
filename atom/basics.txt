@@ -1,6 +1,12 @@
 http://http://flight-manual.atom.io/
 
 test from windows atom git
+windows desktop git
+git-shell
+$env:GIT_SSH = "C:\Users\dave\plink.exe"
+ssh git@github.com
+ perm denied
+https://technologyand.me/2016/08/29/git-with-atom/
 
 Settings : install
   language-puppet
@@ -8,6 +14,7 @@ Settings : install
   git-plus
   git-<various>
   git-time-machine
+  atom-runner ## run scripts from inside atom
 
 Packages : <package> has more info ..
 
