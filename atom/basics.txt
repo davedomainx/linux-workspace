@@ -5,7 +5,8 @@ windows desktop git
 git-shell
 $env:GIT_SSH = "C:\Users\dave\plink.exe"
 ssh git@github.com
- perm denied not any more
+ perm denied not any more der
+ 
 https://technologyand.me/2016/08/29/git-with-atom/
 
 Settings : install
