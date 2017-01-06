@@ -1,5 +1,6 @@
 http://http://flight-manual.atom.io/
 
+<<<<<<< HEAD
 test from windows atom git
 windows desktop git
 git-shell
@@ -8,6 +9,11 @@ ssh git@github.com
  perm denied not any more der
  
 https://technologyand.me/2016/08/29/git-with-atom/
+=======
+Windows - Atom - Git
+  need to figure out the git atom folder stuff
+  seems to work okay
+>>>>>>> e085085c2e84acab0410397d54ce28b2c10347ef
 
 Settings : install
   language-puppet
