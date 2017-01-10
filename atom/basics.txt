@@ -8,6 +8,7 @@ ssh git@github.com
  perm denied not any more der
  now it just works ?
  not using the right ssh key
+ removed one of the git packages i downloaded - fixed it
 https://technologyand.me/2016/08/29/git-with-atom/
 =======
 Windows - Atom - Git
