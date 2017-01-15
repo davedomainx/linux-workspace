@@ -24,6 +24,7 @@ ssh git@github.com
   11Jan: need to launch atom from the git shell ?
   15.jan pageant startup on boot, loads priv key, okay..
          survived the reboot
+         need to start atom from git-shell
 
 https://technologyand.me/2016/08/29/git-with-atom/
 =======
