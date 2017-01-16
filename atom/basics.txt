@@ -25,6 +25,7 @@ ssh git@github.com
   15.jan pageant startup on boot, loads priv key, okay..
          survived the reboot
          need to start atom from git-shell
+  17.jan test from work
 
 https://technologyand.me/2016/08/29/git-with-atom/
 =======
