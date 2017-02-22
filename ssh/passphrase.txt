@@ -3,6 +3,9 @@ ssh-agent
 ssh-add
 ssh-add -L
 
+ssh <git@git_server> info
+
+git clone ssh://git@git_server/some/path/to/repo
 # modify ~ssh/.config for github
 git config --local -l
 git remote -v
