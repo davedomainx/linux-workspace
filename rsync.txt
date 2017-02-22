@@ -1,0 +1,11 @@
+Full / backup, excluding unneeded directories:
+
+<code>
+rsync -aAXvx --dry-run --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} / /path/to/backup/folder
+rsync -aAXvx --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} / /path/to/backup/folder
+</code>
+
+( The 'x' is very important  - do not rsync over exports.. :)
+
+enforce bandwidth limits from userspace:\\
+rsync --rsh="trickle -s -d 20000 -u 20000 -t 4 -l 10 ssh" --progress --stats --bwlimit=20000 -avhW ./fromfs01home //tmp/rsync
