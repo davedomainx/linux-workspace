@@ -1,0 +1,38 @@
+Note - augeas apparently does not ignore commented-out lines when it parses a file - can be annoying if you have PermitRootLogin commented out in sshd_config …..
+
+augtool --noautoload
+print /augeas/load
+ /augeas/load
+set /augeas/load/Fstab/lens "Fstab.lns"
+set /augeas/load/Fstab/incl "/tmp/fstab"
+print /augeas/load
+ /augeas/load
+ /augeas/load/Fstab
+ /augeas/load/Fstab/lens = "Fstab.lns"
+ /augeas/load/Fstab/incl = "/tmp/fstab"
+load
+ls /files/
+ tmp/ = (none)
+ls /files/tmp/
+ fstab/ = (none)
+ls /files/tmp/fstab/
+..
+defvar r /files/tmp/fstab
+print $r
+
+print $r/*[file[.=~regexp('/home.*')]]
+rm $r/*[file=~regexp('/home.*')]
+
+Then in manfiest:
+ $removehome = "rm *[file=~regexp('/home.*')]"
+    augeas {'homeremoval':
+        #incl => '/etc/fstab',
+        #lens => 'Fstab.lns',
+        context => '/files/etc/fstab',
+        changes => $removehome,
+        notify => Service['autofs'],
+    }
+
+Removes all fstab entries like so where 'file=/home*' is the regexp match on the mountpoint:
+IP:/export/home	/home	nfs rw,noatime,noacl,rsize=32768,wsize=32768,hard,intr,vers=3	00
+IP:/export/user_scratch	/home/user/scratch nfs rw,noatime,noacl,rsize=32768,wsize=32768,hard,intr,vers=3
