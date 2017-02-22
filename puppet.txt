@@ -1,0 +1,1 @@
+sudo pdsh -a puppet agent -t –splaylimit=2m
