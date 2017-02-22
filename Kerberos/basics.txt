@@ -1,0 +1,20 @@
+https://ssimo.org/blog/id_016.html
+https://uit.stanford.edu/service/kerberos/keytabs
+
+
+service; these generally need to be set manually by an AD admin
+    For service principals, generally, instead of using a password a random key is generated and stored both in the KDC and in a file called a 'Keytab'.
+    Keytab files generally do not expire.
+    For the service principal, how do I get the keytab from the KDC? Do I even need it ? user and host do not have their principals manually copied to the keytab, it's automatically handled by the KDC .. ?
+
+492  export KRB5_KTNAME=/etc/AFS.keytab
+501  net ads keytab CREATE
+502  net ads keytab ADD AFS
+506  klist -k -e /etc/AFS.keytab
+
+Try deleting the offending computer principal from AD.
+Rejoin with “/usr/bin/net ads join -U djaccount%XXXXXXXX osname=/bin/uname -s osver=CentOS” ## Usually works here …
+
+net ads status -P
+net ads dns register -P
+net ads status -P
