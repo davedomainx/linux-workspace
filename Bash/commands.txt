@@ -1,0 +1,43 @@
+ps -eo pcpu,args |grep sge_shepherd|egrep -E '^[90-100].*[[:digit:]]*'
+
+## show total memory usage of a threaded process..
+pmap $(ps -C mmfsd -o pid=)|tail -1|sed 's/K$//g'|awk '{print $2/(1024*1024)}'
+
+## show top CPU user-processes..
+sudo pdsh -a "ps -eo pcpu,pid,user,etime,args --sort=-%cpu |grep -v 'ps -eo pcpu,pid,user,etime,args'|head -20|grep -v root"|dshbak -c
+
+##
+sudo pdsh -w max0[20-80] "ps -eo pid,pcpu,user,etime,comm,args --sort=etime|grep -Ev 'root|rpcbind|rpcuser|ge-admin|dbus|hald|ntpd|postfix' |head -10"|dshbak -c
+
+## multiline grep, note wildcards
+##
+pcregrep -i -v -M 'Killing connection from 141.80.121.206.*\n.*Connection rese.*' /var/adm/ras/mmfs.log.latest
+
+## kill process with string
+sudo pdsh -w max[040-060] "pkill -SIGKILL -f 'puppet agent'"
+
+ip -4 route list 0/0 ## (will list multiple default g/w ?)
+
+Sorting + counting
+
+hpc_sleep.debug.25:Tue Sep 25 15:23:56 CEST 2012 node054 - shutdown executed
+hpc_sleep.debug.25:Tue Sep 25 19:23:56 CEST 2012 node054 - shutdown executed
+hpc_sleep.debug.26:Wed Sep 26 18:23:57 CEST 2012 node054 - shutdown executed
+hpc_sleep.debug.29:Sat Sep 29 18:33:56 CEST 2012 node054 - shutdown executed
+
+grep node054 *|grep 'shutdown executed'|sort -k6,6n -M -k2,2 -k3,3n
+-M      # calendar sort on the next field (-k2,2)..
+-k2,2   # string sort of entire field 2 (Sep, Oct, Nov)
+-k6,6n  # sort on entire 6th field only, numeric
+
+you need to list the sort keys in the order you want them sorted..
+
+for i in `qstat| awk '{ print $1}'|egrep [0-9]`; do echo -n "$i  "; qstat -j $i|grep usage;done
+
+cat 19July2016.txt |awk ' { print $8 } '|cut -d@ -f2|sort |sed s/max//g| paste -s --delimiters="|" -
+001|002|003|005|006|035|041|046|048|050|051|058|063|065|073|078|079|080|
+
+qconf -shgrp @fastmem|egrep -o -w max[[:digit:]]{3}
+
+# count number of times X appears in file Y
+cat 8Aug.txt  | awk ' { tot[$0]++ } END { for (i in tot) print tot[i],i } ' | sort
