@@ -1,0 +1,4 @@
+quicksearch h:host[1-9] h:host[0-6]
+h:host[1-9] h:host[0-6]
+s:Memory Module DIMM_[A-B]
+h:host[1-9] s:Memory Module DIMM_[A-B]
