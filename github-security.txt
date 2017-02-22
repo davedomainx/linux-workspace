@@ -1,3 +1,0 @@
-Hmm how did I setup gpg on my github repo again..
-
-ksshaskpass and kwallet are asking for my gpg key..
