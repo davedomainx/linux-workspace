@@ -11,5 +11,3 @@ git remote -v
 git remote set-url origin ssh://git@github.com/davedomainx/linux-workspace.git
 git remote -v
 git config --local -l
-
-#
