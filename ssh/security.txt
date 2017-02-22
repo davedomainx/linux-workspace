@@ -1,1 +1,2 @@
 http://www.integralist.co.uk/posts/security-basics.html
+https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs
