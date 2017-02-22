@@ -1,0 +1,18 @@
+zpool export
+zpool import
+
+[root@localhost .ssh]# zpool status
+  pool: data
+ state: ONLINE
+status: One or more devices has experienced an unrecoverable error.  An
+        attempt was made to correct the error.  Applications are unaffected.
+action: Determine if the device needs to be replaced, and clear the errors
+        using 'zpool clear' or replace the device with 'zpool replace'.
+   see: http://zfsonlinux.org/msg/ZFS-8000-9P
+  scan: resilvered 96K in 0h0m with 0 errors on Fri Jan 27 22:57:25 2017
+config:
+
+        NAME                                 STATE     READ WRITE CKSUM
+        data                                 ONLINE       0     0     0
+          raidz2-0                           ONLINE       0     0     0
+            ata-ST3000VN000-1HJ166_W6A17BE9  ONLINE       0     0     1
