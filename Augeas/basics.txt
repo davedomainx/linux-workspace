@@ -1,8 +1,14 @@
 Note - augeas apparently does not ignore commented-out lines when it parses a file - can be annoying if you have PermitRootLogin commented out in sshd_config …..
 
+
 augtool --noautoload
 print /augeas/load
  /augeas/load
+
+set /augeas/load/Grub/lns "Grub.lns"
+set /augeas/load/Grub/incl "/boot/grub/grub.conf"
+
+# copy fstab to /tmp/fstab first
 set /augeas/load/Fstab/lens "Fstab.lns"
 set /augeas/load/Fstab/incl "/tmp/fstab"
 print /augeas/load
