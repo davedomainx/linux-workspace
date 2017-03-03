@@ -2,3 +2,8 @@ quicksearch h:host[1-9] h:host[0-6]
 h:host[1-9] h:host[0-6]
 s:Memory Module DIMM_[A-B]
 h:host[1-9] s:Memory Module DIMM_[A-B]
+
+cmk -d
+cmk -vI  # check new services
+cmk -vII # refresh all services (?)
+cmk -O   # restart core, needed for immediate-view after "-vII" ..

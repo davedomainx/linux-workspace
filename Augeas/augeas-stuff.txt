@@ -10,7 +10,15 @@ rm $r/#comment
 	leaves blank lines..
 save
 
+augtool> defvar g /files/boot/grub/grub.conf/
 
+augtool> setm $g/title[*]/kernel loglevel 4
+augtool> print $g/title[*]/kernel/loglevel
+/files/boot/grub/grub.conf/title/kernel/loglevel = "4"
+augtool> rm $g/title[*]/kernel/loglevel
+rm : $g/title[*]/kernel/loglevel 1
+augtool> print $g/title[*]/kernel/loglevel
+augtool> 
 
 
 
