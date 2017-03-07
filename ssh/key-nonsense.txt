@@ -1,0 +1,9 @@
+Description of what keys are used where ..
+
+id_rsa_Aug2016 ..
+4096 SHA256:s6Fyq/H3xdvwyLZddv94bzhSSYMag9rZ4GymcBZTjyM rsa-key-20160821 (RSA)
+  putty -> daveserver
+   why : no passphrase presented ?
+   plink/paegent was only the git stuff ..
+  git -> workplace
+  git -> davedomainx
