@@ -1,0 +1,2 @@
+find the server:
+  ipmiview - search 192.168.0.1 to 192.168.0.254
