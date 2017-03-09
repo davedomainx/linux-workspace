@@ -1,2 +1,9 @@
-find the server:
+find the supermicro:
   ipmiview - search 192.168.0.1 to 192.168.0.254
+  will be at XX
+  password is supermicro default
+    I IPMI reset this; follow up with procedure on how to do this
+
+find where daveserver is:
+
+ 
