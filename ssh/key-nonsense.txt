@@ -8,7 +8,7 @@ Added on Aug 4, 2016
 Last used within the last 5 days
 
 github - this key was used in the last 2 months... (!?)
-  OK, laptop-key
+  OK, laptop-key, created August2016
 Fingerprint: 0f:f3:33:c4:49:cb:fc:0c:c0:aa:43:3f:a9:64:c0:e0
 Added on Jan 5, 2017
 Last used within the last 2 months
