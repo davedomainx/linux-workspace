@@ -55,6 +55,11 @@ cat /etc/hosts
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 192.168.0.17 daveserver.localhost.localdomain daveserver
 
+Finally, to setup channel/repos
+https://easyitstuff.wordpress.com/2015/08/17/how-to-create-spacewalk-channel/
+
+Just Errata/Bugfix : select all package and add them to the errata/bugfix
+
 3) Create a VM to provide named and dhcpd service to your entire environment. Set up the dhcp daemon to use the Spacewalk server as the pxeboot machine (thus allowing you to use Cobbler to do unattended OS installs). Make sure that every forward zone you create has a reverse zone associated with it. Use something like "internal.virtnet" (but not ".local") as your internal DNS zone.
 
 4) Use that Spacewalk server to automatically (without touching it) install a new pair of OS instances, with which you will then create a Master/Master pair of LDAP servers. Make sure they register with the Spacewalk server. Do not allow anonymous bind, do not use unencrypted LDAP.
