@@ -9,3 +9,6 @@ rsync -aAXvx --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","
 
 enforce bandwidth limits from userspace:\\
 rsync --rsh="trickle -s -d 20000 -u 20000 -t 4 -l 10 ssh" --progress --stats --bwlimit=20000 -avhW ./fromfs01home //tmp/rsync
+
+preserve root permissions:
+sudo rsync -aP --rsync-path "sudo rsync" --bwlimit=20000 source destination/
