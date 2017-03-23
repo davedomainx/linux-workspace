@@ -1,5 +1,7 @@
 Note - augeas apparently does not ignore commented-out lines when it parses a file - can be annoying if you have PermitRootLogin commented out in sshd_config …..
 
+Lenses on C7 are at:
+/usr/share/augeas/lenses/dist
 
 augtool --noautoload
 print /augeas/load
