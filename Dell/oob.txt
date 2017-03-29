@@ -1,3 +1,5 @@
 http://www.openfusion.net/tags/dell/
 
-ipmitool -I lanplus -H <idrac IP> -U root sol activate
+ipmitool -I lanplus -H <IP> -U root sol activate
+ipmitool -I lanplus -H <IP> -U root chassis bootdev bios
+
