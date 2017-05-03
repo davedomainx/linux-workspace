@@ -2,4 +2,20 @@ http://www.openfusion.net/tags/dell/
 
 ipmitool -I lanplus -H <IP> -U root sol activate
 ipmitool -I lanplus -H <IP> -U root chassis bootdev bios
+ipmitool -I lanplus -H <IP> -U root chassis power {status|on|off|cycle|reset}
 
+ipmitool -I lanplus -H <IP> -U root -f .huge mc reset cold
+ipmitool -I lanplus -H <IP> -U root -f .huge chassis selftest
+ipmitool -I lanplus -H <IP> -U root -f .huge chassis status
+ipmitool -I lanplus -H <IP> -U root -f .huge chassis power
+ipmitool -I lanplus -H <IP> -U root -f .huge chassis power diag
+ipmitool -I lanplus -H <IP> -U root -f .huge chassis power cycle
+ipmitool -I lanplus -H <IP> -U root -f .huge sol info
+ipmitool -I lanplus -H <IP> -U root -f .huge sol activate instance=1
+ipmitool -I lanplus -H <IP> -U root chassis bootdev bios
+
+# channel/instance 1 by default
+ipmitool -I lanplus -H <IP> -U root sol set non-volatile-bit-rate 57.6
+ipmitool -I lanplus -H <IP> -U root sol set volatile-bit-rate 57.6
+ipmitool -I lanplus -H <IP> -U root sol info
+ipmitool -I lanplus -H <IP> -U root sol activate ## note still get on-screen gibberish, <enter> clears it ..
