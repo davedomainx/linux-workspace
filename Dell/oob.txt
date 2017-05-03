@@ -12,9 +12,20 @@ ipmitool -I lanplus -H <IP> -U root -f .huge chassis power diag
 ipmitool -I lanplus -H <IP> -U root -f .huge chassis power cycle
 ipmitool -I lanplus -H <IP> -U root -f .huge sol info
 ipmitool -I lanplus -H <IP> -U root -f .huge sol activate instance=1
+ipmitool -I lanplus -H <IP> -U root -f .huge sol deactivate instance=1
 ipmitool -I lanplus -H <IP> -U root chassis bootdev bios
 
 # channel/instance 1 by default
+# if you get gibberish try setting the *volatile-bit-rate to whatever the FailSafeBaud rate is in the idrac (115.2 here)
+
+#racadm get BIOS.SerialCommsettings
+#[Key=BIOS.Setup.1-1#SerialCommsettings]
+#ConTermType=Ansi
+#FailSafeBaud=115200
+#RedirAfterBoot=Enabled
+#SerialComm=OnConRedir
+#SerialPortAddress=Com2
+
 ipmitool -I lanplus -H <IP> -U root sol set non-volatile-bit-rate 57.6
 ipmitool -I lanplus -H <IP> -U root sol set volatile-bit-rate 57.6
 ipmitool -I lanplus -H <IP> -U root sol info
