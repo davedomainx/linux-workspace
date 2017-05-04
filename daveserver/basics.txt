@@ -6,4 +6,9 @@ find the supermicro:
 
 find where daveserver is:
 
- 
+4.May
+  daveserver didnt get IP set
+  ip address change 192.168.0.17/24 dev eno1
+  ip link set eno1 down
+  ip link set eno1 up
+  ah okay dhcp is giving me 0.20 not 0.17 as expected
