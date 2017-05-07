@@ -12,3 +12,13 @@ find where daveserver is:
   ip link set eno1 down
   ip link set eno1 up
   ah okay dhcp is giving me 0.20 not 0.17 as expected
+
+7.May
+  reconfig daveserver to 192.168.0.99/32
+    /etc/sysconfig/network-scripts/ifcfg-eno1
+      IPADDR
+      NETMASK
+      GATEWAY
+    Hmm, looks like something automatically converted
+      NETMASK=255.255.255.0 => PREFIX=24
+      BOOTPROTO=static => BOOTPROTO=none
