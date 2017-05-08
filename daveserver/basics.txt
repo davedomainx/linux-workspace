@@ -24,3 +24,7 @@ find where daveserver is:
       BOOTPROTO=static => BOOTPROTO=none
   install ZoL
    https://github.com/zfsonlinux/zfs/wiki/RHEL-%26-CentOS
+
+   8.May
+     lost the github somehow
+     atom --wait from the git shell
