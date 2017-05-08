@@ -28,4 +28,4 @@ find where daveserver is:
    8.May
      lost the github somehow
      atom --wait from the git shell
-     hmrpth?
+     commits work from git-shell
