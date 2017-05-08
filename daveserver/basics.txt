@@ -22,3 +22,5 @@ find where daveserver is:
     Hmm, looks like something automatically converted
       NETMASK=255.255.255.0 => PREFIX=24
       BOOTPROTO=static => BOOTPROTO=none
+  install ZoL
+   https://github.com/zfsonlinux/zfs/wiki/RHEL-%26-CentOS
