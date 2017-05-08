@@ -1,1 +1,3 @@
 sudo pdsh -a puppet agent -t –splaylimit=2m
+
+puppet parser validate ./nodes.pp --parser future
