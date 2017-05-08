@@ -61,3 +61,6 @@ git-plus:
 
 Make atom the default git-editor:
 git config --global core.editor "atom --wait"
+
+8.May.2017
+ git push from atom erroring with "git credentials"
