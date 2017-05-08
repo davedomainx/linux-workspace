@@ -66,3 +66,11 @@ git config --global core.editor "atom --wait"
  git push from atom erroring with "git credentials"
 
  git config --global url."git@github.com:".insteadOf "https://github.com/"
+
+git shell:
+  cd /tmp/linux-workspace
+  git pull
+  note how git config -l has "https" and not the probable expected "git"
+  remote.origin.url=https://github.com/davedomainx/linux-workspace
+  make a change
+  note how command prompt + git diff show differences
