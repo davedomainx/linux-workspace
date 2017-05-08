@@ -26,6 +26,4 @@ find where daveserver is:
    https://github.com/zfsonlinux/zfs/wiki/RHEL-%26-CentOS
 
    8.May
-     lost the github somehow
-     atom --wait from the git shell
-     commits work from git-shell
+     see atom/basics.txt; really need better git-log status message in atom
