@@ -74,3 +74,6 @@ git shell:
   remote.origin.url=https://github.com/davedomainx/linux-workspace
   make a change
   note how command prompt + git diff show differences
+
+9.May
+ github test
