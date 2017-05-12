@@ -1,9 +1,0 @@
-systemctl restart multipathd
-  # multipath -r v4 does not apparently reload multipath ?
-
-Confusion regarding queue_if_no_path vs path_retry
-
-lsscsi -dgi
-dmsetup ls --tree -o uuid
-dmsetup ls --tree --target=multipath
-multipath -v4 -ll
