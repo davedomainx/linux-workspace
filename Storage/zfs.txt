@@ -1,3 +1,26 @@
-ZFS info
+ZFS sector size
+===
 
 https://docs.google.com/spreadsheets/d/1pdu_X2tR4ztF6_HLtJ-Dc4ZcwUdt6fkCjpnXxAEFlyA/edit#gid=804965548
+https://www.delphix.com/blog/delphix-engineering/zfs-raidz-stripe-width-or-how-i-learned-stop-worrying-and-love-raidz
+
+assume default 512-byte sectors on the spinning rust disks
+    hmm nup
+Advanced Format (AF) Disks
+    looks like industory only switched over to 4k byte sectors ~ 2014
+
+hmm okay, ashift=12 implies 4k
+fs16 got 128k recordsize (default)
+
+ZFS tuning
+===
+http://open-zfs.org/wiki/Performance_tuning
+
+terms
+===
+
+ARC
+  replaces LRU cache
+
+ashift
+  alignment shift, set at vdev creation, immutable
