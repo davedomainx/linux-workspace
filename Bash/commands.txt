@@ -46,3 +46,12 @@ cat 8Aug.txt  | awk ' { tot[$0]++ } END { for (i in tot) print tot[i],i } ' | so
 # Use gnomon (node.js; yum -y install nodejs+npm) for a real-time display of how long a command takes:
 # https://github.com/paypal/gnomon
 ls -dl $p|gnomon --type=elapsed-total --real-time=false
+
+# Bash arithmetic doesnt do floats, need to use either bc or callout to 3rd party
+
+BEG=$(date +%s.%3N)
+.. code
+ENDX=$(date +%s.%3N)
+runtime=$(python -c "print(${ENDX} - ${BEG})")
+echo $runtime
+~
