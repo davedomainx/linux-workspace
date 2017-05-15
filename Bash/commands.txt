@@ -44,4 +44,5 @@ cat 8Aug.txt  | awk ' { tot[$0]++ } END { for (i in tot) print tot[i],i } ' | so
 
 ## Timing
 # Use gnomon (node.js; yum -y install nodejs+npm) for a real-time display of how long a command takes:
+# https://github.com/paypal/gnomon
 ls -dl $p|gnomon --type=elapsed-total --real-time=false
