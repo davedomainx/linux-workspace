@@ -15,6 +15,7 @@ fs16 got 128k recordsize (default)
 ZFS tuning
 ===
 http://open-zfs.org/wiki/Performance_tuning
+https://utcc.utoronto.ca/~cks/space/blog/linux/ZFSonLinuxWeakAreas
 
 terms
 ===
