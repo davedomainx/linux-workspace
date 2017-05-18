@@ -1,0 +1,17 @@
+Specific NFS troubleshooting
+
+https://www.sebastien-han.fr/blog/2012/12/18/noac-performance-impact-on-web-applications/
+https://linux.die.net/man/5/nfs
+https://blogs.sap.com/2015/11/20/performance-impact-of-disabling-nfs-attribute-caching/
+https://utcc.utoronto.ca/~cks/space/blog/linux/ZFSonLinuxWeakAreas
+
+specific mount options:
+
+soft/hard = use hard in Clustered environment
+noac = for use in clustered environments, multiple clients.  Huge performance
+penalty
+bg = if a mount fails, fork a child mount and continue to try mounting
+fg = fail immediately
+
+it seems that setting noactime=0 is better than noac ?
+sharecache may be useful for /home
