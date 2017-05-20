@@ -1,0 +1,19 @@
+Understanding where virbr0 is being set or coming from ..
+
+[root@daveserver etc]# grep -Ri virbr0 *
+grep: alternatives/hibernate_jdbc_cache: No such file or directory
+cobbler/settings:# "virbr0".  This can be overriden on a per-profile
+cobbler/settings-swsave:# "virbr0".  This can be overriden on a per-profile
+libvirt/qemu/networks/autostart/default.xml:  <bridge name='virbr0' stp='on' delay='0'/>
+libvirt/qemu/networks/default.xml:  <bridge name='virbr0' stp='on' delay='0'/>
+qemu-kvm/bridge.conf:allow virbr0
+[root@daveserver etc]#
+
+https://docs.openstack.org/mitaka/networking-guide/misc-libvirt.html
+..  libvirt creates an additional bridge, dnsmasq process, and iptables ruleset ..
+
+The virbr0 bridge stays around even after you disable libvirtd, cobblerd and other suspect services..
+
+virsh net-list
+virsh net-destroy default
+virsh net-autostart --network default --disable

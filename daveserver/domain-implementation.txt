@@ -13,8 +13,7 @@ This is what I tell people to do, who ask me "how do I learn to be a Linux sysad
 http://www.linuxtechi.com/install-kvm-hypervisor-on-centos-7-and-rhel-7/
 
   yum install qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install virt-viewer bridge-utils
-  systemctl start libvirtd
-  systemctl enable libvirtd
+  systemctl enable libvirtd --now
   yum install "@X Window System" xorg-x11-xauth xorg-x11-fonts-* xorg-x11-utils -y
   virt-manager // virsh list
 
