@@ -12,7 +12,7 @@ qemu-kvm/bridge.conf:allow virbr0
 https://docs.openstack.org/mitaka/networking-guide/misc-libvirt.html
 ..  libvirt creates an additional bridge, dnsmasq process, and iptables ruleset ..
 
-The virbr0 bridge stays around even after you disable libvirtd, cobblerd and other suspect services..
+The virbr0 bridge stays around even after you disable libvirtd, cobblerd and other suspect services..  aah ffs NetworkManager..
 
 virsh net-list
 virsh net-destroy default

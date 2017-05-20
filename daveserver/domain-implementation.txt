@@ -67,8 +67,10 @@ Try DNS via Docker :
  from docker tutorial, example program at :
  http://192.168.0.99:4000/
 
-Hmm, nup, dnsMasq from KVM intefers with port 53.
-Try the docker stuff from inside a VM
+Hmm, nup, dnsMasq from libvirtd inteferes with port 53.
+Try the docker stuff from inside a VM.
+
+look at kvm.txt for more libvirtd virbr0 stuff.
 
 4) Use that Spacewalk server to automatically (without touching it) install a new pair of OS instances, with which you will then create a Master/Master pair of LDAP servers. Make sure they register with the Spacewalk server. Do not allow anonymous bind, do not use unencrypted LDAP.
 

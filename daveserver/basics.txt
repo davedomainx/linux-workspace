@@ -27,3 +27,6 @@ find where daveserver is:
 
    8.May
      see atom/basics.txt; really need better git-log status message in atom
+
+  20.May
+    Disable NetworkManager yeah really.  Keeps messing around wih the virbr0 route
