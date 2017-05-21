@@ -30,4 +30,8 @@ find where daveserver is:
 
   20.May
     Disable NetworkManager yeah really.  Keeps messing around wih the virbr0 route
-    Spacewalk died - downgraded c3p0 package
+    Spacewalk died - downgraded c3p0 package.
+    Spacewalk is (was) the upstream for Satellite <= 5, but looks like RedHat
+    went their own way for Satellite 6.
+    spacewalk has alot of components/moving parts.
+    Probably should do the foreman ..
