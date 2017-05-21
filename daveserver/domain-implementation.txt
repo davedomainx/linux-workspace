@@ -19,7 +19,7 @@ http://www.linuxtechi.com/install-kvm-hypervisor-on-centos-7-and-rhel-7/
 
 2) Inside of that KVM hypervisor, install a Spacewalk server. Use CentOS 6 as the distro for all work below. (For bonus points, set up errata importation on the CentOS channels, so you can properly see security update advisory information.)
 
-NOTE : trying out foreman instead of spacewalk.
+NOTE : 20.May.2017 trying out foreman instead of spacewalk.
 
 === spacewalk ===
 
@@ -64,6 +64,24 @@ https://easyitstuff.wordpress.com/2015/08/17/how-to-create-spacewalk-channel/
 Just Errata/Bugfix : select all package and add them to the errata/bugfix
 
 === foreman ===
+
+getenforce
+setenforce 0
+getenforce
+
+yum -y install https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+Or to use Puppet 3.x from Puppet Labs:
+
+yum -y install https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
+Enable the EPEL (Extra Packages for Enterprise Linux) and the Foreman repos:
+
+yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum -y install https://yum.theforeman.org/releases/1.15/el7/x86_64/foreman-release.rpm
+Downloading the installer
+
+yum -y install foreman-installer
+ initial password didnt work, cant login; reset with
+  foreman-rake permissions:reset
 
 3) Create a VM to provide named and dhcpd service to your entire environment. Set up the dhcp daemon to use the Spacewalk server as the pxeboot machine (thus allowing you to use Cobbler to do unattended OS installs). Make sure that every forward zone you create has a reverse zone associated with it. Use something like "internal.virtnet" (but not ".local") as your internal DNS zone.
 

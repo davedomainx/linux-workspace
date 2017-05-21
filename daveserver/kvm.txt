@@ -1,19 +1,32 @@
-Understanding where virbr0 is being set or coming from ..
-
-[root@daveserver etc]# grep -Ri virbr0 *
-grep: alternatives/hibernate_jdbc_cache: No such file or directory
-cobbler/settings:# "virbr0".  This can be overriden on a per-profile
-cobbler/settings-swsave:# "virbr0".  This can be overriden on a per-profile
-libvirt/qemu/networks/autostart/default.xml:  <bridge name='virbr0' stp='on' delay='0'/>
-libvirt/qemu/networks/default.xml:  <bridge name='virbr0' stp='on' delay='0'/>
-qemu-kvm/bridge.conf:allow virbr0
-[root@daveserver etc]#
 
 https://docs.openstack.org/mitaka/networking-guide/misc-libvirt.html
 ..  libvirt creates an additional bridge, dnsmasq process, and iptables ruleset ..
 
 The virbr0 bridge stays around even after you disable libvirtd, cobblerd and other suspect services..  aah ffs NetworkManager..
 
+# Network stuff
 virsh net-list
 virsh net-destroy default
 virsh net-autostart --network default --disable
+
+# Destroy VM
+virsh shutdown vm1-clone
+virsh destroy vm1-clone
+virsh undefine vm1-clone
+rm /vm-images/vm1-clone.img
+
+semanage fcontext --add -t virt_image_t '/data/img(/.*)?'
+semanage fcontext -l | grep virt_image_t
+/var/lib/imagefactory/images(/.*)? all files system_u:object_r:virt_image_t:s0
+/var/lib/libvirt/images(/.*)? all files system_u:object_r:virt_image_t:s0
+/data/img(/.*)? all files system_u:object_r:virt_image_t:s0
+# 4. Restore the security context. This will effectively change the context to virt_image_t:
+restorecon -R -v /data/img
+# Verify that the context was changed:
+ls –aZ /data/img
+drwxr-xr-x. root root system_u:object_r:virt_image_t:s0 .
+dr-xr-xr-x. root root system_u:object_r:root_t:s0 ..
+# 5. If you are going to export the directory /data/img as a samba or NFS share, there are SELinux
+# Booleans that need to be set as well:
+setsebool -P virt_use_samba 1
+setsebool -P virt_use_nfs 1
