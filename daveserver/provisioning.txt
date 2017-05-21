@@ -1,0 +1,12 @@
+Issue with spacewalk after yum -y update.
+spacewalk has alot of components/moving parts (foreman has even more but I
+digress).
+
+Had a closer look at spacewalk...
+
+Spacewalk is (was) the upstream for Satellite <= 5, but looks like RedHat
+went their own way for Satellite 6.
+
+Probably should do the foreman ..
+
+foreman seems to have morphed into a kitchen sink since i last looked at it..
