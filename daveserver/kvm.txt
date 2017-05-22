@@ -15,6 +15,24 @@ virsh destroy vm1-clone
 virsh undefine vm1-clone
 rm /vm-images/vm1-clone.img
 
+# create a disk image in qcow2 format
+qemu-img create -f qcow2 ./100g.qcow2 100G
+
+# SELinux config for /data/img
+semanage fcontext --add -t virt_image_t '/data/img(/.*)?'
+semanage fcontext -l |grep virt_image_t
+tree /data/img/
+ls -aZ /data/img/
+restorecon -R -v /data/img/
+ls -aZ /data/img/
+
+
+# see /data/img/c7.sh for VM startup stuff
+# 1. note need to kickstart or install from install media onto VM as per normal
+
+# connect to console
+virsh console vm-foreman
+
 semanage fcontext --add -t virt_image_t '/data/img(/.*)?'
 semanage fcontext -l | grep virt_image_t
 /var/lib/imagefactory/images(/.*)? all files system_u:object_r:virt_image_t:s0
