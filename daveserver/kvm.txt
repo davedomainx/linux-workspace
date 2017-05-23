@@ -10,10 +10,10 @@ virsh net-destroy default
 virsh net-autostart --network default --disable
 
 # Destroy VM
-virsh shutdown vm1-clone
-virsh destroy vm1-clone
-virsh undefine vm1-clone
-rm /vm-images/vm1-clone.img
+virsh shutdown vm-foreman
+virsh destroy vm-foreman
+virsh undefine vm-foreman
+rm /disk/img/X.img
 
 # create a disk image in qcow2 format
 qemu-img create -f qcow2 ./100g.qcow2 100G

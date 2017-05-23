@@ -83,6 +83,19 @@ yum -y install foreman-installer
  initial password didnt work, cant login; reset with
   foreman-rake permissions:reset
 
+nasty passenger ruby puppet errors
+
+/usr/share/passenger
+[root@daveserver passenger]# grep -Ri passenger_log_level .
+./templates/standalone/config.erb:    <% if debugging? %>passenger_log_level 2;<% end %>
+[root@daveserver passenger]# vi templates/standalone/config.erb
+[root@daveserver passenger]# ls $(passenger-config about resourcesdir)/templates/standalone/config.erb
+/usr/share/passenger/templates/standalone/config.erb
+[root@daveserver passenger]# vi /usr/share/passenger/templates/standalone/config.erb
+
+hmm after much trial and error problem appears to be I installed puppet 3.6
+somehow.  Installed the puppet 4.1 from the foreman docs and all good now.
+
 3) Create a VM to provide named and dhcpd service to your entire environment. Set up the dhcp daemon to use the Spacewalk server as the pxeboot machine (thus allowing you to use Cobbler to do unattended OS installs). Make sure that every forward zone you create has a reverse zone associated with it. Use something like "internal.virtnet" (but not ".local") as your internal DNS zone.
 
 Try DNS via Docker :
