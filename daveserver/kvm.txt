@@ -29,6 +29,7 @@ semanage fcontext -l |grep virt_image_t
 
 # connect to console
 virsh console vm-foreman
+virsh -c qemu:///system list
 
 semanage fcontext --add -t virt_image_t '/data/img(/.*)?'
 semanage fcontext -l | grep virt_image_t

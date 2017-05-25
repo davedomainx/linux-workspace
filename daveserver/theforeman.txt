@@ -1,0 +1,22 @@
+Issue with spacewalk after yum -y update.
+spacewalk has alot of components/moving parts (foreman has even more but I
+digress).
+
+Had a closer look at spacewalk...
+
+Spacewalk is (was) the upstream for Satellite <= 5, but looks like RedHat
+went their own way for Satellite 6.
+
+aha saw web comments that RedHat are ditching Satellite and moving to theforeman ?
+
+=== theforeman -> qemu ===
+
+# FIXME : Changed /etc/libvirt/libvirtd.conf to explictly stop using polkit
+# couldnt stop error:
+# 2017-05-25 10:08:49.676+0000: 13426: error : virPolkitCheckAuth:133 : authentication unavailable: no polkit agent available to authenticate action 'org.libvirt.unix.manage'
+
+[root@daveserver libvirt]# grep auth_unix /etc/libvirt/libvirtd.conf
+#auth_unix_ro = "none"
+auth_unix_rw = "none"
+
+systemctl restart libvirtd
