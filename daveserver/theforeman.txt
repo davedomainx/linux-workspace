@@ -1,3 +1,7 @@
+https://spredzy.wordpress.com/2013/10/16/the-foreman-pxe-provisioning-with-libvirt/
+http://blog.daniellobato.me/unattended-deployments-of-fedora-and-rhel-atomic-with-foreman/
+https://m0dlx.com/blog/Automatic_DNS_updates_from_libvirt_guests.html
+
 Issue with spacewalk after yum -y update.
 spacewalk has alot of components/moving parts (foreman has even more but I
 digress).
