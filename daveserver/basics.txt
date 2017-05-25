@@ -42,3 +42,7 @@ find where daveserver is:
   use foreman to install a dhcp/dns VM
   but I need to turn off foremans own dhcpd/dns services
   ah okay i use foremans smart proxy and use ISC dhcp and bind DNS
+
+25.May
+  best way is to disable libvirtd's dnsmasq
+  setup a bridge manually with the IP swap to the physical device
