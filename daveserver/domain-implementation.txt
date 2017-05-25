@@ -96,6 +96,15 @@ nasty passenger ruby puppet errors
 hmm after much trial and error problem appears to be I installed puppet 3.6
 somehow.  Installed the puppet 4.1 from the foreman docs and all good now.
 
+24.May
+Setup NFS server for foreman-access to ISO images
+https://www.linuxtechi.com/bare-metal-provisioning-through-foreman-server/
+echo "/data/iso       192.168.1.0/24(ro) 127.0.0.1(ro)" >> /etc/exports
+systemctl is-active nfs-server
+systemctl enable nfs-server --now
+rpcinfo -p
+mkdir /mnt/iso && mount localhost:/data/iso /mnt/iso
+
 3) Create a VM to provide named and dhcpd service to your entire environment. Set up the dhcp daemon to use the Spacewalk server as the pxeboot machine (thus allowing you to use Cobbler to do unattended OS installs). Make sure that every forward zone you create has a reverse zone associated with it. Use something like "internal.virtnet" (but not ".local") as your internal DNS zone.
 
 Try DNS via Docker :

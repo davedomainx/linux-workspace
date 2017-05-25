@@ -15,17 +15,14 @@ virsh destroy vm-foreman
 virsh undefine vm-foreman
 rm /disk/img/X.img
 
+# I am not sure if I need to swap the virbr0 and eth0 IPs around ..
+
 # create a disk image in qcow2 format
 qemu-img create -f qcow2 ./100g.qcow2 100G
 
 # SELinux config for /data/img
 semanage fcontext --add -t virt_image_t '/data/img(/.*)?'
 semanage fcontext -l |grep virt_image_t
-tree /data/img/
-ls -aZ /data/img/
-restorecon -R -v /data/img/
-ls -aZ /data/img/
-
 
 # see /data/img/c7.sh for VM startup stuff
 # 1. note need to kickstart or install from install media onto VM as per normal

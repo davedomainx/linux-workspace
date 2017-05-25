@@ -35,3 +35,10 @@ find where daveserver is:
     went their own way for Satellite 6.
     spacewalk has alot of components/moving parts.
     Probably should do the foreman ..
+
+24.May
+  foreman is up
+  running into chicken and egg scenarios.
+  use foreman to install a dhcp/dns VM
+  but I need to turn off foremans own dhcpd/dns services
+  ah okay i use foremans smart proxy and use ISC dhcp and bind DNS
