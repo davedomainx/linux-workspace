@@ -9,6 +9,11 @@ went their own way for Satellite 6.
 
 aha saw web comments that RedHat are ditching Satellite and moving to theforeman ?
 
+=== theforeman ===
+
+it is surprisingly dense and unintuitive to go through
+
+
 === theforeman -> qemu ===
 
 # FIXME : Changed /etc/libvirt/libvirtd.conf to explictly stop using polkit
@@ -20,3 +25,9 @@ aha saw web comments that RedHat are ditching Satellite and moving to theforeman
 auth_unix_rw = "none"
 
 systemctl restart libvirtd
+
+Websocket error when trying to access console of VM from foreman:
+  Added daveserver.localdomain to windows hosts file
+  run insecure https from localhost
+  I think I clicked through on the striked-out https and then reloaded page,
+  that seems to have worked
