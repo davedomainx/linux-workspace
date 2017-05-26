@@ -1,0 +1,2 @@
+systemctl list-units --state=failed
+systemctl reset-failed --state=failed
