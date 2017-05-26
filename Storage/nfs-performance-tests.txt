@@ -1,0 +1,40 @@
+Achieve the following:
+
+Preparation:
+  little/no network/cpu traffic (sar -n TCP 1 ; iftop/ganglia).
+  # Drop all caches
+  echo 3 > /proc/sys/vm/drop_caches
+Do : rsync, dd, cp, tc (?)
+Also :  ring buffer size (client + server):
+        "Change the settings to the maximum to optimize for throughput while possibly increasing latency."
+          ethtool -g em1 ; ethtool -G rx 4076 em1
+        network-scheduler (CFS?):
+        socket-queue sizes:
+          /proc/sys/net/ipv4/tcp_wmem
+          /proc/sys/net/ipv4/tcp_rmem
+        RPCNFSDCOUNT:
+        multiple clients:
+
+Test 1 : "normal" options
+
+rw,vers=3,rsize=32768,wsize=32768,namlen=255,acregmin=3,acregmax=60,acdirmin=30,acdirmax=60,
+hard,noacl,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=141.80.174.216,mountvers=3,
+mountport=20048,mountproto=udp,local_lock=none
+
+Test 2 : remove rsize/wsize
+  should negotiate to highest size ( 1048576 bytes // 1 MB )
+  should be faster
+
+Test : set "ac" // remove noac
+  should be [much] faster
+
+Test : set actimeo=0
+  should be [much] faster
+
+Test : set actimeo=0, noac
+  should be [much] faster
+
+Test : set actimeo=0, noac, async
+  should be the fastest
+
+Test : NFS 4.1 (C7 7.3.1611 clients)
