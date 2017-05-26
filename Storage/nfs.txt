@@ -9,13 +9,39 @@ https://linux.die.net/man/5/nfs
 https://blogs.sap.com/2015/11/20/performance-impact-of-disabling-nfs-attribute-caching/
 https://utcc.utoronto.ca/~cks/space/blog/linux/ZFSonLinuxWeakAreas
 
+TCP/IP tuning:
+https://syedali.net/2015/01/05/tcpip-tuning/
+
+In our environment, we have the following set:
+  noac  : disable client-file attribute caching,
+  async :
+
+
 specific mount options:
 
 soft/hard = use hard in Clustered environment
-noac = for use in clustered environments, multiple clients.  Huge performance
-penalty
+
+noac = Prevent client from caching file attributes. Use this in clustered environments
+for coherency. Huge performance penalty.  Note that "noac" seems to imply
+synchronous writes (man nfs : noac)
+
+  In  addition  to preventing the client from caching file
+  attributes, the noac option forces application writes to
+  become  synchronous  so  that  local  changes  to a file
+  become visible on the  server  immediately.   That  way,
+  other clients can quickly detect recent writes when they
+  check the file’s attributes.
+
+  Using the noac option provides greater  cache  coherence
+  among  NFS  clients  accessing  the  same  files, but it
+  extracts a significant performance  penalty.   As  such,
+  judicious  use  of  file  locking is encouraged instead.
+  The DATA  AND  METADATA  COHERENCE  section  contains  a
+  detailed discussion of these trade-offs.
+
+
 bg = if a mount fails, fork a child mount and continue to try mounting
 fg = fail immediately
 
-it seems that setting noactime=0 is better than noac ?
+it seems that setting actime=0 is better than noac ?
 sharecache may be useful for /home
