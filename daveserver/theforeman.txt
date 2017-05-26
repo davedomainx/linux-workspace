@@ -35,3 +35,9 @@ Websocket error when trying to access console of VM from foreman:
   run insecure https from localhost
   I think I clicked through on the striked-out https and then reloaded page,
   that seems to have worked
+
+ ERF12-6899 [ProxyAPI::ProxyException]: Unable to set DHCP entry ([RestClient::BadRequest]: 400 Bad Request) for proxy
+   systemctl restart foreman-proxy.service
+
+Failed to create a compute libvirt (Libvirt) instance will-widell.localdomain: undefined method `merge' for nil:NilClass
+ ..

@@ -99,6 +99,7 @@ somehow.  Installed the puppet 4.1 from the foreman docs and all good now.
 24.May
 Setup NFS server for foreman-access to ISO images
 https://www.linuxtechi.com/bare-metal-provisioning-through-foreman-server/
+
 echo "/data/iso       192.168.1.0/24(ro) 127.0.0.1(ro)" >> /etc/exports
 systemctl is-active nfs-server
 systemctl enable nfs-server --now

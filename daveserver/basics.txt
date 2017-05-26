@@ -46,3 +46,10 @@ find where daveserver is:
 25.May
   best way is to disable libvirtd's dnsmasq
   setup a bridge manually with the IP swap to the physical device
+
+26.May
+  dhclient was still kicking in and giving eno1 an ipaddress, even
+  though that had been turned over to the bridge.  seems that if you
+  have PEERDNS in other network interface configuraiton files, then dhclient
+  will try and dhcp on ALL interfaces (!)  Could not find a way to turn this
+  stupid off so removed the eno2 file
