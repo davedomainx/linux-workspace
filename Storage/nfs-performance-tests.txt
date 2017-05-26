@@ -6,13 +6,14 @@ Preparation:
   echo 3 > /proc/sys/vm/drop_caches
 Do : rsync, dd, cp, tc (?)
 Also :  ring buffer size (client + server):
+        suChange the settings to the maximum to optimize for throughput while possibly increasing latency."
           ethtool -g em1 ; ethtool -G rx 4076 em1
         network-scheduler (CFS),
         socket-queue sizes:
           /proc/sys/net/ipv4/tcp_wmem
           /proc/sys/net/ipv4/tcp_rmem
         NFSDTHREADS:
-        multiple clients
+        multiple clients:
 
 Test 1 : "normal" options
 
