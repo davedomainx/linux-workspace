@@ -41,3 +41,6 @@ Websocket error when trying to access console of VM from foreman:
 
 Failed to create a compute libvirt (Libvirt) instance will-widell.localdomain: undefined method `merge' for nil:NilClass
  ..
+
+Firewalld blocking VNC console
+ firewall-cmd --permanent --add-port=5910-5930/tcp # FIXME : better src restrictions

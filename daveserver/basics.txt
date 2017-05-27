@@ -52,4 +52,4 @@ find where daveserver is:
   though that had been turned over to the bridge.  seems that if you
   have PEERDNS in other network interface configuraiton files, then dhclient
   will try and dhcp on ALL interfaces (!)  Could not find a way to turn this
-  stupid off so removed the eno2 file
+  stupid off so removed the eno2 file.
