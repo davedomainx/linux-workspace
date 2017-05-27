@@ -2,13 +2,19 @@
 https://docs.openstack.org/mitaka/networking-guide/misc-libvirt.html
 ..  libvirt creates an additional bridge, dnsmasq process, and iptables ruleset ..
 
-The virbr0 bridge stays around even after you disable libvirtd, cobblerd and other suspect services..  aah ffs NetworkManager..
+The virb0 bridge stays around even after you disable libvirtd, cobblerd and other suspect services..  aah ffs NetworkManager..
 
-# Network stuff
+# Network stuff.  /etc/libvirt/qemu/networks
 virsh net-list
 virsh net-destroy default
 virsh net-autostart --network default --disable
 virsh net-edit default
+
+virsh net-define --file ./theforeman.xml
+virsh net-list --all
+virsh net-autostart theforeman
+virsh net-list --all
+
 
 # Bridging
 brctl showmacs br0
