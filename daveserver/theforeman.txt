@@ -1,6 +1,9 @@
 https://spredzy.wordpress.com/2013/10/16/the-foreman-pxe-provisioning-with-libvirt/
+http://emeraldreverie.org/blog/2012/10/26/creating-development-environment-with/
+https://lukas.zapletalovi.com/2013/04/managing-many-servers-with-foreman.html
 http://blog.daniellobato.me/unattended-deployments-of-fedora-and-rhel-atomic-with-foreman/
 https://m0dlx.com/blog/Automatic_DNS_updates_from_libvirt_guests.html
+https://beryju.org/en/blog/getting-started-foreman-part-1
 
 Issue with spacewalk after yum -y update.
 spacewalk has alot of components/moving parts (foreman has even more but I
@@ -16,7 +19,6 @@ aha saw web comments that RedHat are ditching Satellite and moving to theforeman
 === theforeman ===
 
 it is surprisingly dense and unintuitive to go through
-
 
 === theforeman -> qemu ===
 
@@ -44,3 +46,11 @@ Failed to create a compute libvirt (Libvirt) instance will-widell.localdomain: u
 
 Firewalld blocking VNC console
  firewall-cmd --permanent --add-port=5910-5930/tcp # FIXME : better src restrictions
+
+yum install -y foreman-console
+ just one file, is it really doing anything ?
+
+foreman-installer --list-scenarios
+ls '/etc/foreman-installer/scenarios.d/
+
+Ah okay I can direct-edit the Bridges in the daveserver.localdomain host

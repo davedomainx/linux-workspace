@@ -61,4 +61,6 @@ too confused with the default libvirtd network, and if that is needed for
 theforeman.
 
   Note you could use the “default” network which has the very same configuration (but usually with 192.168.122.0/24 network), but with DHCP. I tend to prefer creating very own network not to confuse others which would like to use “default” one.
-  C
+
+Problem is:
+ 'default' libvirtd network.
