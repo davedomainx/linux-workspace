@@ -18,12 +18,15 @@ https://www.coverfire.com/articles/queueing-in-the-linux-network-stack/
 
 In our environment, we have the following set:
   noac  : disable client-file attribute caching,
-  async :
+  async : set by implication
 
 
 specific mount options:
 
 soft/hard = use hard in Clustered environment
+
+noacl = is a solaris feature, not used in linux and plain mounts dont
+use it
 
 noac = Prevent client from caching file attributes. Use this in clustered environments
 for coherency. Huge performance penalty.  Note that "noac" seems to imply

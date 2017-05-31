@@ -1,6 +1,6 @@
 Achieve the following:
 
-Preparation:
+Server Preparation:
   little/no network/cpu traffic (sar -n TCP 1 ; iftop/ganglia).
   # Drop all caches
   echo 3 > /proc/sys/vm/drop_caches
@@ -16,25 +16,26 @@ Also :  ring buffer size (client + server):
         multiple clients:
 
 Test 1 : "normal" options
+   + remove "noacl", that is a Solaris feature (man nfs)
 
 rw,vers=3,rsize=32768,wsize=32768,namlen=255,acregmin=3,acregmax=60,acdirmin=30,acdirmax=60,
-hard,noacl,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=141.80.174.216,mountvers=3,
+hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=141.80.174.216,mountvers=3,
 mountport=20048,mountproto=udp,local_lock=none
 
 Test 2 : remove rsize/wsize
   should negotiate to highest size ( 1048576 bytes // 1 MB )
   should be faster
 
-Test : set "ac" // remove noac
+Test 3 : set "ac" // remove noac
   should be [much] faster
 
-Test : set actimeo=0
+Test 4 : set actimeo=0
   should be [much] faster
 
-Test : set actimeo=0, noac
+Test 5 : set actimeo=0, noac
   should be [much] faster
 
-Test : set actimeo=0, noac, async
+Test 6 : set actimeo=0, noac, async
   should be the fastest
 
 Test : NFS 4.1 (C7 7.3.1611 clients)
