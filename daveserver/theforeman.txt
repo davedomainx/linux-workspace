@@ -37,6 +37,7 @@ Websocket error when trying to access console of VM from foreman:
   run insecure https from localhost
   I think I clicked through on the striked-out https and then reloaded page,
   that seems to have worked
+  er no it was using https://daveserver.localdomain as the URL that worked ..
 
  ERF12-6899 [ProxyAPI::ProxyException]: Unable to set DHCP entry ([RestClient::BadRequest]: 400 Bad Request) for proxy
    systemctl restart foreman-proxy.service
