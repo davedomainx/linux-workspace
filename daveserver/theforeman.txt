@@ -56,5 +56,19 @@ ls '/etc/foreman-installer/scenarios.d/
 
 Ah okay I can direct-edit the Bridges in the daveserver.localdomain host
 
-Finally got pxeboot working.. vmlinux and initrd were 0 bytes when copied
+Finally got pxeboot working.. vmlinux and initrd were 0 bytes when copied from
+the CentOS ISO ..
 https://groups.google.com/forum/#!topic/foreman-users/oguMH7ig7kU
+
+Hm I can connect using curl but not browser
+  is firewall
+  but then get "cannot read client cert from environment"
+[root@daveserver foreman-proxy]# curl -k https://daveserver.localdomain:8443/features
+["dhcp","dns","logs","puppet","puppetca","tftp"][root@daveserver foreman-proxy]#
+[root@daveserver foreman-proxy]#
+
+failed to fetch kickstart from daveserver.localdomain/unattended
+ https://daveserver.localdomain/unattended/provision?spoof=192.168.122.123
+ had wrong nameserver - dracut shell couldnt resolve daveserver
+   didnt fix it ..
+ allow firewalld nfsd ports
