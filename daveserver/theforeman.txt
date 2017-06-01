@@ -55,3 +55,6 @@ foreman-installer --list-scenarios
 ls '/etc/foreman-installer/scenarios.d/
 
 Ah okay I can direct-edit the Bridges in the daveserver.localdomain host
+
+Finally got pxeboot working.. vmlinux and initrd were 0 bytes when copied
+https://groups.google.com/forum/#!topic/foreman-users/oguMH7ig7kU
