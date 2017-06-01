@@ -71,4 +71,5 @@ failed to fetch kickstart from daveserver.localdomain/unattended
  https://daveserver.localdomain/unattended/provision?spoof=192.168.122.123
  had wrong nameserver - dracut shell couldnt resolve daveserver
    didnt fix it ..
+   localdomain is the problem ..
  allow firewalld nfsd ports
