@@ -1,0 +1,5 @@
+/etc/hosts
+
+foreman
+  provisioning
+    domainname
