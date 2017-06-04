@@ -9,8 +9,11 @@ https://blog.zhaw.ch/icclab/tag/foreman/
 libvirtd/dnsmasq
 http://libvirt-users.redhat.narkive.com/qikKeDfI/how-to-disable-dnsmasq-from-starting-automatically-with-libvirtd
 
-ipv6 interafce
+odd curl ipv6 interafce problem
 https://binaryfury.wann.net/2016/03/installing-centos-7-on-an-ipv6-only-system/
+https://www.redhat.com/archives/virt-tools-list/2015-February/msg00055.html
+https://serverfault.com/questions/769374/firewalld-blocks-ipv6-ignores-config
+  firewall-cmd --permanent --direct --add-rule ipv6 filter INPUT  0 -p icmpv6 -j ACCEPT
 
 Issue with spacewalk after yum -y update.
 spacewalk has alot of components/moving parts (foreman has even more but I
