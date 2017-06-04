@@ -1,0 +1,7 @@
+# rndc reload davedomain ; dynamic zone; so have to freeze/reload/thaw
+rndc freeze davedomain
+rndc reload davedomain
+rndc thaw davedomain
+
+rndc querylog on
+echo -e "update add aaa.davedomain 3600 IN A 192.168.10.9\nsend\n" |nsupdate -k /etc/rndc.key
