@@ -4,6 +4,7 @@ https://lukas.zapletalovi.com/2013/04/managing-many-servers-with-foreman.html
 http://blog.daniellobato.me/unattended-deployments-of-fedora-and-rhel-atomic-with-foreman/
 https://m0dlx.com/blog/Automatic_DNS_updates_from_libvirt_guests.html
 https://beryju.org/en/blog/getting-started-foreman-part-1
+https://blog.zhaw.ch/icclab/tag/foreman/
 
 Issue with spacewalk after yum -y update.
 spacewalk has alot of components/moving parts (foreman has even more but I
@@ -68,8 +69,50 @@ Hm I can connect using curl but not browser
 [root@daveserver foreman-proxy]#
 
 failed to fetch kickstart from daveserver.localdomain/unattended
- https://daveserver.localdomain/unattended/provision?spoof=192.168.122.123
+ https://daveserver.davedomain/unattended/provision?spoof=192.168.122.123
  had wrong nameserver - dracut shell couldnt resolve daveserver
    didnt fix it ..
    localdomain is the problem ..
  allow firewalld nfsd ports
+
+firewall-cmd --permanent --add-service=nfs
+firewall-cmd --permanent --add-service=mountd
+firewall-cmd --permanent --add-service=rpc-bind
+firewall-cmd --permanent --add-service=ftp
+
+setup vsftpd
+
+looks like the CA puppet SSL was still set to daveserver.localdomain somehow ..
+
+puppet resource service puppet ensure=stopped
+puppet resource service puppetserver ensure=stopped
+cd /etc/puppetlabs/puppet/
+mv ssl ssl.localdomain
+puppet cert list -a --noop
+
+<CA key is created>
+
+cd ssl/ca
+openssl x509 -in ./ca_crt.pem -text -noout # confirm has good FQDN
+
+
+[root@daveserver ca]# puppet master --no-daemonize --verbose
+Info: Caching certificate for ca
+Info: Creating a new SSL key for daveserver.davedomain
+Info: csr_attributes file loading from /etc/puppetlabs/puppet/csr_attributes.yaml
+Info: Creating a new SSL certificate request for daveserver.davedomain
+Info: Certificate Request fingerprint (SHA256): DE:A2:D4:0A:04:43:65:28:59:92:2D:81:45:CC:3E:CD:5B:DE:7B:D1:00:D7:0D:63:F1:F3:5A:19:60:D8:BE:97
+Notice: daveserver.davedomain has a waiting certificate request
+Info: authstore: defaulting to no access for daveserver.davedomain
+Notice: Signed certificate request for daveserver.davedomain
+Notice: Removing file Puppet::SSL::CertificateRequest daveserver.davedomain at '/etc/puppetlabs/puppet/ssl/ca/requests/daveserver.davedomain.pem'
+Notice: Removing file Puppet::SSL::CertificateRequest daveserver.davedomain at '/etc/puppetlabs/puppet/ssl/certificate_requests/daveserver.davedomain.pem'
+Warning: The WEBrick Puppet master server is deprecated and will be removed in a future release. Please use Puppet Server instead. See http://links.puppetlabs.com/deprecate-rack-webrick-servers for more information.
+   (at /opt/puppetlabs/puppet/lib/ruby/vendor_ruby/puppet/application/master.rb:210:in `main')
+Notice: Starting Puppet master version 4.10.1
+
+^C
+puppet resource service puppetserver ensure=running
+puppet resource service puppet ensure=running
+
+dnsmasq = off
