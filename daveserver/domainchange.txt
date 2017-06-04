@@ -1,5 +1,8 @@
+google puppetmaster change FQDN
+
 /etc/hosts
 
 foreman
   provisioning
     domainname
+  domain

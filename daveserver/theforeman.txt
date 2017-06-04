@@ -6,6 +6,12 @@ https://m0dlx.com/blog/Automatic_DNS_updates_from_libvirt_guests.html
 https://beryju.org/en/blog/getting-started-foreman-part-1
 https://blog.zhaw.ch/icclab/tag/foreman/
 
+libvirtd/dnsmasq
+http://libvirt-users.redhat.narkive.com/qikKeDfI/how-to-disable-dnsmasq-from-starting-automatically-with-libvirtd
+
+ipv6 interafce
+https://binaryfury.wann.net/2016/03/installing-centos-7-on-an-ipv6-only-system/
+
 Issue with spacewalk after yum -y update.
 spacewalk has alot of components/moving parts (foreman has even more but I
 digress).
