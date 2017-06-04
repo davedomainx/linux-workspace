@@ -64,3 +64,7 @@ theforeman.
 
 Problem is:
  'default' libvirtd network.
+
+ 4.June
+  success.  stood up a seperate libvirt network and provision into there using
+  ISC dhcp and bind9 running on daveserver

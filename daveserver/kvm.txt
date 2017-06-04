@@ -10,9 +10,9 @@ virsh net-destroy default
 virsh net-autostart --network default --disable
 virsh net-edit default
 
-virsh net-define --file ./theforeman.xml
+virsh net-define --file ./foreman.xml
 virsh net-list --all
-virsh net-autostart theforeman
+virsh net-autostart foreman
 virsh net-list --all
 
 

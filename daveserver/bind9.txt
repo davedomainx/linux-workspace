@@ -1,3 +1,5 @@
+Bind is still a mess.  
+
 # rndc reload davedomain ; dynamic zone; so have to freeze/reload/thaw
 rndc freeze davedomain
 rndc reload davedomain
