@@ -1,4 +1,4 @@
-Bind is still a mess.  
+Bind is still a mess.
 
 # rndc reload davedomain ; dynamic zone; so have to freeze/reload/thaw
 rndc freeze davedomain
@@ -7,3 +7,16 @@ rndc thaw davedomain
 
 rndc querylog on
 echo -e "update add aaa.davedomain 3600 IN A 192.168.10.9\nsend\n" |nsupdate -k /etc/rndc.key
+
+# need to setup forwarding from my domain to the ISP/google
+# /etc/named/options:
+forwarders { 192.168.0.1; };
+
+recursion yes;
+allow-query { any; };
+allow-recursion { any; };
+allow-query-cache { any; };
+
+
+# debugging, ipv6
+dig +trace google.com

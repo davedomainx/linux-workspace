@@ -1,4 +1,5 @@
-
+https://wiki.gentoo.org/wiki/ZFS
+https://wiki.archlinux.org/index.php/ZFS
 
 zpool export
 zpool import
@@ -18,3 +19,10 @@ config:
         data                                 ONLINE       0     0     0
           raidz2-0                           ONLINE       0     0     0
             ata-ST3000VN000-1HJ166_W6A17BE9  ONLINE       0     0     1
+
+5Jun2017
+Seems I created zvols on top of the normal zpool data.
+eg zfs create .. -V data/backups
+this seems to have blocked all attempts at setting quota/mountpoint etc.
+zfs destroy data/backups
+zfs create data/backups  # mountpoint got set automatically
