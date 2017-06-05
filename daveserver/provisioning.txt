@@ -1,0 +1,42 @@
+== Provisioners ==
+
+# Install an OS onto a system
+
+foreman
+cobbler
+
+== Configuration Management ==
+
+# Keep systems in a consistent state
+
+ansible
+cfengine
+chef
+puppet
+salt
+
+== Content Management ==
+
+# Repositories, patching, errata, security, subscriptions
+
+Spacewalk          ## Upstream
+ -> Satellite      ## RedHat implementation
+=> Katello         ##
+
+== Containers ==
+
+Lightweight abstraction of a Virtual Machine
+
+== Orchestration ==
+
+# Perform tasks on systems
+
+terraform
+MCollective
+
+== Virtual Machine ==
+
+# Instance of a system that runs inside of another system
+
+Qemu/KVM/libvirtd
+vmware
