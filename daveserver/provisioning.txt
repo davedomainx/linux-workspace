@@ -1,31 +1,56 @@
+https://xebialabs.com/periodic-table-of-devops-tools/
+
+As of June 2017, seems to boil down to this:
+
+foreman vs satellite 6 for provisioning (install a system)
+puppet/ansible/chef/salt for configuration (keep the system configured)
+terraform vs mcollective for orchestration (run something on the system)
+
 == Provisioners ==
 
 # Install an OS onto a system
 
-foreman
-cobbler
+Cobbler
+Foreman
+SaltStack
+Satellite
+Vagrant (Virtual Machines)
+
+== Cloud Management ==
+
+# Remote Virtual Machines from a Cloud-Service organisation
+
+Amazon Web Services
+
+== Containers ==
+
+# Lightweight abstraction of a system that runs in it's own dedicated
+# seperated namespace on a system.
 
 == Configuration Management ==
 
 # Keep systems in a consistent state
 
-ansible
-cfengine
-chef
-puppet
-salt
+Ansible
+Cfengine
+Chef
+Puppet
+Salt
+Vagrant
 
 == Content Management ==
 
-# Repositories, patching, errata, security, subscriptions
+# Applications, Repositories, patching, errata, security, subscriptions
 
-Spacewalk          ## Upstream
- -> Satellite      ## RedHat implementation
-=> Katello         ##
+Spacewalk            ## Community Upstream
+ -> Satellite 5      ## RedHat implementation
 
-== Containers ==
+Satellite 6         ## RedHat upstream, complete standalone from Satellite 5
+                    ## Now combines Katello, Foreman, Pulp, candlepin
 
-Lightweight abstraction of a Virtual Machine
+Katello             ## Content Management.
+
+
 
 == Orchestration ==
 
@@ -36,7 +61,8 @@ MCollective
 
 == Virtual Machine ==
 
-# Instance of a system that runs inside of another system
+# Instance of a system, that runs inside of another system
 
 Qemu/KVM/libvirtd
+VirtualBox
 vmware
