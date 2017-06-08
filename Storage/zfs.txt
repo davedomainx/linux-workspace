@@ -17,6 +17,7 @@ ZFS tuning
 http://open-zfs.org/wiki/Performance_tuning
 https://utcc.utoronto.ca/~cks/space/blog/linux/ZFSonLinuxWeakAreas
 https://www.svennd.be/tuning-of-zfs-module/
+http://nex7.blogspot.de/2013/04/zfs-intent-log.html
 
 terms
 ===
