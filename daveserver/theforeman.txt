@@ -124,4 +124,8 @@ Notice: Starting Puppet master version 4.10.1
 puppet resource service puppetserver ensure=running
 puppet resource service puppet ensure=running
 
+== Turn off dnsmasq for the "foreman" bridge
+
 dnsmasq = off
+[root@daveserver etc]# grep except /etc/dnsmasq.conf
+except-interface=foreman
