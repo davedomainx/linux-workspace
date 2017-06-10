@@ -16,6 +16,9 @@ pcregrep -i -v -M 'Killing connection from 141.80.121.206.*\n.*Connection rese.*
 ## kill process with string
 sudo pdsh -w max[040-060] "pkill -SIGKILL -f 'puppet agent'"
 
+## skip comments and blank lines
+grep -v ^# dnsmasq.conf|grep -v ^$
+
 ip -4 route list 0/0 ## (will list multiple default g/w ?)
 
 Sorting + counting
