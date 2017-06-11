@@ -28,7 +28,17 @@ aha saw web comments that RedHat are ditching Satellite and moving to theforeman
 
 === theforeman ===
 
-it is surprisingly dense and unintuitive to go through
+Good:
+- excellent feel and quality to the overall provisioning lifecycle
+- NFS as a media install is busted (?)
+- docco overall is very good, relevant, detailed, good examples
+
+Bad:
+- puppet is not setup at all to run on client by default (?!)
+- foreman does not act as a puppetmaster by default (!?)
+- cannot write a kickstart file for a specific host, have to do the hostgroup/
+environment/operating system route
+- docco assumes and leaves out huge knowledge gaps
 
 === theforeman -> qemu ===
 
@@ -135,4 +145,11 @@ conf-dir=/etc/dnsmasq.d
 systemctl restart dnsmasq
 systemctl restart libvirtd
 
-confirm dnsmasq only controlling virbr0
+confirm dnsmasq only controlling virbr0; nope, still runs on foreman,
+cannot easily turn it off, just make dnsmasq do nothing ..
+
+sudo -u puppet /etc/puppetlabs/puppet/node.rb donna-senion.davedomain
+
+Added stringify_facts = false
+to puppet.conf template
+which is called by puppet_setup

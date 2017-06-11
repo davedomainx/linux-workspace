@@ -68,3 +68,8 @@ Problem is:
  4.June
   success.  stood up a seperate libvirt network and provision into there using
   ISC dhcp and bind9 running on daveserver
+
+11.June
+  got rid of uneeded br0 bridge.
+  systemctl disable dnsmasq --now
+  rebooted - needed to restart dhcpd - clients now get IP - now got internet
