@@ -12,7 +12,7 @@ Also :  ring buffer size (client + server):
           partition or disk ?
           16+17 : deadline (!?)
           set to noop (grub elevator=noop)
-
+            success!  CPU no longer sticks at 100% used when writing
         socket-queue sizes:
           /proc/sys/net/ipv4/tcp_wmem
           /proc/sys/net/ipv4/tcp_rmem

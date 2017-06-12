@@ -1,3 +1,6 @@
 sudo pdsh -a puppet agent -t –splaylimit=2m
 
 puppet parser validate ./nodes.pp --parser future
+
+# replace efi with facter variable
+puppet apply -e 'notify { $::efi: }'
