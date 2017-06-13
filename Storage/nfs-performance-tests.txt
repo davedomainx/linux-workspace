@@ -19,6 +19,15 @@ Also :  ring buffer size (client + server):
         RPCNFSDCOUNT:
         multiple clients:
 
+Realworld testing fs16:
+async,ac,1Msize
+20G file to/from server..
+
+real	6m18.142s
+user	0m0.014s
+sys	0m19.264s
+
+
 Test 1 : "normal" options
    + remove "noacl", that is a Solaris feature (man nfs)
 
