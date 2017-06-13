@@ -8,6 +8,10 @@ https://linux.die.net/man/5/nfs
 https://blogs.sap.com/2015/11/20/performance-impact-of-disabling-nfs-attribute-caching/
 https://utcc.utoronto.ca/~cks/space/blog/linux/ZFSonLinuxWeakAreas
 
+NFS Caching:
+https://www.avidandrew.com/understanding-nfs-caching.html
+client should set async ..
+
 NFS Tuning:
 http://cromwell-intl.com/linux/performance-tuning/nfs.html
 
