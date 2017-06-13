@@ -4,3 +4,8 @@ puppet parser validate ./nodes.pp --parser future
 
 # replace efi with facter variable
 puppet apply -e 'notify { $::efi: }'
+
+# search for/install a puppet module
+puppet module search hercules
+puppet module list domcleal-augeasproviders
+puppet module install domcleal-augeasproviders --modulepath=/home/darnold/git/puppet_3rd_party/modules
