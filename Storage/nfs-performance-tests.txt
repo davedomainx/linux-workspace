@@ -19,6 +19,30 @@ Also :  ring buffer size (client + server):
         RPCNFSDCOUNT:
         multiple clients:
 
+== baselines etc ==
+
+# set ring buffer : it seems this has little impact ..
+ethtool -g <network device>
+ethtool -G <newtork device> rx/tx 4096
+
+# socat 1st, test connectivity/bandwidth between points
+sudo iptables -I INPUT 16 -p tcp -m --ctstate NEW -m tcp --dport 5000 -j ACCEPT
+sudo socat - tcp4-listen:5000
+# client
+pv < /dev/zero |socat - TCP:141.80.174.216:5000
+
+
+
+== perform copy-tests ==
+
+server:/tmp to server:/tmp
+server:/tmp to server:/another-directory-location
+server:/tmp to server:/export
+server:/export to server:/export
+client: to server:/export
+
+==
+
 Realworld testing fs16:
 async,ac,1Msize
 20G file to/from server..
