@@ -22,10 +22,12 @@ Also :  ring buffer size (client + server):
 Realworld testing fs16:
 async,ac,1Msize
 20G file to/from server..
-
+ very consistent 60MB/sec, with all various options
 real	6m18.142s
 user	0m0.014s
 sys	0m19.264s
+
+20G file client to server
 
 
 Test 1 : "normal" options
