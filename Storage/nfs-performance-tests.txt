@@ -25,11 +25,15 @@ Also :  ring buffer size (client + server):
 ethtool -g <network device>
 ethtool -G <newtork device> rx/tx 4096
 
-# socat 1st, test connectivity/bandwidth between points
+# socat test connectivity/bandwidth between points
+#   UDP looks like about 25% faster than TCP .. 110MB sec UDP, vs 84MB sec TCP
 sudo iptables -I INPUT 16 -p tcp -m --ctstate NEW -m tcp --dport 5000 -j ACCEPT
+sudo iptables -I INPUT 16 -p udp -m --ctstate NEW -m udp --dport 5001 -j ACCEPT
 sudo socat - tcp4-listen:5000
+sudo socat - udp4-listen:5000
 # client
 pv < /dev/zero |socat - TCP:141.80.174.216:5000
+pv < /dev/zero |socat - UDP:141.80.174.216:5001
 
 
 
