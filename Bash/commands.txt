@@ -38,6 +38,7 @@ cat 19July2016.txt |awk ' { print $8 } '|cut -d@ -f2|sort |sed s/max//g| paste -
 001|002|003|005|006|035|041|046|048|050|051|058|063|065|073|078|079|080|
 
 qconf -shgrp @fastmem|egrep -o -w max[[:digit:]]{3}
+qstat -u <id>|egrep -v '(job-ID|---)'|awk '{print $1}'|xargs -I {} qstat -j {} -u <id>|grep -E '(script_file|exec_host_list)'
 
 # count number of times X appears in file Y
 cat 8Aug.txt  | awk ' { tot[$0]++ } END { for (i in tot) print tot[i],i } ' | sort
@@ -54,4 +55,3 @@ BEG=$(date +%s.%3N)
 ENDX=$(date +%s.%3N)
 runtime=$(python -c "print(${ENDX} - ${BEG})")
 echo $runtime
-~
