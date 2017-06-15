@@ -9,3 +9,6 @@ puppet apply -e 'notify { $::efi: }'
 puppet module search hercules
 puppet module list domcleal-augeasproviders
 puppet module install domcleal-augeasproviders --modulepath=/home/darnold/git/puppet_3rd_party/modules
+
+# facter is always facter -p, to load the puppet facter libs!
+facter -p |grep efi

@@ -25,6 +25,7 @@ Also :  ring buffer size (client + server):
 ethtool -g <network device>
 ethtool -G <newtork device> rx/tx 4096
 
+# meh use iperf 
 # socat test connectivity/bandwidth between points
 #   UDP looks like about 25% faster than TCP .. 110MB sec UDP, vs 84MB sec TCP
 sudo iptables -I INPUT 16 -p tcp -m --ctstate NEW -m tcp --dport 5000 -j ACCEPT
@@ -80,5 +81,3 @@ Test 5 : set actimeo=0, noac
 
 Test 6 : set actimeo=0, noac, async
   should be the fastest
-
-Test : NFS 4.1 (C7 7.3.1611 clients)
