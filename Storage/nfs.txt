@@ -8,6 +8,10 @@ https://linux.die.net/man/5/nfs
 https://blogs.sap.com/2015/11/20/performance-impact-of-disabling-nfs-attribute-caching/
 https://utcc.utoronto.ca/~cks/space/blog/linux/ZFSonLinuxWeakAreas
 
+NFS Caching:
+https://www.avidandrew.com/understanding-nfs-caching.html
+client should set async ..
+
 NFS Tuning:
 http://cromwell-intl.com/linux/performance-tuning/nfs.html
 
@@ -16,12 +20,27 @@ http://cromwell-intl.com/linux/performance-tuning/tcp.html
 https://syedali.net/2015/01/05/tcpip-tuning/
 https://www.coverfire.com/articles/queueing-in-the-linux-network-stack/
 
+Bandwidth Calculator:
+https://www.switch.ch/network/tools/tcp_throughput/
+
 In our environment, we have the following set:
   noac  : disable client-file attribute caching,
   async : set by implication
 
 
 specific mount options:
+
+fsc / nofsc
+Enable/Disables the cache of (read-only) data pages to the local disk using
+the FS-Cache facility. See cachefilesd(8)  and
+<kernel_soruce>/Docu‐mentation/filesystems/caching for detail on how to
+configure the FS-Cache facility.  Default value is nofsc.
+
+rdirplus / nordirplus ** try nordirplus **
+Selects whether to use NFS v3 or v4 READDIRPLUS requests.  If this option is
+not specified, the NFS client uses READDIRPLUS requests on NFS v3 or
+v4 mounts to read small directories.  Some applications perform better if
+the client uses only READDIR requests for all directories.
 
 soft/hard = use hard in Clustered environment
 
