@@ -73,3 +73,6 @@ Problem is:
   got rid of uneeded br0 bridge.
   systemctl disable dnsmasq --now
   rebooted - needed to restart dhcpd - clients now get IP - now got internet
+
+17.June
+  https://serverfault.com/questions/685465/how-to-install-puppet-module-from-github
