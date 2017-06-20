@@ -31,11 +31,12 @@ aha saw web comments that RedHat are ditching Satellite and moving to theforeman
 Good:
 - excellent feel and quality to the overall provisioning lifecycle
 - NFS as a media install is busted (?)
-- docco overall is very good, relevant, detailed, good examples
+- docco overall is good, but there are huge gaps
 
 Bad:
 - puppet is not setup at all to run on client by default (?!)
 - foreman does not act as a puppetmaster by default (!?)
+- NFS as a media install is busted (?)
 - cannot write a kickstart file for a specific host, have to do the hostgroup/
 environment/operating system route
 - docco assumes and leaves out huge knowledge gaps
