@@ -1,9 +1,10 @@
 Achieve the following:
 
 Server Preparation:
-  little/no network/cpu traffic (sar -n TCP 1 ; iftop/ganglia).
+  little/no network/cpu traffic (sar -n TCP 1 ; htop/iftop -B ).
   # Drop all caches
-  echo 3 > /proc/sys/vm/drop_caches
+    free && sync && echo 3 > /proc/sys/vm/drop_caches && free
+    sar -r 1
 Do : rsync, dd, cp, tc (?)
 Also :  ring buffer size (client + server):
         "Change the settings to the maximum to optimize for throughput while possibly increasing latency."
@@ -19,13 +20,57 @@ Also :  ring buffer size (client + server):
         RPCNFSDCOUNT:
         multiple clients:
 
+== 21June2017 ==
+
+getting 110MB sec writes, but stalls writing for periods of 15 seconds ..
+ls latency on same machine is bad
+ls latency from another machine is good - no contention
+
+== I dont understand .. ==
+
+copying _into_ the storage is showing disk-read activity ?
+  it should be write-actvity only ?
+
+there is always a 15s delay after hitting 'enter' on the dd command,
+when visible disk/network activity is shown ..
+
+== core findings ==
+
+BOTH network and local performance seems to be either
+  1) close to 'maximums'
+  2) OR almost-exactly half the 'maximums'
+
+Local FS16 performance is excellent[1]
+  ZFS seems to be punching the data down to the disks well, at either
+  220MB/sec or up to 500MB/sec.
+
+Network performance is limited by the 1Gps NIC
+
+ZFS <> ZFS is incredibly fast, sustained 500MB/sec, spiking to 1GB/sec.
+Praise be unto fast dedicated arrays..
+
+Note that /tmp -> /tmp write is always only 200MB/sec
+
+Some cp/dd seems to be resetting the ARC cache
+  hm... okay, I get the fast performance when the ARC doesnt get reset ..
+
+I am getting sustained 220MB/sec or up to 500MB/sec writes local <> ZFS
+  seems to be independant of any setting I throw at it
+  seems to be independant of any cache-dropping
+  seems to be independant of cp/dd
+
+I am getting sustained 55MB/sec or 100MB/sec writes over the network
+  seems to be independant of any setting I throw at it (NFS, ZFS, TCP)
+  seems to be independant of any cache-dropping
+  seems to be independant of cp/dd
+
 == baselines etc ==
 
 # set ring buffer : it seems this has little impact ..
 ethtool -g <network device>
 ethtool -G <newtork device> rx/tx 4096
 
-# meh use iperf 
+# meh use iperf
 # socat test connectivity/bandwidth between points
 #   UDP looks like about 25% faster than TCP .. 110MB sec UDP, vs 84MB sec TCP
 sudo iptables -I INPUT 16 -p tcp -m --ctstate NEW -m tcp --dport 5000 -j ACCEPT
@@ -35,8 +80,6 @@ sudo socat - udp4-listen:5000
 # client
 pv < /dev/zero |socat - TCP:141.80.174.216:5000
 pv < /dev/zero |socat - UDP:141.80.174.216:5001
-
-
 
 == perform copy-tests ==
 
