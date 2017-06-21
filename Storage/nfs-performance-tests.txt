@@ -20,6 +20,19 @@ Also :  ring buffer size (client + server):
         RPCNFSDCOUNT:
         multiple clients:
 
+== 21June2017 ==
+
+getting 110MB sec writes, but stalls writing for periods of 15 seconds ..
+ls latency on same machine is bad
+ls latency from another machine is good - no contention
+
+== I dont understand .. ==
+
+copying _into_ the storage is showing disk-read activity ?
+  it should be write-actvity only ?
+
+there is always a 15s delay after hitting 'enter' on the dd command,
+when visible disk/network activity is shown ..
 
 == core findings ==
 
