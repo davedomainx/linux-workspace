@@ -65,10 +65,6 @@ Just Errata/Bugfix : select all package and add them to the errata/bugfix
 
 === foreman ===
 
-getenforce
-setenforce 0
-getenforce
-
 yum -y install https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 Or to use Puppet 3.x from Puppet Labs:
 

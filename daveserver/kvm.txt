@@ -6,7 +6,8 @@ The virb0 bridge stays around even after you disable libvirtd, cobblerd and othe
 
 # Network stuff.  /etc/libvirt/qemu/networks
 virsh net-list
-virsh net-destroy default
+virsh net-destroy foreman ## restart ..
+virsh net-start foreman
 virsh net-autostart --network default --disable
 virsh net-edit default
 
