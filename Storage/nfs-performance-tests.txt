@@ -24,6 +24,7 @@ Also :  ring buffer size (client + server):
 
 the 100% CPU write-spikes are back .. ?
   looks like 2 dd processes are getting launched at the same time
+  
 == 21June2017 ==
 
 getting 110MB sec writes, but stalls writing for periods of 15 seconds ..
