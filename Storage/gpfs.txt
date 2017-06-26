@@ -1,0 +1,3 @@
+ mount|grep gpfs ## get the 'device'
+ sudo /usr/lpp/mmfs/bin/mmlsfileset /dev/mdc
+ sudo /usr/lpp/mmfs/bin/mmlsquota -j <fileset> /dev/mdc --block-size=auto
