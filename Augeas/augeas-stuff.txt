@@ -4,7 +4,7 @@ rsyslog.conf
 augtool
 defvar r /files/etc/rsyslog.conf
 ls $r
-print $r/#comment 
+print $r/#comment
 	46 or so on a RHEL 6 box
 rm $r/#comment
 	leaves blank lines..
@@ -18,7 +18,7 @@ augtool> print $g/title[*]/kernel/loglevel
 augtool> rm $g/title[*]/kernel/loglevel
 rm : $g/title[*]/kernel/loglevel 1
 augtool> print $g/title[*]/kernel/loglevel
-augtool> 
+augtool>
 
 
 
@@ -31,7 +31,7 @@ Cons:
 		puppet simple file_copy
 		puppet templates
 		puppet file_line
-	
+
 Pros:
 	very good for complicated or tricky configuration files
 	lenses are excellent (but nearly impossible to understand the internal structure)
@@ -114,7 +114,7 @@ ls $sec
 ins 024 after $sec/*[last()]  	# last line of the file
 ins 025 after $sec/*[last() -1] # 2nd last line ..
 ls $sec
-rm $sec/024		
+rm $sec/024
 
 set $sec/*[last()] ttyS1
 print print $sec/*[last()]
@@ -125,7 +125,7 @@ print $sec/*[last()-1]
 /files/etc/securetty/024 = "ttyS1"
 
 set $sec/*[last()-1] badexample
-print $sec/*[last()-1] 
+print $sec/*[last()-1]
 /files/etc/securetty/026 = "badexample"
 
 ins 01 after $sec/*[last()]  	# insert node at last line of file
@@ -201,12 +201,31 @@ ls /augeas/files/boot/grub/grub.conf/error
 augtool> ls /augeas/files/boot/grub/grub.conf/error
 path = /files/boot/grub/grub.conf/title/kernel/01
 lens = /usr/share/augeas/lenses/dist/grub.aug:165.21-.57:
-message = Failed to match 
-    
+message = Failed to match
+
   with tree
     { "console" = "ttyS1,57600" }
 
+== /etc/sudoers
 
+augtool> print /augeas/load/Sudoers
+augtool> ls /augeas/files/etc/sudoers
+path = /files/etc/sudoers
+mtime = 1498655963
+lens/ = @Sudoers
+augtool>
+augtool> defvar r /files/etc/sudoers
+augtool> set $r/Defaults/secure_path "/sbin:/bin:/usr/sbin:/usr/bin:/opt/puppetlabs/bin/puppet"
+augtool> match $r/Defaults/secure_path
+augtool> print $r/Defaults/secure_path
 
+/files/etc/sudoers/Defaults[10]/secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/opt/puppetlabs/bin/puppet
 
-
+# Trying to break up /etc/sudoers secure_path a:b:c:d to add another element 'e' ..
+# shellvars and shellvars_list are whitespace delimited
+augtool> print /augeas/load/Sudoers/lens
+/augeas/load/Sudoers/lens = "@Sudoers"
+augtool> set /augeas/load/Sudoers/lens "Shellvars.lns"
+augtool> print /augeas/load/Sudoers/lens
+/augeas/load/Sudoers/lens = "Shellvars.lns"
+augtool>
