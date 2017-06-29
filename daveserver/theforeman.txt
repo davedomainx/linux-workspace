@@ -192,5 +192,10 @@ curl got a dns timeout.  restarted firewall, named
 tried pinging donna-senion and daveserver - now it just works (?)
 
 29.June
-  setup new static subnet 192.168.11.0/24
+  setup new "foreman-static" subnet 192.168.11.0/24
   idea is to create naming-service VMs in this subnet with static IPs
+  /etc/dnsmasq.conf:
+    interface=foreman-static
+    dhcp-host=<mac>,<hostname>,<ip>,infinite
+    dhcp-range=192.168.11.50,192.168.11.150,static,255.255.255.0,infinite
+  I couldnt get pxe working via virsh net-edit foreman-static
