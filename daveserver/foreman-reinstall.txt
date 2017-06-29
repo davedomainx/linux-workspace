@@ -1,0 +1,69 @@
+I got into a nasty DNS/DHCP/foreman collision.
+And I also messed around with the default templates too much, even refreshing
+templates from github didnt work cleanly.
+Reinstall from scratch if possible.
+
+systemctl stop foreman[-proxy]
+yum remove foreman-*
+yum remove puppet-*
+rm -rf /var/lib/puppet
+rm -rf /etc/puppetlabs
+reboot
+
+systemctl stop dhcpd
+mv /var/lib/dhcpd/* /root/backup
+touch /var/lib/dhcpd/dhcpd.leases
+chown dhcpd:dhcpd !$
+systemctl start dhcpd # started up
+
+# dnsmasq listening on foreman network (not default)
+
+# grr hosts etc was still there after reinstall ..
+# sudo password reset procedure + drop db
+sudo -u postgres psql
+\password postgres
+https://www.question-defense.com/2008/11/12/postgres-error-database-dev-is-being-accessed-by-other-users
+postgres=# drop database foreman;
+DROP DATABASE
+postgres=#
+
+# now drop it from foreman-rake
+foreman-rake db:drop
+[root@daveserver yum.repos.d]# echo $?
+0
+
+systemctl stop foreman[-proxy]
+yum remove foreman-*
+yum remove puppet-*
+rm -rf /var/lib/puppet
+rm -rf /etc/puppetlabs
+reboot
+
+== clean foreman ==
+
+/opt/puppetlabs/bin/puppet agent -t
+
+foreman-installer \
+  --enable-foreman-proxy \
+  --foreman-proxy-tftp=true \
+  --foreman-proxy-tftp-servername=192.168.10.1 \
+  --foreman-proxy-dhcp=true \
+  --foreman-proxy-dhcp-interface=foreman \
+  --foreman-proxy-dhcp-gateway=192.168.10.1 \
+  --foreman-proxy-dhcp-nameservers="192.168.0.99" \
+  --foreman-proxy-dns=true \
+  --foreman-proxy-dns-interface=foreman \
+  --foreman-proxy-dns-zone=davedomain \
+  --foreman-proxy-dns-reverse=10.168.192.in-addr.arpa \
+  --foreman-proxy-dns-forwarders=192.168.0.99 \
+  --foreman-proxy-foreman-base-url=https://daveserver.davedomain \
+  --foreman-proxy-oauth-consumer-key=2bK5X3CoANUrQSvaLt7R5scyH7pEit8R \
+  --foreman-proxy-oauth-consumer-secret=VJfJ7vLr9QfkUzNxXmTpznN6FniVBwau
+
+[root@daveserver tmp]# vi /etc/httpd/conf.d/15-default.conf
+  setup VirtualHost:81 with DocRoot /data/iso
+[root@daveserver tmp]# vi /etc/httpd/conf/ports.conf
+  Add "Listen 81"
+systemctl restart httpd
+ss -talpn|grep 81
+wget http://daveserver.davedomain:81/CentOS-7-x86-64-1611/

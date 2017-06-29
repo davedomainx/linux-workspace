@@ -15,6 +15,9 @@ https://www.redhat.com/archives/virt-tools-list/2015-February/msg00055.html
 https://serverfault.com/questions/769374/firewalld-blocks-ipv6-ignores-config
   firewall-cmd --permanent --direct --add-rule ipv6 filter INPUT  0 -p icmpv6 -j ACCEPT
 
+Templates
+  https://github.com/theforeman/community-templates
+
 Issue with spacewalk after yum -y update.
 spacewalk has alot of components/moving parts (foreman has even more but I
 digress).
@@ -154,3 +157,20 @@ sudo -u puppet /etc/puppetlabs/puppet/node.rb donna-senion.davedomain
 Added stringify_facts = false
 to puppet.conf template
 which is called by puppet_setup
+
+18.June
+pxeboot BOOTIF=mac_address is correct, but it tries to load a long nonexistent
+kickstart file in /var/lib/tftpboot, and doesnt try the correct mac-address file
+
+wget was missing somehow from the install ... I had it commented out for some
+dumb reason in my own kickstart template ?
+
+20.June
+dhcpd.conf next-server must be the 'gateway machine' in the libvirt subnet ..
+192.168.10.1 in this case.  now can pxeboot
+
+still not sure how/where it is attempting to dhcprequest the 192.168.10.117 entry
+from.
+
+curl got a dns timeout.  restarted firewall, named
+tried pinging donna-senion and daveserver - now it just works (?)
