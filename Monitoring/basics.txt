@@ -1,7 +1,0 @@
-netdata : 19999
-grafana : 3000
-prometheus : 9090
-
-netdata is the actual monitor
-prometheus scrapes netdata
-grafana reads prometheus to store in long-term DB store

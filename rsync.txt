@@ -1,3 +1,6 @@
+#cd /sourcedir ; parallel -j8 -i rsync -aqHP {} /destdir/{} -- *
+cd /sourcedir ; parallel -j8 -i rsync --dry-run -aHP {} /destdir/{} -- *
+
 Full / backup, excluding unneeded directories:
 
 <code>
