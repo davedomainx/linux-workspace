@@ -23,10 +23,12 @@ https://cutebit.de/blog/installing-foreman-on-an-existing-puppet-master/
 
 Hammer
   horrible horrible PoS ~/.hammer/BS/config was overriding /etc/hammer/config BS BS BS 1 hour wasted
-
+ hammer sc-param update --puppet-class ntp --name servers --parameter-type 'string' --default-value ['server 0.europe.pool.ntp.org']
   hammer sc-param add-override-value --match domain=daveserver --puppet-class ntp --smart-class-parameter servers --value ["server 0.europe.pool.ntp.org"]
  Override value created
  hammer sc-param info --puppet-class ntp --name servers
+
+ hammer sc-param list --puppet-class firewalld
 
 
 Also find out for once and for all what the ENC is..
@@ -188,3 +190,7 @@ from.
 
 curl got a dns timeout.  restarted firewall, named
 tried pinging donna-senion and daveserver - now it just works (?)
+
+29.June
+  setup new static subnet 192.168.11.0/24
+  idea is to create naming-service VMs in this subnet with static IPs

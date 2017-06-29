@@ -12,6 +12,7 @@ virsh net-autostart --network default --disable
 virsh net-edit default
 
 virsh net-define --file ./foreman.xml
+virsh net-create --file ./foreman.xml
 virsh net-list --all
 virsh net-autostart foreman
 virsh net-list --all
