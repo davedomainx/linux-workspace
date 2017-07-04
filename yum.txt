@@ -10,7 +10,6 @@ yum install yum-utils
 repoquery -l remote_package
 repoquery whatprovides "libXm.so.4"
 
-
 rpm2cpio ./gridengine-8.1.8-1.el6.x86_64.rpm |cpio -idmv
 
 yum --disablerepo=* --enablerepo=dell-system-update_independent repolist all
@@ -22,14 +21,15 @@ rpm -q --whatrequires open-vm-tools-deploypkg
 yum erase <busted package>
 yum update  ## hopeful..
 
-sssd
-
 sudo yum history list
 sudo yum history summary 223  << eg, sssd update
 sudo yum history info 223
 sudo yum history undo 223  << blows up sssd: removes the frigging package, assumed it woulda just downgraded to the last-version.
 sudo yum history redo 223
 yum history package-list sssd*
+
+# yum-plugin-security
+sudo pdsh -a yum -q updateinfo info --cve CVE-2017-1000366|dshbak -c
 
 http://virtuallyhyper.com/2013/03/rhcsa-and-rhce-chapter-6-package-management/
 http://www.cyberciti.biz/faq/yum-history-command/
