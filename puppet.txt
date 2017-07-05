@@ -5,6 +5,9 @@ puppet parser validate ./nodes.pp --parser future
 # replace efi with facter variable
 puppet apply -e 'notify { $::efi: }'
 
+puppet resource service
+puppet resource service 'NetworkManager'
+
 # search for/install a puppet module
 puppet module search hercules
 puppet module list domcleal-augeasproviders
