@@ -199,3 +199,7 @@ tried pinging donna-senion and daveserver - now it just works (?)
     dhcp-host=<mac>,<hostname>,<ip>,infinite
     dhcp-range=192.168.11.50,192.168.11.150,static,255.255.255.0,infinite
   I couldnt get pxe working via virsh net-edit foreman-static
+
+5.July
+  hammer sc-param list --puppet-class dns
+  hammer sc-param update --puppet-class dns --name allow_query --parameter-type 'string' --default-value 'any' --override yes
