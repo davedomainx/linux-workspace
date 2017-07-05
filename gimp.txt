@@ -1,0 +1,4 @@
+Restore old Toolbox:
+
+Windows -> Toolbox
+Preferences -> Window Management -> Reset Saved Window Positions to Default Values
