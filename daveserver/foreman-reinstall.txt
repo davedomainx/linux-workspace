@@ -67,3 +67,6 @@ foreman-installer \
 systemctl restart httpd
 ss -talpn|grep 81
 wget http://daveserver.davedomain:81/CentOS-7-x86-64-1611/
+
+ddns-confgen -r /dev/urandom -k foreman -a hmac-md5
+  copy/paste output of above to /etc/rndc.key and etc/named.conf

@@ -9,7 +9,7 @@ https://blog.zhaw.ch/icclab/tag/foreman/
 libvirtd/dnsmasq
 http://libvirt-users.redhat.narkive.com/qikKeDfI/how-to-disable-dnsmasq-from-starting-automatically-with-libvirtd
 
-odd curl ipv6 interafce problem
+odd curl ipv6 interafce problem # problem was dns wasnt setup properly
 https://binaryfury.wann.net/2016/03/installing-centos-7-on-an-ipv6-only-system/
 https://www.redhat.com/archives/virt-tools-list/2015-February/msg00055.html
 https://serverfault.com/questions/769374/firewalld-blocks-ipv6-ignores-config
@@ -17,6 +17,22 @@ https://serverfault.com/questions/769374/firewalld-blocks-ipv6-ignores-config
 
 Templates
   https://github.com/theforeman/community-templates
+
+Do I use foreman as a puppet master or stand up a different puppet master ?
+https://cutebit.de/blog/installing-foreman-on-an-existing-puppet-master/
+
+Hammer
+  horrible horrible PoS ~/.hammer/BS/config was overriding /etc/hammer/config BS BS BS 1 hour wasted
+ hammer sc-param update --puppet-class ntp --name servers --parameter-type 'string' --default-value ['server 0.europe.pool.ntp.org']
+  hammer sc-param add-override-value --match domain=daveserver --puppet-class ntp --smart-class-parameter servers --value ["server 0.europe.pool.ntp.org"]
+ Override value created
+ hammer sc-param info --puppet-class ntp --name servers
+
+ hammer sc-param list --puppet-class firewalld
+
+
+Also find out for once and for all what the ENC is..
+
 
 Issue with spacewalk after yum -y update.
 spacewalk has alot of components/moving parts (foreman has even more but I
@@ -174,3 +190,12 @@ from.
 
 curl got a dns timeout.  restarted firewall, named
 tried pinging donna-senion and daveserver - now it just works (?)
+
+29.June
+  setup new "foreman-static" subnet 192.168.11.0/24
+  idea is to create naming-service VMs in this subnet with static IPs
+  /etc/dnsmasq.conf:
+    interface=foreman-static
+    dhcp-host=<mac>,<hostname>,<ip>,infinite
+    dhcp-range=192.168.11.50,192.168.11.150,static,255.255.255.0,infinite
+  I couldnt get pxe working via virsh net-edit foreman-static
