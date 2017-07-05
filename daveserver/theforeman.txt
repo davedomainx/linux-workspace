@@ -202,4 +202,7 @@ tried pinging donna-senion and daveserver - now it just works (?)
 
 5.July
   hammer sc-param list --puppet-class dns
+  hammer sc-param info --puppet-class dns --name service_enable
   hammer sc-param update --puppet-class dns --name allow_query --parameter-type 'string' --default-value 'any' --override yes
+  hammer sc-param update --puppet-class dns --name recursion --parameter-type 'boolean' --default-value 'yes' --override yes
+  hammer sc-param update --puppet-class dns --name forwarders --parameter-type 'string' --default-value '192.168.0.1' --override yes
