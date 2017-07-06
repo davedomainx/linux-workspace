@@ -206,3 +206,9 @@ tried pinging donna-senion and daveserver - now it just works (?)
   hammer sc-param update --puppet-class dns --name allow_query --parameter-type 'string' --default-value 'any' --override yes
   hammer sc-param update --puppet-class dns --name recursion --parameter-type 'boolean' --default-value 'yes' --override yes
   hammer sc-param update --puppet-class dns --name forwarders --parameter-type 'string' --default-value '192.168.0.1' --override yes
+
+6.July
+  # re-use a previously allocated dnsmasq static "dhcp" IP
+  systemctl stop dnsmasq
+  rm /var/lib/dnsmasq/dnsmasq.leases
+  systemctl start dnsmasq
