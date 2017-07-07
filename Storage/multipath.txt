@@ -4,7 +4,29 @@ systemctl restart multipathd
 Confusion regarding queue_if_no_path vs path_retry
 
 lsscsi -dgi
+sudo systool -c scsi_host -v host2
 dmsetup ls --tree -o uuid
 dmsetup ls --tree --target=multipath
 multipath -v4 -ll
 /lib/udev/scsi_id --help
+
+sudo lspci -v -s 42:00.0
+42:00.0 Serial Attached SCSI controller: LSI Logic / Symbios Logic SAS2308 PCI-Express Fusion-MPT SAS-2 (rev 05)
+	Subsystem: LSI Logic / Symbios Logic 9207-8e SAS2.1 HBA
+	Flags: bus master, fast devsel, latency 0, IRQ 76, NUMA node 1
+	I/O ports at bc00 [size=256]
+	Memory at d0ff0000 (64-bit, non-prefetchable) [size=64K]
+	Memory at d0f80000 (64-bit, non-prefetchable) [size=256K]
+	Expansion ROM at d0000000 [disabled] [size=1M]
+	Capabilities: [50] Power Management version 3
+	Capabilities: [68] Express Endpoint, MSI 00
+	Capabilities: [d0] Vital Product Data
+	Capabilities: [a8] MSI: Enable- Count=1/1 Maskable- 64bit+
+	Capabilities: [c0] MSI-X: Enable+ Count=16 Masked-
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [1e0] #19
+	Capabilities: [1c0] Power Budgeting <?>
+	Capabilities: [190] #16
+	Capabilities: [148] Alternative Routing-ID Interpretation (ARI)
+	Kernel driver in use: mpt2sas
+	Kernel modules: mpt2sas
