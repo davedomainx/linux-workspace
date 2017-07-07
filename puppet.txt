@@ -8,6 +8,9 @@ puppet apply -e 'notify { $::efi: }'
 puppet resource service
 puppet resource service 'NetworkManager'
 
+# apply only manifest[s] matching --tags"
+puppet agent --test --logdest syslog --tags dhcp
+
 # search for/install a puppet module
 puppet module search hercules
 puppet module list domcleal-augeasproviders
