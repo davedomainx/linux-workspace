@@ -242,13 +242,18 @@ Jul  8 16:01:47 daveserver in.tftpd[14307]: Client 192.168.11.139 File not found
 Jul  8 16:01:47 daveserver in.tftpd[14308]: RRQ from 192.168.11.139 filename pxelinux.cfg/01-52-54-00-8a-67-28
 
 9.July
-  Problem 1 : was using the wrong operating system for some reason.  All template-resolving is now correct.
-  Problem 2 : libvirtd provider was using the general 'foreman' dhcp network, not the seperately created foreman-static network
+  Problem 1 : was using the wrong operating system for some reason.
+    fixed with the right OS.
+    All template-resolving is now correct.
+  Problem 2 : libvirtd provider was using the general 'foreman' dhcp network
+    explictly tell each new VM to use the foreman-static network
   Just add the deisred IP to Interfaces : IPv4
     nothing else is needed.  note it uses a temporary dhcp ip from the range
   Note :
     cannot seem to clone a VM - foreman and/or static network doesnt seem to like it
+    new machines need to be rebooted twice maybe to get the initial pxe boot working (?)
 
+setup some better defaults with hammer, domain-level
 hammer hostgroup list
 hammer hostgroup info --id 1
 hammer hostgroup set-parameter --hostgroup "Provision from daveserver.davedomain" --name enable-puppetlabs-pc1-repo --value true
