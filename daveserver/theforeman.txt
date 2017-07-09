@@ -248,3 +248,9 @@ Jul  8 16:01:47 daveserver in.tftpd[14308]: RRQ from 192.168.11.139 filename pxe
     nothing else is needed.  note it uses a temporary dhcp ip from the range
   Note :
     cannot seem to clone a VM - foreman and/or static network doesnt seem to like it
+
+hammer hostgroup list
+hammer hostgroup info --id 1
+hammer hostgroup set-parameter --hostgroup "Provision from daveserver.davedomain" --name enable-puppetlabs-pc1-repo --value true
+hammer hostgroup set-parameter --hostgroup "Provision from daveserver.davedomain" --name force-puppet --value true
+hammer hostgroup set-parameter --hostgroup "Provision from daveserver.davedomain" --name package_upgrade --value false
