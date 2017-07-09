@@ -205,10 +205,46 @@ tried pinging donna-senion and daveserver - now it just works (?)
   hammer sc-param info --puppet-class dns --name service_enable
   hammer sc-param update --puppet-class dns --name allow_query --parameter-type 'string' --default-value 'any' --override yes
   hammer sc-param update --puppet-class dns --name recursion --parameter-type 'boolean' --default-value 'yes' --override yes
-  hammer sc-param update --puppet-class dns --name forwarders --parameter-type 'string' --default-value '192.168.0.1' --override yes
+  hammer sc-param update --puppet-class dns --name forwarders --parameter-type 'array' --default-value '[192.168.0.1]' --override yes
 
 6.July
   # re-use a previously allocated dnsmasq static "dhcp" IP
   systemctl stop dnsmasq
   rm /var/lib/dnsmasq/dnsmasq.leases
   systemctl start dnsmasq
+
+7.July
+  odd results with static/dhcp for namer2.
+  think I forgot to manually specify boot mode static
+  Subnet options
+
+Subnets are defined in Foreman under Infrastructure > Subnets, and have a few options that affect how hosts are provisioned.
+
+IPAM: DHCP will use a DHCP-enabled smart proxy, checking for assigned leases and reservations and suggesting a new IP from the range. Internal DB will use Foreman’s list of already-assigned IPs and doesn’t rely on a DHCP smart proxy. None disables auto-suggestion of IP addresses.
+Boot mode: during OS provisioning, the template will configure the interface with either a static IP address or to use DHCP depending on the value of this setting.
+
+8.July
+  foreman/libvirtd got into a state - rebooted host
+  rebuilt namer2 -static works now (?)
+    Interfaces - Managed - ticked
+    Interfaces - IP - 192.168.11.52
+    67:28 is NOT in dhcpd.conf, dnsmasq.conf or virsh net-edit foreman-static ...
+    it seems the provisioning stage uses a dhcp IP from the dnsmasq.conf range ..
+
+Jul  8 16:01:42 daveserver dnsmasq-dhcp[2941]: DHCPDISCOVER(foreman-static) 52:54:00:8a:67:28
+Jul  8 16:01:42 daveserver dnsmasq-dhcp[2941]: DHCPOFFER(foreman-static) 192.168.11.139 52:54:00:8a:67:28
+Jul  8 16:01:47 daveserver dnsmasq-dhcp[2941]: DHCPREQUEST(foreman-static) 192.168.11.139 52:54:00:8a:67:28
+Jul  8 16:01:47 daveserver dnsmasq-dhcp[2941]: DHCPACK(foreman-static) 192.168.11.139 52:54:00:8a:67:28
+Jul  8 16:01:47 daveserver in.tftpd[14306]: RRQ from 192.168.11.139 filename pxelinux.0
+Jul  8 16:01:47 daveserver in.tftpd[14306]: Client 192.168.11.139 finished pxelinux.0
+Jul  8 16:01:47 daveserver in.tftpd[14307]: RRQ from 192.168.11.139 filename pxelinux.cfg/d9574c4c-8684-6644-ba4a-86ac79788e83
+Jul  8 16:01:47 daveserver in.tftpd[14307]: Client 192.168.11.139 File not found pxelinux.cfg/d9574c4c-8684-6644-ba4a-86ac79788e83
+Jul  8 16:01:47 daveserver in.tftpd[14308]: RRQ from 192.168.11.139 filename pxelinux.cfg/01-52-54-00-8a-67-28
+
+9.July
+  Problem 1 : was using the wrong operating system for some reason.  All template-resolving is now correct.
+  Problem 2 : libvirtd provider was using the general 'foreman' dhcp network, not the seperately created foreman-static network
+  Just add the deisred IP to Interfaces : IPv4
+    nothing else is needed.  note it uses a temporary dhcp ip from the range
+  Note :
+    cannot seem to clone a VM - foreman and/or static network doesnt seem to like it
