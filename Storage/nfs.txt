@@ -18,10 +18,13 @@ http://cromwell-intl.com/linux/performance-tuning/nfs.html
 ** 21 June 2017 **
 NFS + VM Tuning:
 https://www.novell.com/support/kb/doc.php?id=7010287
+https://gluster.readthedocs.io/en/latest/Administrator%20Guide/Linux%20Kernel%20Tuning/
+http://fasterdata.es.net/
 http://www.monperrus.net/martin/scheduler+queue+size+and+resilience+to+heavy+IO
 http://www.monperrus.net/martin/performance+of+read-write+throughput+with+iscsi
 
 TCP/IP tuning:
+http://fasterdata.es.net/
 http://cromwell-intl.com/linux/performance-tuning/tcp.html
 https://syedali.net/2015/01/05/tcpip-tuning/
 https://www.coverfire.com/articles/queueing-in-the-linux-network-stack/
