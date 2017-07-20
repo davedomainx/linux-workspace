@@ -15,6 +15,11 @@ client should set async ..
 NFS Tuning:
 http://cromwell-intl.com/linux/performance-tuning/nfs.html
 
+File copy:
+https://github.com/Xfennec/progress
+http://www.itadmintools.com/2012/10/throughput-calculator.html
+https://blog.urfix.com/9-tricks-pv-pipe-viewer/
+
 ** 21 June 2017 **
 NFS + VM Tuning:
 https://www.novell.com/support/kb/doc.php?id=7010287
