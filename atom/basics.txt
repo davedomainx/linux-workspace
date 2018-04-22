@@ -1,6 +1,7 @@
 http://http://flight-manual.atom.io/
 #
 # new ssh key tests xx
+# 2018 test
 test from windows atom git
 windows desktop git
  C:\Users\dave\AppData\Local\GitHub\GitHub.appref-ms --open-shell
