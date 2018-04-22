@@ -1,5 +1,8 @@
-ZFS sector size
-===
+ZFSonLinux
+==
+/sys/module/zfs/parameters
+https://github.com/imp/izarc/blob/master/izarc.py
+==
 
 https://docs.google.com/spreadsheets/d/1pdu_X2tR4ztF6_HLtJ-Dc4ZcwUdt6fkCjpnXxAEFlyA/edit#gid=804965548
 https://www.delphix.com/blog/delphix-engineering/zfs-raidz-stripe-width-or-how-i-learned-stop-worrying-and-love-raidz
