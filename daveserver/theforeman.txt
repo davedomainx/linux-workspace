@@ -21,6 +21,7 @@ Templates
 Do I use foreman as a puppet master or stand up a different puppet master ?
 https://cutebit.de/blog/installing-foreman-on-an-existing-puppet-master/
 
+there
 Hammer
   horrible horrible PoS ~/.hammer/BS/config was overriding /etc/hammer/config BS BS BS 1 hour wasted
  hammer sc-param update --puppet-class ntp --name servers --parameter-type 'string' --default-value ['server 0.europe.pool.ntp.org']
@@ -247,8 +248,10 @@ Jul  8 16:01:47 daveserver in.tftpd[14308]: RRQ from 192.168.11.139 filename pxe
     All template-resolving is now correct.
   Problem 2 : libvirtd provider was using the general 'foreman' dhcp network
     explictly tell each new VM to use the foreman-static network
-  Just add the deisred IP to Interfaces : IPv4
-    nothing else is needed.  note it uses a temporary dhcp ip from the range
+  Just add the deisred static-IP to Interfaces : IPv4
+    Note although you specify a static IP, it uses a temporary dhcp ip from the range
+      maybe need to set static-IP entry in dnsmasq.conf ..
+    no need to special-edit dnsmasq.conf or virsh net-edit foreman-static .. just works now
   Note :
     cannot seem to clone a VM - foreman and/or static network doesnt seem to like it
     new machines need to be rebooted twice maybe to get the initial pxe boot working (?)
