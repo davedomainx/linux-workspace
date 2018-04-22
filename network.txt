@@ -1,0 +1,24 @@
+9000 vs 9216
+
+With MTU size you need to leave enough room for the headers to be added.
+IPv4 =20, TCP =20, So MTU 9216 is not required, but is used to ensure
+there is enough space.
+
+sudo ip link set em1 mtu 9000
+ping -M do -s 8972 <host>
+PING <host> 8972(9000) bytes of data.
+8980 bytes from <host> icmp_seq=1 ttl=63 time=0.664 ms
+8980 bytes from <host> icmp_seq=2 ttl=63 time=0.667 ms
+^C
+--- host ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 0.664/0.665/0.667/0.025 ms
+
+
+ping -M do -s 9972 <host>
+PING <host> 9972(10000) bytes of data.
+ping: local error: Message too long, mtu=9000
+ping: local error: Message too long, mtu=9000
+^C
+--- <host> ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 999ms

@@ -54,3 +54,7 @@ prometheus (metrics collector)
 collectd (metrics collector)
 
 Influx/Chronix (metrics storage)
+
+== Prometheus query ==
+
+avg({__name__=~"node_network_receive_bytes|node_network_transmit_bytes"})
