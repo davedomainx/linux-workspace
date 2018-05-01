@@ -1,1 +1,73 @@
 # just the commands maam
+
+System Information
+Manufacturer: Supermicro
+Product Name: X11SSL-CF
+Serial Number : VM15CS023044
+
+dmidecode -s bios-version
+1.0a
+
+# rufus burn freedos 8gB sandisk cruzer
+# copy BIOS updates to sandisk
+# stupid Supermicro
+
+# ISO prep
+dload 7.4 1708 dvd iso
+daveserver OOB - Virtual Console - Mount ISO image - Plug it in -okay- its the "ATEN" USB device ..
+reboot daveserver - "entf" to get into UEFI - ATEN.. to boot into C 7.4 - okay
+
+# backup prep onto ZFS ..
+mkdir /data/backups/2018-daveserver
+rsync -av  /root /data/backups/2018-daveserver
+rsync -av  /etc /data/backups/2018-daveserver
+
+# boot control keys
+del/entf UEFI
+f11 boot menu
+ctrl c SAS
+ctrl i SSDs
+ .. reset to raid1 both SSDs (dont remember why I set to raid0 in the 1st place)
+
+# install C7.4 ..
+# postinstall - network
+
+ethtool -s eno1 # link up
+cd /etc/sysconfig/network-scripts
+sed -i s/BOOTPROTO=static/BOOTPROTO=dhcp/g ifcfg-eno1
+sed -i s/ONBOOT=no/ONBOOT=yes/g ifcfg-eno1
+echo "IPADDR=192.168.1.99" >> ifcfg-eno1
+echo "GATEWAY=192.168.1.254" >> ifcfg-eno1
+
+systemctl restart network
+# ping google doesnt work
+# but this did and set the route ..
+# ( ip route add default via 192.168.1.99
+# WRONG should have been
+# ip route add default via 192.168.1.254 )
+
+ifup eno1
+# still not pinging google but yum/curl/wget work?
+yum install -y net-tools curl wget elinks strace
+wget cnn.com   # works
+elinks index.html  # verifies
+
+# postinstall - ssh
+psftp id_ed21159.pub /root/.ssh
+cat id_ed21159.pub >> authorized_keys
+
+# postinstall - puppet
+rpm -Uvh https://yum.puppet.com/puppet5/puppet5-release-el-7.noarch.rpm
+yum install -y puppet ## installs agent only
+/opt/puppetlabs/bin/puppet agent --version --noop
+
+# postinstall - packages
+yum update && yum upgrade
+yum install -y augeas
+
+# postinstall - zfs
+sudo yum install
+yum install  http://download.zfsonlinux.org/epel/zfs-release.el7_4.noarch.rpm
+systemctl preset zfs-import-cache zfs-import-scan zfs-import.target zfs-mount zfs-share zfs-zed zfs.target
+modprobe zfs
+zpool import data # okay

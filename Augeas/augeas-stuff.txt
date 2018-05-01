@@ -1,3 +1,7 @@
+# Puppet Plugins
+augtool -s set /files/etc/puppet/puppet.conf/main/pluginsync true
+
+
 rsyslog.conf
 ============
 
