@@ -78,3 +78,6 @@ yum install  http://download.zfsonlinux.org/epel/zfs-release.el7_4.noarch.rpm
 systemctl preset zfs-import-cache zfs-import-scan zfs-import.target zfs-mount zfs-share zfs-zed zfs.target
 modprobe zfs
 zpool import data # okay
+
+# postinstall - NFS exports
+zfs set sharenfs=ro=192.168.1/24:192.168.11.0/24:192.168.22.0 data/iso
