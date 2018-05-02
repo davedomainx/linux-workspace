@@ -1,7 +1,13 @@
-# Allow http/s:
-firewall-cmd --zone=public --add-service=http
-firewall-cmd --zone=public --add-service=https
-firewall-cmd --zone=public --list-services
+# Allow http/s  zone=public is default
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-service=https
+firewall-cmd --permanent --zone=public --list-services
+
+# Allow NFS:
+firewall-cmd --permanent --add-service=nfs
+firewall-cmd --permanent --add-service=mountd
+firewall-cmd --permanent --add-service=rpc-bind
+firewall-cmd --permanent --add-service=ftp
 
 #
 foreman-installer
@@ -13,4 +19,8 @@ puppet agent --test
 
 ## hammer
 hammer domain list # davedomain set from foreman-installer ..
+
 hammer subnet create --boot-mode Static --description "Foreman static network for naming" --domain-ids 1 --mask 255.255.255.0 --name Foreman_Static --network 192.168.11.0
+
+# see other file for 7.4 centos setup
+ hammer medium create --name "CentOS 7.4 1708 local" --operatingsystem-ids 1 --os-family Redhat --path nfs://daveserver.davedomain:/data/iso/CentOS-7-x86-64-1708

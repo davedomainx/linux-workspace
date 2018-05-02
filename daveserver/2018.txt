@@ -79,5 +79,7 @@ systemctl preset zfs-import-cache zfs-import-scan zfs-import.target zfs-mount zf
 modprobe zfs
 zpool import data # okay
 
-# postinstall - NFS exports
-zfs set sharenfs=ro=192.168.1/24:192.168.11.0/24:192.168.22.0 data/iso
+# postinstall - setup 7.4 iso directory tree
+mkdir  /data/iso/CentOS-7-x86-64-1708
+mount -o loop ./CentOS-7-x86_64-DVD-1708.iso /mnt/iso
+rsync -a /mnt/iso  /data/iso/CentOS-7-x86-64-1708
