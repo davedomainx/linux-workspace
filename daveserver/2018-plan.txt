@@ -1,0 +1,5 @@
+. Install foreman on daveserver
+. setup foreman-static network for naming/ntp/dhcp etc
+. setup 2x naming servers for dns (static network?)
+. setup 2x ntp servers for time (dockers/kubes/openstack?)
+. 

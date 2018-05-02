@@ -1,0 +1,12 @@
+# Allow http/s:
+firewall-cmd --zone=public --add-service=http
+firewall-cmd --zone=public --add-service=https
+firewall-cmd --zone=public --list-services
+
+#
+foreman-installer
+
+foreman-installer \
+  --enable-foreman-proxy
+
+puppet agent --test

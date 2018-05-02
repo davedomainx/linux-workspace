@@ -52,6 +52,13 @@ yum install -y net-tools curl wget elinks strace
 wget cnn.com   # works
 elinks index.html  # verifies
 
+# Windows - set hostname
+c:\Windows\System32\Drivers\etc\hosts
+192.168.1.99 daveserver.davedomain daveserver
+
+# postinstall - hostname (for foreman)
+hostnamectl set-hostname daveserver.davedomain
+
 # postinstall - ssh
 psftp id_ed21159.pub /root/.ssh
 cat id_ed21159.pub >> authorized_keys
