@@ -34,10 +34,12 @@ ctrl i SSDs
 
 ethtool -s eno1 # link up
 cd /etc/sysconfig/network-scripts
-sed -i s/BOOTPROTO=static/BOOTPROTO=dhcp/g ifcfg-eno1
-sed -i s/ONBOOT=no/ONBOOT=yes/g ifcfg-eno1
-echo "IPADDR=192.168.1.99" >> ifcfg-eno1
-echo "GATEWAY=192.168.1.254" >> ifcfg-eno1
+#sed -i s/BOOTPROTO=static/BOOTPROTO=dhcp/g ifcfg-eno
+## below assumes augeas installed at boot or network was availble ..
+augtool set /files/etc/sysconfig/network-scripts/ifcfg-eno1/GATEWAY 192.168.1.254
+augtool set /files/etc/sysconfig/network-scripts/ifcfg-eno1/BOOTPROTO static
+augtool set /files/etc/sysconfig/network-scripts/ifcfg-eno1/ONBOOT yes
+augtool set /files/etc/sysconfig/network-scripts/ifcfg-eno1/IPADDR 192.168.1.99
 
 systemctl restart network
 # ping google doesnt work
@@ -73,7 +75,6 @@ yum update && yum upgrade
 yum install -y augeas
 
 # postinstall - zfs
-sudo yum install
 yum install  http://download.zfsonlinux.org/epel/zfs-release.el7_4.noarch.rpm
 systemctl preset zfs-import-cache zfs-import-scan zfs-import.target zfs-mount zfs-share zfs-zed zfs.target
 modprobe zfs
@@ -83,3 +84,10 @@ zpool import data # okay
 mkdir  /data/iso/CentOS-7-x86-64-1708
 mount -o loop ./CentOS-7-x86_64-DVD-1708.iso /mnt/iso
 rsync -a /mnt/iso  /data/iso/CentOS-7-x86-64-1708
+
+# postinstall - KVM - installs 200+ packages ..
+yum install qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install virt-viewer bridge-utils
+systemctl enable libvirtd
+systemctl start libvirtd
+lsmod |grep kvm
+virsh list #

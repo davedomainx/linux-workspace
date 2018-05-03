@@ -22,5 +22,20 @@ hammer domain list # davedomain set from foreman-installer ..
 
 hammer subnet create --boot-mode Static --description "Foreman static network for naming" --domain-ids 1 --mask 255.255.255.0 --name Foreman_Static --network 192.168.11.0
 
-# see other file for 7.4 centos setup
+# see other file for 7.4 centos directory-from-ISO setup
  hammer medium create --name "CentOS 7.4 1708 local" --operatingsystem-ids 1 --os-family Redhat --path nfs://daveserver.davedomain:/data/iso/CentOS-7-x86-64-1708
+
+ # create hostgroup for good organisation
+ # subnet-id 1 = foreman-Static
+ # operatingsystem-id 1 = Centos 7.4 I setup earlier
+ # medium-id 9 = centos 7.4 1708 local that I setup above
+ # architecture-id = x86-64
+
+hammer hostgroup create --name "Naming Servers" --subnet-id 1 --architecture-id 1 --medium-id 9 --domain davedomain
+
+hammer hostgroup update --name "Naming Servers" --operatingsystem-id 1
+hammer hostgroup update --name "Naming Servers" --description "Naming Servers (DNS/DHCP)"
+hammer hostgroup update --name "Naming Servers" --environment production --puppet-proxy daveserver.davedomain --puppet-ca-proxy daveserver.davedomain
+
+# associate partition table for the Centos 7.4 to Kickstart default
+hammer os add-ptable --id 1  --partition-table "Kickstart default"
