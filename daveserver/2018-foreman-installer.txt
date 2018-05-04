@@ -9,11 +9,14 @@ firewall-cmd --permanent --add-service=mountd
 firewall-cmd --permanent --add-service=rpc-bind
 firewall-cmd --permanent --add-service=ftp
 
-#
-foreman-installer
+# Allow foreman-ports
+firewall-cmd --permanent --add-port 8443/tcp # foreman-proxy
+firewall-cmd --permanent --add-port 8140/tcp # puppet
+firewall-cmd --permanent --add-port 5910-5930/tcp # server VNC consoles
 
 foreman-installer \
-  --enable-foreman-proxy
+  --enable-foreman-proxy \
+  --enable-foreman-compute-libvirt
 
 puppet agent --test
 
@@ -39,3 +42,9 @@ hammer hostgroup update --name "Naming Servers" --environment production --puppe
 
 # associate partition table for the Centos 7.4 to Kickstart default
 hammer os add-ptable --id 1  --partition-table "Kickstart default"
+
+# Create libvirt compute resource
+# FIXME URL is wrong
+# FIXME this didnt actually work, had to create it via web-gui ..
+hammer compute-resource create --name libvirtd --provider libvirt --url qemu://192.168.1.99
+hammer compute-resource update --name libvirtd --url qemu+ssh://root@daveserver.davedomain/system

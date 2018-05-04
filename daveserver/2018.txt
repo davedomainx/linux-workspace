@@ -72,7 +72,7 @@ yum install -y puppet ## installs agent only
 
 # postinstall - packages
 yum update && yum upgrade
-yum install -y augeas
+yum install -y augeas yum-utils
 
 # postinstall - zfs
 yum install  http://download.zfsonlinux.org/epel/zfs-release.el7_4.noarch.rpm
