@@ -14,6 +14,9 @@ firewall-cmd --permanent --add-port 8443/tcp # foreman-proxy
 firewall-cmd --permanent --add-port 8140/tcp # puppet
 firewall-cmd --permanent --add-port 5910-5930/tcp # server VNC consoles
 
+# firewall-cmd --list-ports # 5910-5930 were missing ..
+firewall-cmd --reload  ## to fix missing 5910-5930 ports
+
 foreman-installer \
   --enable-foreman-proxy \
   --enable-foreman-compute-libvirt
@@ -21,6 +24,9 @@ foreman-installer \
 puppet agent --test
 
 ## hammer
+# turn off annoying hammer warning output (Silences all)
+echo export RUBYOPT=\"-W0\" >> /etc/profile
+
 hammer domain list # davedomain set from foreman-installer ..
 
 hammer subnet create --boot-mode Static --description "Foreman static network for naming" --domain-ids 1 --mask 255.255.255.0 --name Foreman_Static --network 192.168.11.0
@@ -29,7 +35,7 @@ hammer subnet create --boot-mode Static --description "Foreman static network fo
  hammer medium create --name "CentOS 7.4 1708 local" --operatingsystem-ids 1 --os-family Redhat --path nfs://daveserver.davedomain:/data/iso/CentOS-7-x86-64-1708
 
  # create hostgroup for good organisation
- # subnet-id 1 = foreman-Static
+ # subnet-id 1 = foreman-Static subnet I setup earlier
  # operatingsystem-id 1 = Centos 7.4 I setup earlier
  # medium-id 9 = centos 7.4 1708 local that I setup above
  # architecture-id = x86-64
@@ -44,7 +50,43 @@ hammer hostgroup update --name "Naming Servers" --environment production --puppe
 hammer os add-ptable --id 1  --partition-table "Kickstart default"
 
 # Create libvirt compute resource
-# FIXME URL is wrong
 # FIXME this didnt actually work, had to create it via web-gui ..
-hammer compute-resource create --name libvirtd --provider libvirt --url qemu://192.168.1.99
-hammer compute-resource update --name libvirtd --url qemu+ssh://root@daveserver.davedomain/system
+hammer compute-resource create --name libvirtd --provider Libvirt --url qemu+ssh://root@daveserver.davedomain/system
+
+# setup ssh for the 'foreman' user account to connect to libvirtd
+# foreman 1.17 manual, s.5.2.5, libvirtd stuff
+chmod 700 /usr/share/foreman/.ssh
+chown foreman:foreman /usr/share/foreman/.ssh
+
+su foreman -s /bin/bash
+foreman$ ssh-keygen
+foreman$ ssh-copy-id root@daveserver.davedomain
+foreman$ ssh root@daveserver.davedomain
+exit
+
+augtool -s set /files/etc/libvirt/libvirtd.conf/listen_tls 0
+augtool -s set /files/etc/libvirt/libvirtd.conf/listen_tcp 1
+augtool -s set /files/etc/libvirt/libvirtd.conf/auth_tcp "none"
+
+/etc/sysconfig/libvirtd:
+LIBVIRTD_ARGS="--listen" # un-comment this out
+
+# after the libvirtd restart I can connect to the libvirtd in foreman
+systemctl restart libvirtd
+
+## setup libvirt virtual network for naming services
+/etc/libvirt/qemu/networks/foreman_static.xml:
+<network>
+  <name>foreman_static</name>
+  <uuid>aad69fe1-b740-40a6-b6cc-3d6c1dcaebf2</uuid>
+  <forward mode='nat'/>
+  <bridge name='virbr1' stp='on' delay='0'/>
+  <mac address='52:54:00:20:1f:50'/>
+  <ip address='192.168.11.1' netmask='255.255.255.0'>
+  </ip>
+</network>
+
+virsh net-define /etc/libvirt/qemu/networks/foreman_static.xml
+virsh net-create /etc/libvirt/qemu/networks/foreman_static.xml
+virsh net-autostart foreman_static ## creates symlink
+virsh net-list ## confirm persistent and autostarts

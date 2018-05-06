@@ -1,5 +1,6 @@
 . Install foreman on daveserver
-. setup foreman-static network for naming/ntp/dhcp etc
-. setup 2x naming servers for dns (static network?)
+. setup libvirtd foreman-static network for naming/ntp/dhcp etc
+. setup 2x dns naming servers inside foreman-static network
+.. dns naming should be static-ip assigned but provisioned from foreman
 . setup 2x ntp servers for time (dockers/kubes/openstack?)
-. 
+.
