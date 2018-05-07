@@ -90,3 +90,45 @@ virsh net-define /etc/libvirt/qemu/networks/foreman_static.xml
 virsh net-create /etc/libvirt/qemu/networks/foreman_static.xml
 virsh net-autostart foreman_static ## creates symlink
 virsh net-list ## confirm persistent and autostarts
+
+# libvirt has native support for ZFS, setup a storage pool 1st ..
+zfs create data/vmpool
+zfs set quota=20G data/vmpool
+zfs list
+
+# Support is in libvirt for ZFS, but it's not defaulted
+# need to rebuild the libvirt RPM
+##
+yum -y groupinstall "Development Tools"
+yum -y install rpm-build
+## rpmbuild requires bunch of dependencies ..
+yum -y install libxml2-devel readline-devel ncurses-devel libtasn1-devel gnutls-devel libattr-devel libblkid-devel systemd-devel libpciaccess-devel yajl-devel sanlock-devel libpcap-devel libnl3-devel avahi-devel libselinux-devel cyrus-sasl-devel polkit-devel libacl-devel parted-devel device-mapper-devel librados2-devel librbd1-devel glusterfs-api-devel glusterfs-devel numactl-devel libcap-ng-devel fuse-devel netcf-devel libcurl-devel audit-libs-devel systemtap-sdt-devel dbus-devel scrub
+
+rpm -Uvh https://buildlogs.centos.org/c7.1804.00.x86_64/libvirt/201804122
+14704/3.9.0-14.el7.x86_64/libvirt-3.9.0-14.el7.src.rpm
+cd rpmbuild/SPECS
+rpmbuild -ba libvirt.spec
+cd /root/RPMS/x86_64
+yum -y localinstall *
+
+which libvirtd
+/usr/sbin/libvirtd
+libvirtd --version
+libvirtd (libvirt) 3.9.0
+systemctl start libvirtd   # okay
+systemctl status libvirtd  # okay
+
+virsh pool-list
+virsh pool-define-as --name default --type dir --target /data/img/
+virsh pool-autostart default
+virsh pool-start default
+virsh pool-list
+
+
+# setup 1st machine namer99 in forman webGUI, webconsole problem
+# see if machine is running in libvirt ..
+su - foreman -s /bin/bash
+# -bash-4.2$ virsh -c qemu+ssh://root@daveserver.davedomain/system list
+# Id    Name                           State
+# ----------------------------------------------------
+# 1     namer99.davedomain             running
