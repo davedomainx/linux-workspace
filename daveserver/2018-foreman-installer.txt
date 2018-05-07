@@ -93,12 +93,13 @@ virsh net-list ## confirm persistent and autostarts
 
 # libvirt has native support for ZFS, setup a storage pool 1st ..
 zfs create data/vmpool
-zfs set quota=20G data/vmpool
+zfs set quota=100G data/vmpool
 zfs list
 
 # Support is in libvirt for ZFS, but it's not defaulted
 # need to rebuild the libvirt RPM
-##
+#https://plone.lucidsolutions.co.nz/linux/libvirt/enable-zfs-storage-driver-with-centos-v7-libvirt-v2.0.0-storage-driver
+
 yum -y groupinstall "Development Tools"
 yum -y install rpm-build
 ## rpmbuild requires bunch of dependencies ..
@@ -107,9 +108,28 @@ yum -y install libxml2-devel readline-devel ncurses-devel libtasn1-devel gnutls-
 rpm -Uvh https://buildlogs.centos.org/c7.1804.00.x86_64/libvirt/201804122
 14704/3.9.0-14.el7.x86_64/libvirt-3.9.0-14.el7.src.rpm
 cd rpmbuild/SPECS
-rpmbuild -ba libvirt.spec
+rpmbuild -ba --rebuild libvirt.spec
+# Seems specfile had a wrong assumption about zfs binary locations
+# fix with:
+sed -i 's@/sbin/zpool@/usr/sbin/zpool@g' libvirt.spec
+sed -i 's@/sbin/zfs@/usr/sbin/zfs@g' libvirt.spec
+rpmbuild -ba --rebuild libvirt.spec
+
+# also needed further fixes in libvirt.spec for:
+# F25+ has zfs-fuse
+%if 0%{?fedora} >= 25
+    %define with_storage_zfs      0%{!?_without_storage_zfs:1}
+## comment out this bit here
+## something keeps turning off zfs build options ....
+#%else
+#    %define with_storage_zfs      0
+%endif
+
 cd /root/RPMS/x86_64
-yum -y localinstall *
+yum reinstall *
+
+systemctl daemon-reload
+systemctl restart libvirtd
 
 which libvirtd
 /usr/sbin/libvirtd
@@ -118,11 +138,11 @@ libvirtd (libvirt) 3.9.0
 systemctl start libvirtd   # okay
 systemctl status libvirtd  # okay
 
-virsh pool-list
-virsh pool-define-as --name default --type dir --target /data/img/
-virsh pool-autostart default
-virsh pool-start default
-virsh pool-list
+virsh pool-define-as --name zfsvmpool --source-name data/vmpool --type zfs
+virsh pool-list --all
+virsh pool-autostart zfsvmpool
+virsh pool-start zfsvmpool
+virsh vol-create-as --pool zfsvmpool --name vol1 --capacity 20G
 
 
 # setup 1st machine namer99 in forman webGUI, webconsole problem
