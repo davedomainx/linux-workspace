@@ -98,7 +98,7 @@ zfs list
 
 # Support is in libvirt for ZFS, but it's not defaulted
 # need to rebuild the libvirt RPM
-#https://plone.lucidsolutions.co.nz/linux/libvirt/enable-zfs-storage-driver-with-centos-v7-libvirt-v2.0.0-storage-driver
+https://plone.lucidsolutions.co.nz/linux/libvirt/enable-zfs-storage-driver-with-centos-v7-libvirt-v2.0.0-storage-driver
 
 yum -y groupinstall "Development Tools"
 yum -y install rpm-build
@@ -138,7 +138,9 @@ libvirtd (libvirt) 3.9.0
 systemctl start libvirtd   # okay
 systemctl status libvirtd  # okay
 
-virsh pool-define-as --name zfsvmpool --source-name data/vmpool --type zfs
+# --source-name data = the zpool name is
+# this creates data/zfsvmpool zvol
+virsh pool-define-as --name zfsvmpool --source-name data --type zfs
 virsh pool-list --all
 virsh pool-autostart zfsvmpool
 virsh pool-start zfsvmpool
