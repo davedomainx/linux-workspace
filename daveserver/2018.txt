@@ -1,3 +1,10 @@
+# supermicro + foreman
+https://hobo.house/2016/08/10/automate-supermicro-server-provisioning-or-die-trying/
+# provision KVM without DHCP
+https://projects.theforeman.org/projects/foreman/wiki/Provision_KVM_VM_without_DHCP
+# specialised foreman bootdisk
+https://github.com/theforeman/foreman_bootdisk
+
 # just the commands maam
 
 System Information
@@ -73,6 +80,8 @@ yum install -y puppet ## installs agent only
 # postinstall - packages
 yum update && yum upgrade
 yum install -y augeas yum-utils
+# need to setup webserver listening on port 81 for ISOs ..
+yum install -y setroubleshoot-server selinux-policy-devel
 
 # postinstall - zfs
 yum install  http://download.zfsonlinux.org/epel/zfs-release.el7_4.noarch.rpm

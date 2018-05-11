@@ -1,3 +1,6 @@
+# cleanly restart foreman:
+touch ~foreman/tmp/restart.txt
+
 # Allow http/s  zone=public is default
 firewall-cmd --permanent --zone=public --add-service=http
 firewall-cmd --permanent --zone=public --add-service=https
@@ -12,6 +15,7 @@ firewall-cmd --permanent --add-service=ftp
 # Allow foreman-ports
 firewall-cmd --permanent --add-port 8443/tcp # foreman-proxy
 firewall-cmd --permanent --add-port 8140/tcp # puppet
+firewall-cmd --permanent --add-port 8140/tcp # VNC (?)
 firewall-cmd --permanent --add-port 5910-5930/tcp # server VNC consoles
 
 # firewall-cmd --list-ports # 5910-5930 were missing ..
@@ -19,9 +23,15 @@ firewall-cmd --reload  ## to fix missing 5910-5930 ports
 
 foreman-installer \
   --enable-foreman-proxy \
-  --enable-foreman-compute-libvirt
+  --enable-foreman-compute-libvirt \
+  --foreman-proxy-tftp=true \
+  --foreman-proxy-tftp-servername=192.168.1.99
 
 puppet agent --test
+
+## FIXME
+# turn off websockets encryption to get console access
+ sed -i 's@:websockets_encrypt: on@websockets_encrypt: off@g' /etc/foreman/settings.yaml
 
 ## hammer
 # turn off annoying hammer warning output (Silences all)
@@ -33,6 +43,20 @@ hammer subnet create --boot-mode Static --description "Foreman static network fo
 
 # see other file for 7.4 centos directory-from-ISO setup
  hammer medium create --name "CentOS 7.4 1708 local" --operatingsystem-ids 1 --os-family Redhat --path nfs://daveserver.davedomain:/data/iso/CentOS-7-x86-64-1708
+ # NFS is broken
+ # use port 81 instead, need to selinux-prepare it
+ semanage fcontext -a -t httpd_sys_content_t "/data/iso(/.*)?"
+ restorecon -Rv /data/iso # this actually writes it on disk
+ ls -Z /data/iso
+ setenforce 1 # should already be enforcing
+ getenforce
+ wget http://daveserver.davedomain:81/index.html
+ hammer medium update --name "CentOS 7.4 1708 local" --path http://daveserver.davedomain:81/data/iso/CentOS-7-x86-64-1708
+
+ echo "Listen 81" >> /etc/httpd/conf/ports.conf
+ # Add VirtualHost stanza for /data/iso in /etc/httpd/conf.d/15-default.conf
+
+ systemctl restart httpd
 
  # create hostgroup for good organisation
  # subnet-id 1 = foreman-Static subnet I setup earlier
@@ -44,6 +68,7 @@ hammer hostgroup create --name "Naming Servers" --subnet-id 1 --architecture-id 
 
 hammer hostgroup update --name "Naming Servers" --operatingsystem-id 1
 hammer hostgroup update --name "Naming Servers" --description "Naming Servers (DNS/DHCP)"
+hammer hostgroup update --name "Naming Servers" --pxe-loader 'PXELinux BIOS'
 hammer hostgroup update --name "Naming Servers" --environment production --puppet-proxy daveserver.davedomain --puppet-ca-proxy daveserver.davedomain
 
 # associate partition table for the Centos 7.4 to Kickstart default
@@ -144,13 +169,35 @@ virsh pool-define-as --name zfsvmpool --source-name data --type zfs
 virsh pool-list --all
 virsh pool-autostart zfsvmpool
 virsh pool-start zfsvmpool
+#
 virsh vol-create-as --pool zfsvmpool --name vol1 --capacity 20G
+# FIXME
+# foreman needs to set volume format type as raw and not qcow
 
+########
+# adding puppet classes to theforeman
+# manage tftp/ntp on daveserver
+puppet module install theforeman-tftp --version 4.0.0
+puppet module install puppetlabs-ntp --version 6.0.0
+hammer proxy import-classes --id 1
+# refresh puppet classes webpage, tftp/ntp etc now available ..
+hammer environment info --id 1
+hammer host update --id 1 --puppet-classes 'xinetd,stdlib,ntp,tftp'
+hammer host puppet-classes --host-id 1
 
-# setup 1st machine namer99 in forman webGUI, webconsole problem
-# see if machine is running in libvirt ..
-su - foreman -s /bin/bash
-# -bash-4.2$ virsh -c qemu+ssh://root@daveserver.davedomain/system list
-# Id    Name                           State
-# ----------------------------------------------------
-# 1     namer99.davedomain             running
+## associate Templates to OS
+# FIXME also need to associate OS to templates (of course...)
+# 31 kickstart default (normal kickstart)
+# 33 kickstart default finish
+# 34 kickstart default pxelinux (pxe boot)
+# 43 pxegrub2
+# FIXME default template vs normal template ?
+#hammer os set-default-template --id 1 --config-template-id 31
+hammer os add-config-template --id 1 --config-template-id 31
+hammer os add-config-template --id 1 --config-template-id 33
+hammer os add-config-template --id 1 --config-template-id 34
+hammer os info --id 1
+
+## provision without DHCP (see weblink top of page)
+cd /data/iso/CentOS-7-x86-64-1708/isolinux/
+cp vmlinuz initrd.img /var/lib/libvirt/images/
