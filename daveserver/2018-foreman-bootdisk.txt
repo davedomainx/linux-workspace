@@ -1,0 +1,28 @@
+# ongoing project to use bootdisk to provision KVM without DHCP
+https://projects.theforeman.org/projects/foreman/wiki/Provision_KVM_VM_without_DHCP
+https://lukas.zapletalovi.com/2015/10/foreman-and-pxe-less-environments.html
+# specialised foreman bootdisk
+https://github.com/theforeman/foreman_bootdisk
+
+cd /data/iso/CentOS-7-x86-64-1708/isolinux/
+cp vmlinuz initrd.img /var/lib/libvirt/images/
+
+## hmm try foreman-bootdisk instead..
+## Disable tftp smart Proxy
+sed -i 's@:enabled: https@:enabled: false@g' /etc/foreman-proxy/settings.d/tftp.yml
+touch ~foreman/tmp/restart.txt
+yum install -y syslinux-tftpboot ipxe-bootimgs
+ tfm-rubygem-foreman_bootdisk tfm-rubygem-hammer_cli_foreman_bootdisk
+yum install -y genisoimage
+# remove the existing asosciated templates from the OS..
+hammer os remove-config-template --config-template "Kickstart default PXELinux" --id 1
+hammer os remove-config-template --config-template "Kickstart default finish" --id 1
+hammer os remove-config-template --config-template "Kickstart default" --id 1
+hammer os delete-default-template --id 1 --type provision
+hammer os delete-default-template --id 1 --type finish
+hammer os delete-default-template --id 1 --type PXELinux
+hammer os add-config-template --id 1 --config-template-id 31
+hammer os add-config-template --id 1 --config-template-id 33
+hammer os add-config-template --id 1 --config-template-id 37
+
+hammer bootdisk host --host namer11.davedomain

@@ -2,6 +2,7 @@
 https://hobo.house/2016/08/10/automate-supermicro-server-provisioning-or-die-trying/
 # provision KVM without DHCP
 https://projects.theforeman.org/projects/foreman/wiki/Provision_KVM_VM_without_DHCP
+https://lukas.zapletalovi.com/2015/10/foreman-and-pxe-less-environments.html
 # specialised foreman bootdisk
 https://github.com/theforeman/foreman_bootdisk
 
@@ -80,6 +81,7 @@ yum install -y puppet ## installs agent only
 # postinstall - packages
 yum update && yum upgrade
 yum install -y augeas yum-utils
+yum install -y genisoimage
 # need to setup webserver listening on port 81 for ISOs ..
 yum install -y setroubleshoot-server selinux-policy-devel
 

@@ -24,8 +24,9 @@ firewall-cmd --reload  ## to fix missing 5910-5930 ports
 foreman-installer \
   --enable-foreman-proxy \
   --enable-foreman-compute-libvirt \
-  --foreman-proxy-tftp=true \
-  --foreman-proxy-tftp-servername=192.168.1.99
+  --enable-foreman-plugin-bootdisk
+  #--foreman-proxy-tftp=true \
+  #--foreman-proxy-tftp-servername=192.168.1.99
 
 puppet agent --test
 
@@ -190,6 +191,7 @@ hammer host puppet-classes --host-id 1
 # 31 kickstart default (normal kickstart)
 # 33 kickstart default finish
 # 34 kickstart default pxelinux (pxe boot)
+# 37 kickstart default ipxe (ipxe)
 # 43 pxegrub2
 # FIXME default template vs normal template ?
 #hammer os set-default-template --id 1 --config-template-id 31
@@ -201,3 +203,21 @@ hammer os info --id 1
 ## provision without DHCP (see weblink top of page)
 cd /data/iso/CentOS-7-x86-64-1708/isolinux/
 cp vmlinuz initrd.img /var/lib/libvirt/images/
+
+## hmm try foreman-bootdisk instead..
+## Disable tftp smart Proxy
+sed -i 's@:enabled: https@:enabled: false@g' /etc/foreman-proxy/settings.d/tftp.yml
+touch ~foreman/tmp/restart.txt
+yum install -y syslinux-tftpboot ipxe-bootimgs
+ tfm-rubygem-foreman_bootdisk tfm-rubygem-hammer_cli_foreman_bootdisk
+yum install -y genisoimage
+# remove the existing asosciated templates from the OS..
+hammer os remove-config-template --config-template "Kickstart default PXELinux" --id 1
+hammer os remove-config-template --config-template "Kickstart default finish" --id 1
+hammer os remove-config-template --config-template "Kickstart default" --id 1
+hammer os delete-default-template --id 1 --type provision
+hammer os delete-default-template --id 1 --type finish
+hammer os delete-default-template --id 1 --type PXELinux
+hammer os add-config-template --id 1 --config-template-id 31
+hammer os add-config-template --id 1 --config-template-id 33
+hammer os add-config-template --id 1 --config-template-id 37
