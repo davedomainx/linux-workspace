@@ -11,7 +11,7 @@ sudo pdsh -w max0[20-80] "ps -eo pid,pcpu,user,etime,comm,args --sort=etime|grep
 
 ## multiline grep, note wildcards
 ##
-pcregrep -i -v -M 'Killing connection from 141.80.121.206.*\n.*Connection rese.*' /var/adm/ras/mmfs.log.latest
+pcregrep -i -v -M 'Killing connection from IPaddr.*\n.*Connection rese.*' /var/adm/ras/mmfs.log.latest
 
 ## kill process with string
 sudo pdsh -w max[040-060] "pkill -SIGKILL -f 'puppet agent'"

@@ -2,5 +2,6 @@
 . setup libvirtd foreman-static network for naming/ntp/dhcp etc
 . setup 2x dns naming servers inside foreman-static network
 .. dns naming should be static-ip assigned but provisioned from foreman
+.. ongoing project to bootdisk-provision naming servers
 . setup 2x ntp servers for time (dockers/kubes/openstack?)
 .

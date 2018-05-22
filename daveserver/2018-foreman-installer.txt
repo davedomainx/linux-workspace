@@ -1,12 +1,24 @@
+https://gist.github.com/omaciel/11319054
+
 # cleanly restart foreman:
 touch ~foreman/tmp/restart.txt
+systemctl restart foreman-proxy
+
+# FIXME add inst.sshd to templates so can ssh in during kickstart
+# FIXME 4.5.2 Success Story : ideas how to bare-metal provision foreman
 
 # Allow http/s  zone=public is default
 firewall-cmd --permanent --zone=public --add-service=http
 firewall-cmd --permanent --zone=public --add-service=https
 firewall-cmd --permanent --zone=public --list-services
 
-# Allow NFS:
+# DNS/dhcp
+firewall-cmd --permanent --zone=public --add-port=53/tcp
+firewall-cmd --permanent --zone=public --add-port=53/udp
+firewall-cmd ---permanent -add-service=dhcp
+firewall-cmd --reload
+
+# NFS:
 firewall-cmd --permanent --add-service=nfs
 firewall-cmd --permanent --add-service=mountd
 firewall-cmd --permanent --add-service=rpc-bind
@@ -15,16 +27,40 @@ firewall-cmd --permanent --add-service=ftp
 # Allow foreman-ports
 firewall-cmd --permanent --add-port 8443/tcp # foreman-proxy
 firewall-cmd --permanent --add-port 8140/tcp # puppet
-firewall-cmd --permanent --add-port 8140/tcp # VNC (?)
 firewall-cmd --permanent --add-port 5910-5930/tcp # server VNC consoles
 
 # firewall-cmd --list-ports # 5910-5930 were missing ..
 firewall-cmd --reload  ## to fix missing 5910-5930 ports
 
+# enable-foreman-compute-ovirt - enable/install this for VM restart bug
+foreman-installer
+--enable-foreman-proxy
+--enable-foreman-compute-libvirt
+--enable-foreman-plugin-docker
+--enable-foreman-compute-ovirt
+--foreman-proxy-foreman-base-url=https://daveserver.davedomain
+--foreman-proxy-dhcp=true
+--foreman-proxy-dhcp-interface=virbr1
+--foreman-proxy-dhcp-range="192.168.11.11 192.168.11.31"
+--foreman-proxy-dhcp-gateway=192.168.11.1   --foreman-proxy-dhcp-nameservers="192.168.1.99"
+--foreman-proxy-dhcp-pxeserver=192.168.11.1
+--foreman-proxy-dns=true
+--foreman-proxy-dns-interface=virbr1   --foreman-proxy-dns-zone=davedomain   --foreman-proxy-dns-reverse=11.168.192.in-addr.arpa   --foreman-proxy-dns-forwarders=8.8.8.8
+--foreman-proxy-dns-forwarders=8.8.4.4
+--foreman-proxy-tftp=true
+--foreman-proxy-tftp-servername=192.168.11.1
+--foreman-websockets-encrypt=false
+
 foreman-installer \
   --enable-foreman-proxy \
   --enable-foreman-compute-libvirt \
-  --enable-foreman-plugin-bootdisk
+  --enable-foreman-plugin-docker \
+  --foreman-proxy-dhcp=true \
+  --foreman-proxy-dhcp-interface=virbr1 \   --foreman-proxy-dhcp-gateway=192.168.1.99 \  --foreman-proxy-dhcp-nameservers="192.168.1.99" \   --foreman-proxy-dns=true  \
+  --foreman-proxy-dns-interface=virbr1 \   --foreman-proxy-dns-zone=davedomain  \ --foreman-proxy-dns-reverse=11.168.192.in-addr.arpa \   --foreman-proxy-dns-forwarders=8.8.8.8 \
+  --foreman-proxy-tftp=true \ --foreman-proxy-tftp-servername=192.168.1.99
+
+  #--enable-foreman-plugin-bootdisk
   #--foreman-proxy-tftp=true \
   #--foreman-proxy-tftp-servername=192.168.1.99
 
@@ -36,6 +72,7 @@ puppet agent --test
 
 ## hammer
 # turn off annoying hammer warning output (Silences all)
+# FIXME
 echo export RUBYOPT=\"-W0\" >> /etc/profile
 
 hammer domain list # davedomain set from foreman-installer ..
@@ -52,7 +89,7 @@ hammer subnet create --boot-mode Static --description "Foreman static network fo
  setenforce 1 # should already be enforcing
  getenforce
  wget http://daveserver.davedomain:81/index.html
- hammer medium update --name "CentOS 7.4 1708 local" --path http://daveserver.davedomain:81/data/iso/CentOS-7-x86-64-1708
+ hammer medium update --name "CentOS 7.4 1708 local" --path http://daveserver.davedomain:81/CentOS-7-x86-64-1708
 
  echo "Listen 81" >> /etc/httpd/conf/ports.conf
  # Add VirtualHost stanza for /data/iso in /etc/httpd/conf.d/15-default.conf
@@ -192,7 +229,6 @@ hammer host puppet-classes --host-id 1
 # 33 kickstart default finish
 # 34 kickstart default pxelinux (pxe boot)
 # 37 kickstart default ipxe (ipxe)
-# 43 pxegrub2
 # FIXME default template vs normal template ?
 #hammer os set-default-template --id 1 --config-template-id 31
 hammer os add-config-template --id 1 --config-template-id 31
@@ -200,24 +236,115 @@ hammer os add-config-template --id 1 --config-template-id 33
 hammer os add-config-template --id 1 --config-template-id 34
 hammer os info --id 1
 
-## provision without DHCP (see weblink top of page)
-cd /data/iso/CentOS-7-x86-64-1708/isolinux/
-cp vmlinuz initrd.img /var/lib/libvirt/images/
+## interlude - dns+dhcp
+yum install -y bind bind-utils dhcp
 
-## hmm try foreman-bootdisk instead..
-## Disable tftp smart Proxy
-sed -i 's@:enabled: https@:enabled: false@g' /etc/foreman-proxy/settings.d/tftp.yml
-touch ~foreman/tmp/restart.txt
-yum install -y syslinux-tftpboot ipxe-bootimgs
- tfm-rubygem-foreman_bootdisk tfm-rubygem-hammer_cli_foreman_bootdisk
-yum install -y genisoimage
-# remove the existing asosciated templates from the OS..
-hammer os remove-config-template --config-template "Kickstart default PXELinux" --id 1
-hammer os remove-config-template --config-template "Kickstart default finish" --id 1
-hammer os remove-config-template --config-template "Kickstart default" --id 1
-hammer os delete-default-template --id 1 --type provision
-hammer os delete-default-template --id 1 --type finish
-hammer os delete-default-template --id 1 --type PXELinux
-hammer os add-config-template --id 1 --config-template-id 31
-hammer os add-config-template --id 1 --config-template-id 33
-hammer os add-config-template --id 1 --config-template-id 37
+# DNS key updates
+# /root/nsupdate.txt
+server 192.168.1.99
+debug yes
+zone davedomain.
+update add bogushost1.davedomain 86400 A 192.168.11.111
+show
+send
+
+nsupdate -k /etc/foreman.key -v /root/nsupdate.txt
+
+# DHCP proxy errors ..
+# ensure foreman-proxy user has group-write:
+/etc/dhcp/dhcpd.conf
+
+# In /etc/foreman-proxy/settings.d ..
+# Change dhcp_isc.yml and dns_nsupdate.yml to point to the
+# correct keys and/or include the right keys in them
+# cannot set these in foreman_installer options ?
+dhcp_isc:
+:key_name: omapi_key
+:key_secret: " ...... "
+
+dns_nsupdate.yml:
+:dns_key: /etc/foreman.key
+
+# fix 0 size vmlinuz + initrd files
+# (do the needful and proper fix here - why 0 byte,
+# no change in file size after waiting 2 minutes ... )
+cd /var/lib/tfptboot/boot
+cp /data/iso/CentOS-7-x86-64-1708/images/pxeboot/initrd.img CentOS-7.4.1708-x86_64-initrd.img
+cp /data/iso/CentOS-7-x86-64-1708/images/pxeboot/vmlinuz  CentOS-7.4.1708-x86_64-vmlinuz
+
+# FIXME
+# dracut errors
+# timeout on trying to get url daveserver.davedomain:81 ...
+# puppet trashed the apache changes to virtualhost:81 and ports.conf
+# network unavailable error on provision, dracut bombs to emergency
+# shell, but the network is a-ok ..
+
+# FIXME
+# maybe problem with latest 1708 verison
+# try 1611 version see if does anything ..
+# 1611 setup earlier in /data/iso
+hammer medium create --name "Centos 7.4 1611 local" --os-family Redhat --path http://daveserver.davedomain:81/CentOS-7-x86-64-1611
+hammer os create --name CentOS --architecture-ids 1 --medium-ids 10 --major 7 --minor 4.1611 --description "CentOS 7.4 1611"
+hammer os add-ptable --id 2  --partition-table "Kickstart default"
+hammer os add-config-template --id 2 --config-template-id 31
+hammer os add-config-template --id 2 --config-template-id 33
+hammer os add-config-template --id 2 --config-template-id 34
+hammer os info --id 2
+hammer hostgroup update --id 1 --operatingsystem-id 2 --medium "Centos 7.4 1611 local"
+
+# nope, made no difference
+# add rd.debug to host kicksart file in pxelinux.cfg
+# scroll thru debug output on kickstart, saw this..
+eth0 comes up with link ..
+ip route get 192.168.11.24
+RNETLINK  network is unreachable
+
+# had interfaces assigned to the virtual Bridges, docco says no to this
+[root@daveserver networks]# brctl show
+bridge name     bridge id               STP enabled     interfaces
+virbr0          8000.5254003552ed       yes             virbr0-nic
+virbr1          8000.fe5400bc211b       yes             vnet1
+[root@daveserver networks]# brctl delif virbr1 vnet1
+[root@daveserver networks]# brctl show
+bridge name     bridge id               STP enabled     interfaces
+virbr0          8000.5254003552ed       yes             virbr0-nic
+virbr1          8000.000000000000       yes
+# no difference
+
+# new libvirt network "tester" - bootproto dhcp - fixed it!
+# probably uuid/mac address issue when copying default to foreman_static
+# noted new 7.5 1804 centos release
+# FIXME clean up this, commands missing/not correct
+ hammer medium create --name "Centos 7.5 1804 local" --os-family Redhat --path http://daveserver.davedomain:81/CentOS-7-x86-64-1804
+ hammer os create --name CentOS --architecture-ids 1 --medium-ids 11 --major 7 --minor 5.1804 --description "CentOS 7.5 1804"
+
+ # next problem is /dev/root not found
+ # not enough memory, bumped up to 2G - fixed!
+ # now installing .. SUCCESS
+
+# Remove broken foreman_static network from davedomain + libvirtd
+# cant remove foreman_static from theforeman, coz it is used by davedomain
+hammer subnet update --id 1 --domain-ids ''
+hammer domain info --id 1 # foreman_static now gone
+virsh net-destroy foreman_static
+virsh net-undefine foreman_static
+virsh net-list
+# can now finally delete it from foreman
+hammer subnet delete --name foreman_static
+# recreate it with right options, note CAPS ...
+hammer subnet create --name static --domains davedomain --boot-mode Static --from 192.168.11.11 --to 192.168.11.21 --mask 255.255.255.128  --domain-ids 1 --network 192.168.11.0 --gateway 192.168.11.1 --ipam DHCP --dns-primary 192.168.1.99 --tftp-id 1 --dns-id 1 --dhcp-id 1 --description "Static subnet for DNS/DHCP VM provisioning"
+# tell the static VM hostgroup to use this new subnet
+ hammer hostgroup update --id 1 --subnet static
+
+## DHCP notes for new subnets:
+# edit /etc/dhcpd.conf  ## new subnet definition
+# edit /etc/systemd/system/dhcpd.service ## listen on virbrX interface
+# NOTE
+# interfaces.conf was overwriting /etc/systemd/system/dhcpd.service,
+# move it out the way, systemctl daemon-reload; systemctl restart dhcpd
+# all good.... not sure why interfaces.conf overrode, havent seen it b4.
+# [root@daveserver system]# systemctl status dhcpd -l
+# ● dhcpd.service - DHCPv4 Server Daemon
+#   Loaded: loaded (/etc/systemd/system/dhcpd.service; enabled; vendor preset: disabled)
+#  Drop-In: /etc/systemd/system/dhcpd.service.d
+#           └─interfaces.conf

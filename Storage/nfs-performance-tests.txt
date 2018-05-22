@@ -24,7 +24,7 @@ Also :  ring buffer size (client + server):
 
 the 100% CPU write-spikes are back .. ?
   looks like 2 dd processes are getting launched at the same time
-  
+
 == 21June2017 ==
 
 getting 110MB sec writes, but stalls writing for periods of 15 seconds ..
@@ -83,8 +83,8 @@ sudo iptables -I INPUT 16 -p udp -m --ctstate NEW -m udp --dport 5001 -j ACCEPT
 sudo socat - tcp4-listen:5000
 sudo socat - udp4-listen:5000
 # client
-pv < /dev/zero |socat - TCP:141.80.174.216:5000
-pv < /dev/zero |socat - UDP:141.80.174.216:5001
+pv < /dev/zero |socat - TCP:hostname:5000
+pv < /dev/zero |socat - UDP:hostname:5001
 
 == perform copy-tests ==
 
@@ -111,7 +111,7 @@ Test 1 : "normal" options
    + remove "noacl", that is a Solaris feature (man nfs)
 
 rw,vers=3,rsize=32768,wsize=32768,namlen=255,acregmin=3,acregmax=60,acdirmin=30,acdirmax=60,
-hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=141.80.174.216,mountvers=3,
+hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=IPaddr,mountvers=3,
 mountport=20048,mountproto=udp,local_lock=none
 
 Test 2 : remove rsize/wsize
