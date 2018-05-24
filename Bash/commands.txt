@@ -21,6 +21,8 @@ grep -v ^# dnsmasq.conf|grep -v ^$
 
 ip -4 route list 0/0 ## (will list multiple default g/w ?)
 
+arp-scan
+
 Sorting + counting
 
 hpc_sleep.debug.25:Tue Sep 25 15:23:56 CEST 2012 node054 - shutdown executed
