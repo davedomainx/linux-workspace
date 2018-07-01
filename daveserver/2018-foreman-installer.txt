@@ -119,6 +119,8 @@ hammer hostgroup create --name "Naming Servers" --subnet-id 1 --architecture-id 
 
 # hammer hostgroup update --name "Naming Servers" \ #--operatingsystem-id 1
 
+hammer hostgroup create --name "Foreman Hosts" --subnet-id 6 --architecture-id 1 --medium-id 11 --domain davedomain --operatingsystem-id 1 --description "Foreman Hosts" --pxe-loader 'PXELinux BIOS' --environment production --puppet-proxy daveserver.davedomain --puppet-ca-proxy daveserver.davedomain
+
 # associate partition table for the Centos 7.4 to Kickstart default
 hammer os add-ptable --id 1  --partition-table "Kickstart default"
 
