@@ -96,11 +96,16 @@ hammer subnet create --boot-mode Static --description "Foreman static network fo
 
  systemctl restart httpd
 
- # Create a new environment and move the foreman
- # host into it.
+# the foreman host is by default in the production
+# environment.  Create a new environment and move the # foreman host into it.  This prevents puppet module
+# install and import trashing the foreman host
+
  hammer environment create --name "host"
  hammer host update --name daveserver.davedomain --environment "host"
 
+ puppet module install inkblot-bind --version 7.4.0
+
+# add the
  hammer hostgroup update --name "Naming Servers" --puppet-classes-id "19,20,21,22,23,24"
 
  # create hostgroup for good organisation
@@ -109,12 +114,10 @@ hammer subnet create --boot-mode Static --description "Foreman static network fo
  # medium-id 9 = centos 7.4 1708 local that I setup above
  # architecture-id = x86-64
 
-hammer hostgroup create --name "Naming Servers" --subnet-id 1 --architecture-id 1 --medium-id 9 --domain davedomain
+hammer hostgroup create --name "Naming Servers" --subnet-id 1 --architecture-id 1 --medium-id 9 --domain davedomain --operatingsystem-id 1 --description "Naming Servers (DNS/DHCP)"
+--pxe-loader 'PXELinux BIOS' --environment production --puppet-proxy daveserver.davedomain --puppet-ca-proxy daveserver.davedomain
 
-hammer hostgroup update --name "Naming Servers" --operatingsystem-id 1
-hammer hostgroup update --name "Naming Servers" --description "Naming Servers (DNS/DHCP)"
-hammer hostgroup update --name "Naming Servers" --pxe-loader 'PXELinux BIOS'
-hammer hostgroup update --name "Naming Servers" --environment production --puppet-proxy daveserver.davedomain --puppet-ca-proxy daveserver.davedomain
+# hammer hostgroup update --name "Naming Servers" \ #--operatingsystem-id 1
 
 # associate partition table for the Centos 7.4 to Kickstart default
 hammer os add-ptable --id 1  --partition-table "Kickstart default"
