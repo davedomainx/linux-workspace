@@ -1,0 +1,44 @@
+foreman expects hash in yaml format
+
+# $controls::                   Specify a hash of controls. Each key is the
+#                               name of a network, and its value is a hash
+#                               containing 'port' => integer, 'keys' => array
+#                               and 'allowed_addresses' => array
+
+{"192.168.1.1":{ "port":953, "keys":["foreman"], "allowed_addresses":["127.0.0.1"]}}
+
+Foreman processes it like:
+127.0.0.1:
+  port: 953
+  keys:
+  - foreman
+  allowed_addresses:
+  - 127.0.0.1
+
+
+# $acls::                       Specify a hash of ACLs. Each key is the
+#                               name of a network, and its value is
+#                               an array of subnet strings.
+#
+{"192.168.1.0/24":[192.168.1.0/25,192.168.1.128/25]}
+
+foreman writes it:
+192.168.1.0/24i:
+- 192.168.1.0/25
+- 192.168.1.128/25
+
+# $zones::                      A hash of zones to be created. See dns::zone
+#                               for options.
+
+192.168.1.0:
+  zone: foreman_dhcp
+  zonetype: master
+  allow_query:
+  - localhost, foreman_static, foreman_dhcp
+  allow_transfer:
+  - localhost, foreman_static, foreman_dhcp
+  update_policy_rules:
+    foreman_key:
+      matchtype: zonesub
+      rr: ANY
+===============================
