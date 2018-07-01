@@ -347,6 +347,9 @@ hammer subnet create --name static --domains davedomain --boot-mode Static --fro
 # tell the static VM hostgroup to use this new subnet
  hammer hostgroup update --id 1 --subnet static
 
+ hammer subnet create --name foreman_dhcp --domains davedomain --boot-mode DHCP --from 192.168.100.2 --to 192.168.100.250 --mask 255.255.255.0  --domain-ids 1 --network 192.168.100.0 --gateway 192.168.100.1 --ipam DHCP --dns-primary 192.168.11.11 --dns-secondary 192.168.11.21 --tftp-id 1 --dns-id 1 --dhcp-id 1 --description "DHCP network for foreman hosts"
+
+
 ## DHCP notes for new subnets:
 # edit /etc/dhcpd.conf  ## new subnet definition
 # edit /etc/systemd/system/dhcpd.service ## listen on virbrX interface
