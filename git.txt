@@ -1,1 +1,4 @@
 ssh git@<git_server> info
+git commit -am "test" --dry-run
+git reset --hard 6b912b1da40f2a6b83a244245a3d485e8a9fe2cc
+git push -f origin master # potentially dangerous
