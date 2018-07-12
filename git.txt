@@ -1,4 +1,13 @@
 ssh git@<git_server> info
-git commit -am "test" --dry-run
+
+git config --global user.name "David Arnold"
+git config --global user.email "davedomainx@users.noreply.github.com"
+
+git reset HEAD~		# last commit
+
+# previous commit
 git reset --hard 6b912b1da40f2a6b83a244245a3d485e8a9fe2cc
-git push -f origin master # potentially dangerous
+git push -f origin master # potentially dangerous in shared repos
+
+git commit -am "test" --dry-run
+
