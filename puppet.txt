@@ -1,3 +1,8 @@
+puppet 4
+https://www.devco.net/archives/2015/07/31/shiny-new-things-in-puppet-4.php
+
+#
+
 sudo pdsh -a puppet agent -t –splaylimit=2m
 
 puppet parser validate ./nodes.pp --parser future
