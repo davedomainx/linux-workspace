@@ -1,0 +1,10 @@
+# on tftpserver
+tcpdump -vvi eth0 port 69
+
+# Client - check squid proxies (should not be affected squid is HTTP)
+# NOTE need to prepend "01" to the mac-address filename!
+# 01-<mac-address>
+# need to play around with DHCP options ..
+tftp server 69 -m binary -c get "/pxelinux.cfg/01-<mac-address>"
+
+lftp -c "get ftp://server/pxelinux.cfg"
