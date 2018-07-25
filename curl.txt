@@ -1,0 +1,2 @@
+curl -L -v -o google.html https://google.com
+
