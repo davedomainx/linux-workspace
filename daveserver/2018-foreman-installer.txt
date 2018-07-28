@@ -32,7 +32,9 @@ firewall-cmd --permanent --add-port 5910-5930/tcp # server VNC consoles
 # firewall-cmd --list-ports # 5910-5930 were missing ..
 firewall-cmd --reload  ## to fix missing 5910-5930 ports
 
-# enable-foreman-compute-ovirt - enable/install this for VM restart bug
+# enable-foreman-compute-ovirt - enable/install
+# this for VM restart bug
+
 foreman-installer
 --enable-foreman-proxy
 --enable-foreman-compute-libvirt
@@ -229,12 +231,22 @@ virsh vol-create-as --pool zfsvmpool --name vol1 --capacity 20G
 # manage tftp/ntp on daveserver
 puppet module install theforeman-tftp --version 4.0.0
 puppet module install puppetlabs-ntp --version 6.0.0
-puppet module install inkblot-bind --version 7.4.0
+puppet module install theforeman-dns
+
 hammer proxy import-classes --id 1
 # refresh puppet classes webpage, tftp/ntp etc now available ..
 hammer environment info --id 1
 hammer host update --id 1 --puppet-classes 'xinetd,stdlib,ntp,tftp,bind'
 hammer host puppet-classes --host-id 1
+
+puppet module install theforeman-dhcp
+hammer proxy import-classes --id 1
+hammer puppet-class list
+hammer config-group create --name "DHCP services"
+hammer config-group list
+hammer config-group update --id 2 --puppet-class-ids 45,46,47,48
+
+
 
 ## associate Templates to OS
 # FIXME also need to associate OS to templates (of course...)
