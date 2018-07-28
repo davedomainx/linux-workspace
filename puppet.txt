@@ -1,3 +1,8 @@
+puppet 4
+https://www.devco.net/archives/2015/07/31/shiny-new-things-in-puppet-4.php
+
+#
+
 sudo pdsh -a puppet agent -t –splaylimit=2m
 
 puppet parser validate ./nodes.pp --parser future
@@ -18,3 +23,13 @@ puppet module install domcleal-augeasproviders --modulepath=/home/darnold/git/pu
 
 # facter is always facter -p, to load the puppet facter libs!
 facter -p |grep efi
+
+#
+puppet module generate test-test
+
+Rename the module's directory from test-test to test.
+
+puppet module generate generates the module in the format 
+that the Puppet Forge wants, but this is a format that puppet 
+itself cannot use.
+
