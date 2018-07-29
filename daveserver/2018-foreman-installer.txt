@@ -40,7 +40,6 @@ foreman-installer
 --enable-foreman-compute-libvirt
 --enable-foreman-plugin-docker
 --enable-foreman-compute-ovirt
---foreman-proxy-foreman-base-url=https://daveserver.davedomain
 --foreman-proxy-dhcp=true
 --foreman-proxy-dhcp-interface=virbr1
 --foreman-proxy-dhcp-range="192.168.11.11 192.168.11.31"
@@ -182,8 +181,7 @@ yum -y install rpm-build
 ## rpmbuild requires bunch of dependencies ..
 yum -y install libxml2-devel readline-devel ncurses-devel libtasn1-devel gnutls-devel libattr-devel libblkid-devel systemd-devel libpciaccess-devel yajl-devel sanlock-devel libpcap-devel libnl3-devel avahi-devel libselinux-devel cyrus-sasl-devel polkit-devel libacl-devel parted-devel device-mapper-devel librados2-devel librbd1-devel glusterfs-api-devel glusterfs-devel numactl-devel libcap-ng-devel fuse-devel netcf-devel libcurl-devel audit-libs-devel systemtap-sdt-devel dbus-devel scrub
 
-rpm -Uvh https://buildlogs.centos.org/c7.1804.00.x86_64/libvirt/201804122
-14704/3.9.0-14.el7.x86_64/libvirt-3.9.0-14.el7.src.rpm
+rpm -Uvh https://buildlogs.centos.org/c7.1804.00.x86_64/libvirt/20180412214704/3.9.0-14.el7.x86_64/libvirt-3.9.0-14.el7.src.rpm
 cd rpmbuild/SPECS
 rpmbuild -ba --rebuild libvirt.spec
 # Seems specfile had a wrong assumption about zfs binary locations
@@ -202,7 +200,7 @@ rpmbuild -ba --rebuild libvirt.spec
 #    %define with_storage_zfs      0
 %endif
 
-cd /root/RPMS/x86_64
+cd /root/rpmbuild/RPMS/x86_64
 yum reinstall *
 
 systemctl daemon-reload
@@ -246,6 +244,23 @@ hammer config-group create --name "DHCP services"
 hammer config-group list
 hammer config-group update --id 2 --puppet-class-ids 45,46,47,48
 
+### sc-param
+### seems 1.17 had a bug preventing setting this sc-parameter but 1.18 fixed it..
+
+hammer sc-param list
+hammer sc-param info --id 374
+
+# note add-override-value is a hidden resource ..
+hammer -r sc-param add-override-value --match fqdn=daveserver.davedomain --omit "no" --puppet-class apache --smart-class-parameter purge_configs --value "no"
+Override value created.
+
+# Also unsure if need to do an update 1st on the
+# sc-param ..
+
+hammer sc-param update --name purge_configs --puppet-class-id 59  --parameter-type boolean --override true --default-value "false"
+
+# and there is also add-matcher
+hammer sc-param add-matcher --match fqdn=daveserver.davedomain --puppet-class apache --smart-class-parameter purge_configs --value "false"
 
 
 ## associate Templates to OS
