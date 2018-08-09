@@ -6,6 +6,9 @@
 * https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html
 * https://docs.aws.amazon.com/cli/latest/userguide/controlling-output.html
 
+* https://wblinks.com/notes/aws-tips-i-wish-id-known-before-i-started/
+* https://linuxacademy.com/blog/amazon-web-services-2/troubleshooting-ec2-connectivity-issues/
+
 #### AWS Root account
 
 * https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html

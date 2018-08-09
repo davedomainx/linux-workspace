@@ -8,5 +8,4 @@ aws ec2 describe-instances --query "Reservations[].Instances[].[InstanceId, Tags
 aws ec2 describe-instances --query 'Reservations[].Instances[].{Name: Tags[?Key==`Name`].Value | [0], Role: Tags[?Key==`Billing by Role`].Value | [0]}' --output text
 
 aws ec2 describe-instances --instance-id <instance> --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text
-
-
+rdesktop -g 1440x900 -P -z -x l -r sound:off -u vagrant <IP above>:3389
