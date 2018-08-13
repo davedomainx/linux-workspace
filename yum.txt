@@ -1,3 +1,5 @@
+/etc/yum.repos.d
+	must end in ".repo" (or change yum config)	
 yum install yum-utils
 find-repos-of-install ## from yum-utils
 yum check-update
@@ -5,6 +7,12 @@ yum install yum-plugin-changelog
 yum changelog 10 kernel ## find out what they actually did to the kernel, last 10 updates
 yum info kernel
 From repo : anaconda-CentOS-201605220104.x86_64 ## assume this is from the base kickstart of the system
+
+yum grouplist hidden
+
+yum --disablerepo="*" --enablerepo="mcp" list available
+
+yum-debug-dump # find $basearch etc
 
 yum install yum-utils
 repoquery -l remote_package
