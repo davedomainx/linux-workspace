@@ -221,6 +221,10 @@ virsh pool-autostart zfsvmpool
 virsh pool-start zfsvmpool
 #
 virsh vol-create-as --pool zfsvmpool --name vol1 --capacity 20G
+
+vol-list --details --pool vmpool
+vol-delete --pool vmpool --vol ns1broken
+
 # FIXME
 # foreman needs to set volume format type as raw and not qcow
 
