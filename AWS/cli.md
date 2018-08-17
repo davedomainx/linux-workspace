@@ -1,3 +1,6 @@
+
+http://jmespath.org/specification.html
+
 aws ec2 describe-instances
 aws ec2 describe-snapshots --query 'Snapshots[*].{Desc:Description,Owner:OwnerId,ID:SnapshotId}'
 
@@ -9,3 +12,11 @@ aws ec2 describe-instances --query 'Reservations[].Instances[].{Name: Tags[?Key=
 
 aws ec2 describe-instances --instance-id <instance> --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text
 rdesktop -g 1440x900 -P -z -x l -r sound:off -u vagrant <IP above>:3389
+
+== C7 images ==
+
+aws ec2 describe-images --owners aws-marketplace --filters 'Name=product-code,Values=aw0evgkw8e5c1q413zgy5pjce' --query 'sort_by(Images, &CreationDate)[-1].[ImageId]' --output 'text'
+
+aws ec2 describe-images --owners aws-marketplace --filters Name=product-code,Values=aw0evgkw8e5c1q413zgy5pjce --query 'Images[*].[CreationDate,Name,ImageId]' --filters "Name=name,Values=CentOS Linux 7*"  --output table|sort -r
+
+
