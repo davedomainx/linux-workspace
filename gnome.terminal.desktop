@@ -1,2 +1,0 @@
-#/usr/share/applications/gnome-terminal.desktop:
-Exec=gnome-terminal -e 'tmux -2'
