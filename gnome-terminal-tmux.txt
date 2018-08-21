@@ -1,0 +1,2 @@
+#replace this line to /usr/share
+Exec=gnome-terminal -e 'tmux -2'
