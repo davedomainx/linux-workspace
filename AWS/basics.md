@@ -13,7 +13,11 @@
 
 * https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html
 
-#### AWS CLI setpu
+#### AWS Metadata stuff
+
+https://stackoverflow.com/questions/42314029/whats-special-about-169-254-169-254-ip-address-for-aws?noredirect=1&lq=1
+
+#### AWS CLI setup
 
 ```
 pip install awscli [[–user]] ; mkdir ~/.aws; cd .aws ; [[ aws configure ; cp the credentials file here .. ]]
