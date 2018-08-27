@@ -1,3 +1,5 @@
+
+umask 0077
 # Find existing SSH agents, startup one if not there
 # https://github.com/wwalker/ssh-find-agent
 . /root/.ssh/ssh-find-agent.sh
