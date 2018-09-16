@@ -1,5 +1,5 @@
 15.September.2018
-4k PC general purpose
+4k PC, 4k monitor and good keyboard/mice
 685 EUD total spend
 
 PC
