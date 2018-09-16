@@ -1,5 +1,10 @@
 libvirt provider
 ================
+
+export GOPATH=${HOME}/go
+# -u = update
+go get -u github.com/dmacvicar/terraform-provider-libvirt
+
 https://github.com/dmacvicar/terraform-provider-libvirt/issues/272
 
 . bug with libvirt provider-dhcp incorrectly setting static IP address: need to ifdown/ifup eth0 + restart network in cloud init to set IP address properly/statically.
