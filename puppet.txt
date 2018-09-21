@@ -4,6 +4,8 @@ http://nicolas.corrarello.com/general/code/puppet/2015/05/02/What's-this-R10K-th
 
 https://rnelson0.com/2015/11/17/troubleshooting-hiera-from-the-cli/
 
+https://puppet.com/blog/troubleshooting-hiera
+
 #
 
 puppet 4
