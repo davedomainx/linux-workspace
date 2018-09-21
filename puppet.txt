@@ -6,6 +6,8 @@ https://rnelson0.com/2015/11/17/troubleshooting-hiera-from-the-cli/
 
 https://puppet.com/blog/troubleshooting-hiera
 
+https://www.tompurl.com/Puppet_Wont_See_My_Hiera.html
+
 #
 
 puppet 4
