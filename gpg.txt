@@ -1,0 +1,15 @@
+[root@share ~]# cat /root/.rpmmacros
+%_signature gpg
+%_gpg_path /root/.gnupg
+%_gpg_name Blah Blah
+%_gpgbin /usr/bin/gpg
+
+Now can do the steps required to setup the GPG key sign:
+
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-XXXX
+rpm -q gpg-pubkey --qf '%{name}-%{version}-%{release} --> %{summary}\n'
+gpg --import <GPG key> # Import the Waratek Internal Repo Key
+gpg --import secring.gpg # Import the Secret Keyring
+gpg --list-keys
+gpg --list-secret-keys
+createrepo --update < path_to_repo >

@@ -10,6 +10,24 @@ https://www.tompurl.com/Puppet_Wont_See_My_Hiera.html
 
 #
 
+On your puppetserver open the following file:
+
+    /etc/puppetlabs/puppetserver/logback.xml
+
+You should see a line that looks something like this:
+
+    <root level"info">=
+
+Change info to debug and then restart your puppetserver service.
+Run the Puppet agent on your agent machine to recreate the issue.
+Next, search the following file on your puppetserver:
+
+    /var/log/puppetlabs/puppetserver/puppetserver.log
+
+Search for any recent instance of your sender.example.org vhos
+
+#
+
 puppet 4
 https://www.devco.net/archives/2015/07/31/shiny-new-things-in-puppet-4.php
 
