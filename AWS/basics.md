@@ -1,5 +1,7 @@
 #### AWS basics
 
+* https://aws.amazon.com/getting-started/projects/
+
 * https://www.reddit.com/r/sysadmin/comments/8inzn5/so_you_want_to_learn_aws_aka_how_do_i_learn_to_be/
 * https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html
 * https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html
