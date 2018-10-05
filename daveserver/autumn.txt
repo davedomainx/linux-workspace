@@ -1,0 +1,6 @@
+pool-define-as windows-pool --type dir --target /data/windows-pool --source-path /data/windows-pool 
+Pool windows-pool defined
+
+virsh # pool-autostart windows-pool
+
+virsh # pool-start windows-pool
