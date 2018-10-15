@@ -1,0 +1,17 @@
+ssh/su don't work for user
+strongly looks like thread or limits
+but ulimit -u == unlimited
+
+ps -u username -L |wc -l
+1026
+
+cat /etc/security/limits.d/90-nproc.conf:
+
+# Default limit for number of user's processes to prevent
+# accidental fork bombs.
+# See rhbz #432903 for reasoning.
+
+*          soft    nproc     1024
+root       soft    nproc     unlimited
+
+Change to 8192
