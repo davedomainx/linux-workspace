@@ -36,3 +36,8 @@ aws ec2 describe-images --owners self --filters 'Name=name,Values=jenkins-qa-sla
 == subnets ==
 
 aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-99f836fc" --query 'Subnets[*].{VPC:VpcId,ID:SubnetId,IPs:CidrBlock}'
+
+
+== Sorting ==
+
+aws ec2 describe-images --owners self --filters 'Name=name,Values=jenkins-qa-slave-windows-*' |jq '.Images | sort_by(.CreationDate) | . [] | {Name: .Name, Created: .CreationDate, Id: .ImageId}'
