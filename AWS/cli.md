@@ -33,6 +33,8 @@ aws ec2 describe-images --owners aws-marketplace --filters Name=product-code,Val
 
 aws ec2 describe-images --owners self --filters 'Name=name,Values=jenkins-qa-slave-windows-2008*' --query 'Images[*].{Name:Name,ImageId:ImageId}'
 
+aws ec2 describe-images --image-ids ami-3548444c
+
 == subnets ==
 
 aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-99f836fc" --query 'Subnets[*].{VPC:VpcId,ID:SubnetId,IPs:CidrBlock}'
