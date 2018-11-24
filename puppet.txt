@@ -28,6 +28,10 @@ Search for any recent instance of your sender.example.org vhos
 
 #
 
+notify{"The value is: ${yourvar}": }
+
+#
+
 puppet 4
 https://www.devco.net/archives/2015/07/31/shiny-new-things-in-puppet-4.php
 
