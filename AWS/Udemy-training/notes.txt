@@ -1,0 +1,14 @@
+===
+meta 
+
+. use polly to take notes and we will then upload them
+. aws this week
+
+===
+to somewhere for mp3 encoding etc.
+
+good security stuff:
+
+Guardduty : monitor for malicious activity
+Inspector : vuln reports
+Macie : s3 bucket analyzer
