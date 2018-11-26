@@ -1,0 +1,26 @@
+# ZFS auto-upgrade Nov2018 didn't work even though have kABI enabled
+ 
+# https://icesquare.com/wordpress/how-to-fix-the-mess-created-by-zfs-on-linux-after-update/
+
+yum erase zfs zfs-dkms libzfs2 spl spl-dkms libzpool2 -y
+reboot
+yum install zfs -y # may already be running when machin
+/sbin/modprobe zfs
+zfs import -a
+zfs list
+reboot # zfs should be auto-loaded at this point
+
+dkms status
+
+( if warnings or mismatches may need to reinstall dkms )
+
+sudo dkms remove zfs/0.7.11 --all 
+sudo dkms remove spl/0.7.11 --all
+sudo dkms --force install spl/0.7.11
+sudo dkms --force install zfs/0.7.11
+sudo dkms status
+
+sudo dkms remove zfs/0.7.11 -k 3.10.0-862.11.6.el7.x86_64; 
+sudo dkms remove spl/0.7.11 -k 3.10.0-862.11.6.el7.x86_64;
+
+This is pretty much what I need to do on my 50 servers every month. Good luck!
