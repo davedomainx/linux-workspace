@@ -2,7 +2,12 @@
 meta 
 
 . use polly to take notes and we will then upload them
-. aws this week
+. aws this week - review it every week see whats new
+
+===
+account
+
+AWS Sign in string = aliased to darnold1978
 
 ===
 to somewhere for mp3 encoding etc.
@@ -12,3 +17,10 @@ good security stuff:
 Guardduty : monitor for malicious activity
 Inspector : vuln reports
 Macie : s3 bucket analyzer
+
+==
+S3
+==
+anything modified new etc is always private by default
+versioning keeps everything really
+

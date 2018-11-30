@@ -1,0 +1,15 @@
+https://wiki.archlinux.org/index.php/Intel_graphics#Disable_Vertical_Synchronization_(VSYNC)
+
+/usr/share/X11/xorg.conf.d/20-intel.conf
+
+Section "Extensions"
+Option "XVideo" "Disable"
+EndSection
+
+Section "Device"
+Identifier "Intel Graphics"
+Driver "intel"
+Option "TearFree" "true"
+Option "AccelMethod" "sna"
+Option "DRI" "true"
+EndSection
