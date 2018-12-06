@@ -9,8 +9,9 @@ account
 
 AWS Sign in string = aliased to darnold1978
 
+sudo apt install awscli
+
 ===
-to somewhere for mp3 encoding etc.
 
 good security stuff:
 
@@ -24,3 +25,31 @@ S3
 anything modified new etc is always private by default
 versioning keeps everything really
 
+cross replication buckets
+	. versioning must be enabled on both source and dest bucks.
+	. deletions on master/primary buck not automatically replicated to 
+	slave buck - security feature.
+
+lifecycle
+	. controls how/when objects are transitioned to other storage
+
+cloudfront
+	. nothing obvious
+	. lecture was very different to what's actually on AWS
+
+storage gateways
+	. file : flat files stored on S3
+	. storage volume : backup local storage to AWS S3 as EBS snapshots.
+	. cached volumnes : cached volumes in S3 and most frequently accessed
+	is cached on site.
+	. tape gateway : Virtual Tape Library VTL to Glacier.
+
+snowballs
+	. replaced import/export (send in your own disks).
+	. standard hardware TPM where you store data to be uploaded to AWS.
+	. edge is bigger than standard.
+	. snowmobile is a containerized truck.
+
+
+s3 static website
+	http://darnold1978-s3website.s3-website-eu-west-1.amazonaws.com/
