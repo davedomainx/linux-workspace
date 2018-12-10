@@ -2,10 +2,45 @@ kubuntu - system settings - Display - scale screen = 1.6
 
 apt-get install nmap nfs-common vim
 
+apt-get install bluez-tools
+	bt-device -l
+
 sudo add-apt-repository ppa:phoerious/keepassxc
 sudo apt-get update
 sudo apt-get install keepassxc
 seems to just work - good merging facility too..
+
+===
+bluetooth
+
+3.Dec
+Mouse having trouble reconnecting after suspend to RAM
+sudo apt install blueman	
+blueman-manager
+	remove mice
+	mice will automatically repair
+	trust
+
+https://fedoraproject.org/wiki/How_to_debug_Bluetooth_problems
+hciconfig [up]
+hctiool scan
+hidd --search
+lsusb |grep Blueto
+lsusb -t|grep Wirel
+systemctl status bluetooth
+systemctl restart bluetooth
+journalctl -r -u bluetooth > /tmp/bluetoothd.out
+bt-device -l
+bt-device -i "MX Ergo"
+
+10.Dec
+didnt work; restart bluetooth daemon seems to have fixed it
+Add -d to below file/line for debug
+/lib/systemd/system/bluetooth.service:
+ExecStart=/usr/lib/bluetooth/bluetoothd -d
+	
+
+===
 
 SSH agent
 new sessions are not loading the existing SSH-agent
