@@ -3,7 +3,7 @@
 685 EUD total spend
 
 PC
-beelink x55 8G 128G Intel HD600 Graphics - 220 EUD (very cheap) - gearbest
+beelink x55 8G 128G Intel HD605 Graphics - 220 EUD (very cheap) - gearbest
 
 Monitor
 3840×2160 = UHD = 4K computer standard

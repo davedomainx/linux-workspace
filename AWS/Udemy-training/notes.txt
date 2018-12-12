@@ -2,13 +2,126 @@
 meta 
 
 . use polly to take notes and we will then upload them
-. aws this week
+. aws this week - review it every week see whats new
 
 ===
-to somewhere for mp3 encoding etc.
+account
+
+AWS Sign in string = aliased to darnold1978
+
+sudo apt install awscli
+
+===
 
 good security stuff:
 
 Guardduty : monitor for malicious activity
 Inspector : vuln reports
 Macie : s3 bucket analyzer
+
+==
+S3
+==
+anything modified new etc is always private by default
+versioning keeps everything really
+
+cross replication buckets
+	. versioning must be enabled on both source and dest bucks.
+	. deletions on master/primary buck not automatically replicated to 
+	slave buck - security feature.
+
+lifecycle
+	. controls how/when objects are transitioned to other storage
+
+cloudfront
+	. nothing obvious
+	. lecture was very different to what's actually on AWS
+
+storage gateways
+	. file : flat files stored on S3
+	. storage volume : backup local storage to AWS S3 as EBS snapshots.
+	. cached volumnes : cached volumes in S3 and most frequently accessed
+	is cached on site.
+	. tape gateway : Virtual Tape Library VTL to Glacier.
+
+snowballs
+	. replaced import/export (send in your own disks).
+	. standard hardware TPM where you store data to be uploaded to AWS.
+	. edge is bigger than standard.
+	. snowmobile is a containerized truck.
+
+
+s3 static website
+	http://darnold1978-s3website.s3-website-eu-west-1.amazonaws.com/
+
+s3 review
+	. read/write consistency puts/deletes etc ?
+
+===
+EC2
+===
+
+puttygen = convert .pem to ppk
+
+. need to understand different EC2 types
+	normal, reserved, spot, dedicated ..
+. need to understand different EBS types
+
+1 subnet = 1 AZ
+
+SecGroups
+	all inbound blocked by default.
+
+	Automatically stateful - adding an inbound rule automatically
+	creates the outbound rule (?!).  Hm even if you delete the
+	allow all outbound rule, traffic still goes out - ?
+
+	note he said secgroups can be a bit buggy :P
+
+EBS
+	Can modify volume type in real time ?!
+
+	Volumes always in the same AZ as the EC2 instance.
+
+	To move volumes from one AZ to another, create snapshot,
+	create image from snapshot ..
+
+	snapshot - copy can move volume to another region.
+	snaphots are only incrememntal - only blocks changed since
+	last snapshot are copied.
+
+	snaps of encrypted volumes and automatically encyrpted.
+
+	AMI - can copy to another region.
+
+	RAID5 on EBS = AWS say no!
+
+	Use RAID on AWS when you are not getting expected disk
+	performance.
+
+	C.f. with Windows AMIs - not free tier!
+	
+	RAID5 normal stuff when snaphostting - quiesce the disks,
+	umount the RAID array, shutdown associated EC2
+
+	Instance stores = cannot stop, only reboot or terminate
+
+** EBS volumes : root dev for an instance launched from AMI is an EBS volume
+created from an EBS snapshot **
+
+** Instance store volumes : root dev comes from AMI template stored in S3 **
+
+===
+ELB
+	. nothing new here
+	. AWS significantly different to what is in the course
+	. 50X = server side http error
+	. 40X = client side http error
+	. secgroup needed allow anywhere port 80 - assume LB issue
+
+===
+Cloudwatch
+	. Disk/Network/CPU metrics available by default
+	. Basic datapoint = 5 minutes, advanced = 1 minute
+
+
