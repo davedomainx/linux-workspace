@@ -2,6 +2,9 @@ ssh git@<git_server> info
 
 git config --global user.name "David Arnold"
 git config --global user.email "davedomainx@users.noreply.github.com"
+- OR -
+cd to repo
+git config user.email "davedomainx@users.noreply.github.com"
 
 git clone ssh://git@git_server/some/path/to/repo
 # modify ~ssh/.config for github

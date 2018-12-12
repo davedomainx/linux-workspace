@@ -16,4 +16,3 @@ add to /etc/sysconfig/iptables, run "iptables-save >/etc/sysconfig/iptable.save"
 -A INPUT -s 192.168.1.5/32 -p tcp -m multiport --dports 111,2049,4045 -m comment --comment "002 NFS from beelink" -j ACCEPT
 
 zfs set sharenfs ..
-
