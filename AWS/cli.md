@@ -45,3 +45,17 @@ aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-99f836fc" --query 'Su
 == Sorting ==
 
 aws ec2 describe-images --owners self --filters 'Name=name,Values=jenkins-qa-slave-windows-*' |jq '.Images | sort_by(.CreationDate) | . [] | {Name: .Name, Created: .CreationDate, Id: .ImageId}'
+
+== ssm ==
+
+aws ssm start-automation-execution --document-name "AWSSupport-TroubleshootRDP" --parameters "InstanceId=XXX,Firewall=Disable" --region xxx
+
+aws ssm start-automation-execution --document-name "AWSSupport-TroubleshootRDP" --parameters "InstanceId=XXX,RDPServiceStartupType=Auto, RDPServiceAction=Start" --region xxx
+
+aws ssm start-automation-execution --document-name "AWSSupport-TroubleshootRDP" --parameters "InstanceId=xxx,RemoteConnections=Enable" --region xxx
+
+# ERROR: recv: Connection reset by peer
+aws ssm start-automation-execution --document-name "AWSSupport-TroubleshootRDP" --parameters "InstanceId=xxx,NLASettingAction=Disable"
+
+#
+aws ssm start-automation-execution --document-name "ManageRDPSettings" --parameters "InstanceId=INSTANCEID,RDPPortAction=Modify, RDPPort=3389, NLASettingAction=Disable,RemoteConnections=Enable"
