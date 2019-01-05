@@ -1,0 +1,132 @@
+===
+1) Install AD DC
+
+2) Install a non-domain join Windows10 and use ServerManager to finish it ?
+3) Join a Win10 RSAT box to the domain and finsh configuring it ?
+
+===
+Seems I cannot directly manage the DC as it is
+Windows2016 [ Server Core ] ?
+
+Need to setup a Win10 Enterprise VM with RSAT.  
+
+Starting with Windows 10 October 2018 Update, RSAT 
+is included as a set of Features on Demand in Windows 
+10 itself.
+
+Run -> winver (will display Windows version)
+
+RSAT can be turned on/off by going:
+Search -> Manage Optional Features -> Add a feature -> Select RSAT tool -> Install
+(give it a minute to install the page to refresh)
+
+===
+Enable Remote commands on r2016 server
+
+Open powershell on local and 2016 boxes
+ensure ping in both directions
+
+1. CLI ?
+Enable-PSRemoting -Force
+
+2. Server Manager ?
+Configure-SMRemoting.exe –Enable
+
+====
+
+https://everythingsysadmin.wordpress.com/category/server-core/
+
+https://4sysops.com/archives/enable-server-manager-remote-management-for-windows-server-2016-core/
+
+https://gal.vin/2018/04/12/domain-controller-windows-server-core-walkthrough/
+
+https://devops.profitbricks.com/tutorials/install-and-configure-remote-server-administration-tools-on-windows-10/
+
+https://docs.microsoft.com/en-us/windows-server/administration/server-core/server-core-manage
+
+https://docs.microsoft.com/en-us/windows-server/manage/windows-admin-center/understand/faq
+
+bit confusing between:
+
+. RSAT (Remote Support Admin Tools)
+. Server Manager 
+	.. Search -> Server Manager
+	... prompted to try Windows Admin Center
+. Windows Admin Center
+	.. intended to replace MMC 
+. MMC (Microsoft Management Console)
+	.. various snap-ins to manage console 
+	.. mmc.exe is NOT installed on Server Core
+. RDS (Remote Desktop Services)
+	.. can be used to manage the server remotely
+	cscript C:\Windows\System32\Scregedit.wsf /ar 0
+
+===
+ServerManager
+DC - DNS Manager
+Add A entry for win10manager box
+
+====
+on manager box Powershell as Administrator
+
+Rename-Computer -NewName CN1 -LocalCredential WS\Administrator -PassThru 
+shutdown -r -t 0
+
+tcp/ip settings -> set DNS to the DCs
+
+Open Start > Settings > Accounts > Access work or school 
+Click Connect 
+Click 'Join this device to a local Active Directory domain' 
+
+Enter the Domain name 
+Click Next
+
+reboot
+should automatically join domain
+
+You will need to re-add in ServerManager etc
+Now AD Admin center works!
+
+
+==
+
+search -> notepad -> runas Admin -> open
+c:\Windows\System32\Drivers\etc\hosts
+192.168.122.101 dc1.davedomain.org dc1
+192.168.122.102 dc1.davedomain.org dc2
+
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "dc1,dc1.davedomain.org" –Force
+
+ServerManager - Create ServerGroup - DCs
+DNS - Search for dc1 - should populate with IP address - Add
+DCs - manage as - DAVEDOMAIN.ORG\rootsecdev
+	tick remember me
+
+or
+Created Admin Account in sconfig
+	ServerManager : Connect as : DC1\rootsecdev
+
+	BINGO AD DS now selectable
+	ah ffs denied 
+
+	this fixed it
+	net user darnold * /add
+	net localgroup Administrators /add darnold
+	
+	In SErver Manager, need to specify manage as:
+	DC1\darnold
+	and can now move on
+
+	after install, probably need to manage as
+	DAVEDOMAIN\darnold but not working ?
+
+	it's semi working
+
+rightclick dc1
+AD Domains and Trusts
+
+===
+troubleshooting
+stood up fresh new DC
+VMs can ping gateway, host, themselves.  But not each other (I could ping each other b4)
+seems theres a firewall blocking ping

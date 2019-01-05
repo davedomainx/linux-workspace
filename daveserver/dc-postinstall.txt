@@ -1,0 +1,13 @@
+Postinstall stuff for DC
+
+https://activedirectorypro.com/active-directory-management-tips/
+https://msdn.microsoft.com/en-us/library/hh846314(v=vs.85).aspx
+
+Probably the major thing is to clone the DC to another..
+
+DNS
+---
+
+dcdiag /s:dc1 /test:dns
+dcdiag /s:dc1 /fix
+dcdiag /s:dc1 /test:dns

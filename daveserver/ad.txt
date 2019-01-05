@@ -1,0 +1,61 @@
+===
+https://docs.microsoft.com/en-us/windows-server/administration/server-core/what-is-server-core
+
+The Server Core option is a minimal installation option that is 
+available when you are deploying the Standard or Datacenter 
+edition of Windows Server.  Server Core includes most but not 
+all server roles. Server Core has a smaller disk footprint, and 
+therefore a smaller attack surface due to a smaller code base.
+
+Server Core does not have a traditional desktop interface. 
+Instead, Server Core is designed to be managed remotely through 
+the command line, PowerShell, or a GUI tool (like RSAT or Windows 
+Admin Center).
+
+Server core is installed on the 2016 server.
+===
+
+https://medium.com/@rootsecdev/how-to-build-a-server-2016-domain-controller-non-gui-and-make-it-secure-4e784b393bac
+
+sconfig
+2 dc1
+3 Add local Admin 'rootsecdev'
+5 
+8 set static IP 
+9
+
+reboots
+applying computer settings (10+ minutes)
+
+==
+New-ADUser -Name “rootsecdev” -GivenName Root -Surname Secdev -SamAccountName rootsecdev -UserPrincipalName rootsecdev@davedomain.org
+
+Set-ADAccountPassword ‘CN=rootsecdev,CN=users,DC=contoso,DC=com’ -Reset -NewPassword (ConvertTo-SecureString -AsPlainText "XXXXXX" -Force)
+
+Enable-ADAccount -Identity rootsecdev
+
+===
+If you close all command prompt windows and want to open a new 
+Command Prompt window, you can do that from the Task Manager. 
+Press CTRL+ALT+DELETE, click Start Task Manager, click More 
+Details > File > Run, and then type cmd.exe. (Type 
+Powershell.exe to open a PowerShell command windows.) 
+Alternatively, you can sign out and then sign back in
+
+- or you can send it via the virsh send-keys method - 
+virsh send-key ad1 --codeset linux --holdtime 1000 KEY_LEFTCTRL KEY_LEFTALT KEY_DELETE
+
+this also brings up a mini task-manager which could be useful
+
+Winver.exe isn't available in Server Core. To obtain version 
+information use Systeminfo.exe
+
+2016 now says : Enter credentials for DAVEDOMAIN\Administrator ..
+
+look at rsat.txt for remote management of the Server Core
+
+====
+
+Actual AD Domain stuff here
+
+https://www.tenforums.com/tutorials/51456-windows-server-2016-setup-local-domain-controller.html

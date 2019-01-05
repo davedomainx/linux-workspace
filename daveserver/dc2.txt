@@ -1,0 +1,1 @@
+virt-install script s/dc1/dc2/g
