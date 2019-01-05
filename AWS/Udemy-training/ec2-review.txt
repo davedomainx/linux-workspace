@@ -1,0 +1,29 @@
+ec2 price models
+	on demand
+		you pay for what you use
+	spot - spare compute capacity
+		you bid a price and if the spot price matches you 
+			get ec2 provisioned
+		if aws terminate you get the hour free
+		if you terminate you pay for the hour
+	reserved
+		you lease capacity by 1-3 years
+	dedicated hosts
+		physical ec2 server
+
+ebs vs instance store (ephermeral).
+	I really need to ace what this is.
+	Instance store/ephermeral cannot be stopped - if the host
+		fails you lose the data.
+
+	ebs can be stopped - you wont lose the data
+
+	ebs root volume deleted on termination by default.  you can
+	tell it not to delete the root volume
+
+cloudwatch
+	is for perofmrance monitoring
+	standard onitoring is for 5 minutes
+	detailed is per minute
+cloudtrail
+	is for auditing
