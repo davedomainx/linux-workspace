@@ -22,6 +22,10 @@ Macie : s3 bucket analyzer
 ==
 S3
 ==
+
+when creating or updating bucket permissions..
+	.. simply saving/confirming will make it 'objects can be public'
+
 anything modified new etc is always private by default
 versioning keeps everything really
 
@@ -125,3 +129,28 @@ Cloudwatch
 	. Basic datapoint = 5 minutes, advanced = 1 minute
 
 
+==
+BashScript
+	. IAM role can access S3 from fresh EC2 because of the role
+	.. aws s3 ls
+	
+MetaData
+	. why not getting same results as per training ?
+	
+
+== 
+Placement Group
+	. Clustered Group of instances within a single AZ.
+	. Spread Group can span multiple AZs.
+	. limited EC2s can be put in the placement group.
+
+EFS
+===
+NFS store
+	. must mount as nfs 4.1 as root - efi inbuilt mount didnt work
+	. needed to selinux sudo setsebool -P httpd_use_nfs=1
+
+
+Lambda
+======
+Has blueprints - very useful

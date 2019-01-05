@@ -38,6 +38,11 @@ didnt work; restart bluetooth daemon seems to have fixed it
 Add -d to below file/line for debug
 /lib/systemd/system/bluetooth.service:
 ExecStart=/usr/lib/bluetooth/bluetoothd -d
+
+===
+suspend to RAM problematic
+
+https://ubuntuforums.org/showthread.php?t=2392205
 	
 
 ===

@@ -1,4 +1,4 @@
-https://spredzy.wordpress.com/2013/10/16/the-foreman-pxe-provisioning-with-libvirt/
+https://spredzy.wordpress.com/2013/10/16/the-foreman-pxe-provesioning-with-libvirt/
 http://emeraldreverie.org/blog/2012/10/26/creating-development-environment-with/
 https://lukas.zapletalovi.com/2013/04/managing-many-servers-with-foreman.html
 http://blog.daniellobato.me/unattended-deployments-of-fedora-and-rhel-atomic-with-foreman/

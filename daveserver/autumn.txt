@@ -1,20 +1,51 @@
+======
+useradd -b /data/home -c "Dave Arnold" -M darnold -G libvirt
+passwd darnold
+
+< yum install kvm >
+grep libvirt /etc/group # 
+mkdir /data/home/darnold/.ssh
+< cp the ssh keys to above >
+chcon -R -t ssh_home_t /data/home/darnold/.ssh
+chmod 700 /data/home/darnold/.ssh
+chmod 400 /data/home/darnold/.ssh/*
+echo "darnold ALL=(ALL:ALL) ALL" > /etc/sudoers.d/darnold
+
+echo <<EOF>>/etc/libvirt/libvirtd.conf
+unix_sock_group = "libvirt"
+unix_sock_rw_perms = "0770"
+EOF
+
+systemctl restart libvirtd
+systemctl restart polkit # libvirt group defined in /usr/share/polkit-1/rules.d/50-libvirt.rules
+
+yum install epel-repo
+yum repolist
+yum install inxi
+
+
+========
+
 zfs create data/windows-pool 
+	# must have quota limited to 200GB somewhere ..
+virsh #
 pool-define-as windows-pool --type dir --target /data/windows-pool --source-path /data/windows-pool 
 Pool windows-pool defined
 
 virsh # pool-autostart windows-pool
 virsh # pool-start windows-pool
 
-Needed to install Xorg to get qemu-kvm to do spice Graphics..
-I think I effed it by installing 500+ packages
-
 ========
 
-# script to install 
-# note not working properly 
-# needed to run out of virt-manager on daveserver
 
 #!/bin/bash
+
+# script to install win2016 Server guest
+# 180 day license win2016 server license can be renewed 
+
+# further investigation
+## --channel (for spice channel setup)
+
 virsh shutdown windows2016
 virsh undefine windows2016
 virsh destroy windows2016
@@ -28,13 +59,100 @@ virt-install \
 --disk /data/windows-pool/win-ad1.qcow2,bus=ide,size=30 \
 --os-type windows \
 --os-variant win2k16 \
---graphics spice,listen=0.0.0.0 \
+--graphics spice,listen=127.0.0.1,password=secret,defaultMode=insecure \
 --network network=default \
---video vga \
+--video qxl \
 --clock hypervclock_present=yes \
---noautoconsole
+--soundhw default \
+--noautoconsole \
+--boot cdrom,hd,network,menu=on \
+--autostart \
+--check-cpu
 
 ========
+daveserver
+
+virt-install --boot=?
+virsh domdisplay --domain windows2016
+firewall-cmd --add-service=vnc-server --permanent
+firewall-cmd --add-service=libvirt --permanent
+
+========
+apt-get install spicy libvirt-clients # spicy and virsh
+ssh root@192.168.1.99 -L 5900:127.0.0.1:5900
+spicy -h localhost -p 5900 -w <password>
+
+ssh -Y daveserver virt-manager # works
+
+========
+
+Install https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-0.141/spice-guest-tools-0.141.exe
+
+	. much better video (too big)
+
+o (too big)
+
+dual-direction copy/paste works ?!!?!?!?!
+
+========
+boot 1
+windows2016 server install
+custom
+create partition, next (format automatically done)
+standard evalutation (no desktop)
+will reboot a couple of times
+	prompt-lock to change admin password
+	hmm how did it cleanly install windows the other times ?
+
+I was actually kicking off the setup script twice..
+getting stuck in a boot loop or something
+meh, for the actual cdrom install iso, need to specify:
+
+--disk ${WINISO},device=cdrom,perms=ro \
+--disk path=${WINDISK},bus=virtio \
+-c ${WINVIRT} \
+
+select 'custom' in installer, no drives are found
+load driver, browse to 
+virtio-win-0.1.1
+	viostor (NOT vioscsi)
+		2k16
+			amd64
+				selected top (vioscsi.inf)
+
+drive now found
+new - apply - okay (it will automatically reserve some space)
+format - ok (does the format ..)
+
+windows install begins here - VM is shutdown, need to power-on manually
+
+=======
+boot 2
+'press any key to boot from cdrom' appears
+getting devices ready 25%, 50% .. 100%
+bingo
+reboots again
+
+========
+boot 3
+windows icon and swirly ring, no other information ....
+dos shell admin password change screen
+
+.. finish - not much help here
+
+
+========
+
+virtio drivers
+wget https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo \
+  -O /etc/yum.repos.d/virtio-win.repo
+yum install -y virtio-win
+/usr/share/virtio-win/virtio-win.iso
+
+========
+AD Forest Service
+
+	. i assume this is the proper way to setup AD
 
 Follow any procedure to get AD installed, then this page to setup Forest
 
@@ -46,3 +164,5 @@ Import-Module ADDSDeployment
 Install-ADDSForest
 
 Change Computer name to adfs1.davedomainx.org
+
+=====
