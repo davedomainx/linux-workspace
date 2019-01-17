@@ -1,0 +1,8 @@
+FSMO - Flexible Single Master Operations.  These DCs need to be brought
+up 1st.
+
+GC - Global Catalog server (DNS)
+
+Virtual Domain Controller
+
+https://infocus.dellemc.com/matt-_liebowitz/best-practices-virtualizing-active-directory-domain-controllers-ad-dc-part-i/

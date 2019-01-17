@@ -1,0 +1,12 @@
+ES1240v6 
+	3.7Ghz
+	360 EUD
+	ECC
+
+i7-XXXX
+	faster and cheaper but no ECC memory support
+
+RAM pricing is bonkers in early 2019.  No go.  I paid 200 EUD in 2016
+for 32G 2133 ECC ,  I would be paying 500 EUD for 32G in 2019 ..
+
+

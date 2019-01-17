@@ -1,0 +1,8 @@
+# doesnt work - virt-sysprep does not work with windows guests
+virsh suspend dc1
+virt-clone --original dc1 --name dc3 --file /data/windows-pool/dc3.qcow2
+virsh resume dc1
+
+# create Reverse Lookup zone
+DNS Manager : Create Zone : Reverse : do all prompts
+not working 100%
