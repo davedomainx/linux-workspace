@@ -1,1 +1,24 @@
 virt-install script s/dc1/dc2/g
+/root/dc2.sh
+
+DC2:
+        sconfig : set network : set preferred DNS to other DC 
+        sconfig : set date
+        net user darnold * /add
+        net localgroup Administrators /add darnold
+	reboot
+
+Win10Manager:
+
+ServerManager - Manage - Add Servers - DNS
+enter dc2 - will select - move to right window
+
+Server Manager, select server, right click, manage as:
+        DC2\darnold
+
+should now be connected and can do Server Roles
+AD Domain Services : all prompts : seemed to be different than DC1
+
+Promote to DC
+root-level Domain Username is DAVEDOMAIN\rootsecdev
+

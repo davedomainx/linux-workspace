@@ -11,3 +11,5 @@ DNS
 dcdiag /s:dc1 /test:dns
 dcdiag /s:dc1 /fix
 dcdiag /s:dc1 /test:dns
+
+

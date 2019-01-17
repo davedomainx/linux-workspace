@@ -2,6 +2,7 @@
 1) Install AD DC
 
 2) Install a non-domain join Windows10 and use ServerManager to finish it ?
+
 3) Join a Win10 RSAT box to the domain and finsh configuring it ?
 
 ===
@@ -53,7 +54,7 @@ bit confusing between:
 	.. Search -> Server Manager
 	... prompted to try Windows Admin Center
 . Windows Admin Center
-	.. intended to replace MMC 
+	.. intended to replace MMC (and eventually Server Manager?)
 . MMC (Microsoft Management Console)
 	.. various snap-ins to manage console 
 	.. mmc.exe is NOT installed on Server Core
@@ -95,7 +96,8 @@ c:\Windows\System32\Drivers\etc\hosts
 192.168.122.101 dc1.davedomain.org dc1
 192.168.122.102 dc1.davedomain.org dc2
 
-Set-Item WSMan:\localhost\Client\TrustedHosts -Value "dc1,dc1.davedomain.org" –Force
+Get-Item WSMan:\localhost\Client\TrustedHosts
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "dc1,dc1.davedomain.org,dc2,dc2.davedomain.org" –Force
 
 ServerManager - Create ServerGroup - DCs
 DNS - Search for dc1 - should populate with IP address - Add
@@ -113,7 +115,7 @@ Created Admin Account in sconfig
 	net user darnold * /add
 	net localgroup Administrators /add darnold
 	
-	In SErver Manager, need to specify manage as:
+	In SErver Manager, select server, right click, manage as:
 	DC1\darnold
 	and can now move on
 
@@ -130,3 +132,10 @@ troubleshooting
 stood up fresh new DC
 VMs can ping gateway, host, themselves.  But not each other (I could ping each other b4)
 seems theres a firewall blocking ping
+
+
+===
+virsh list --all ; virsh start <name>
+# port number appears to map to order in which vms were bought up
+ssh ds -L 5900:127.0.0.1:5900
+spicy -h localhost -p 5900 -w <password>
