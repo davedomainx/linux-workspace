@@ -1,0 +1,11 @@
+root@it-proxmox3:~# wipefs /dev/sdc
+offset               type
+----------------------------------------------------------------
+0x200                gpt   [partition table]
+
+root@it-proxmox3:~# wipefs --all --force /dev/sdc
+/dev/sdc: 8 bytes were erased at offset 0x00000200 (gpt): 45 46 49 20 50 41 52 54
+/dev/sdc: 8 bytes were erased at offset 0x45d764b600 (gpt): 45 46 49 20 50 41 52 54
+/dev/sdc: 2 bytes were erased at offset 0x000001fe (PMBR): 55 aa
+root@it-proxmox3:~# wipefs /dev/sdc
+root@it-proxmox3:~#
