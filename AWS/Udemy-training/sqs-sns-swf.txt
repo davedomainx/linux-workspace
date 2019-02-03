@@ -1,0 +1,14 @@
+Simple Queue Service
+	poll-pull based messaging service.
+	normal : best effort, at least 1 guaranteed message.
+	FIFO : ordered, only 1 message.
+Simple Workflow Service
+	coorindate work across distributed application components.
+	task-oriented, only once and never duplicated.
+	workflow actors: starters, deciders, workers
+Simple Notification Service
+	push based : to lambda, SQS, http endpoint, sms, email 
+
+
+api gateway
+	frontdoor for AWS applications (lambda, ec2, dynamoDB etc)

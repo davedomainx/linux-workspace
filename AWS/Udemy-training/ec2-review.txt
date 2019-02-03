@@ -1,3 +1,10 @@
+Cannot move reserved ec2 from one region to the other.
+
+Placing ec2 in public subnet in custom VPC does not make the EC2
+automatically internet accessible - why not ? Need to apply EIP
+or ELB to the instance ?
+	new EC2 always given private + public IPs ?
+
 ec2 price models
 	on demand
 		you pay for what you use
@@ -20,6 +27,8 @@ ebs vs instance store (ephermeral).
 
 	ebs root volume deleted on termination by default.  you can
 	tell it not to delete the root volume
+
+	ebs cannot be detached if it is the root volume of an instance.
 
 cloudwatch
 	is for perofmrance monitoring

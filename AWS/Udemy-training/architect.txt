@@ -1,0 +1,37 @@
+pillars
+security at all layers
+	AWS responsible for 'security of the cloud'
+	customer responsible for 'security in the cloud'
+
+	data protection 
+		data should be encrypted at rest + in transit
+	privilege managemnent 
+		IAM, MFA, roles, policies.  Keys and Creds
+	infra protection
+		network + host boundary protection
+		AWS service level proteciton
+	
+reliability
+	foundations
+		service limits + scaling
+		network topology
+		escalation path to deal with tech issues
+	change management
+		how does 
+		moniotoring AWS resources
+		executing change management
+	failure management
+
+performance
+	serverless
+	compute
+		most appropriate instance type ?
+	storage	
+		most appropriate storage type
+		monitroring, performance, capacity + throughput
+
+excellence
+
+udemy running serverless lambda and with 10k viewers still within free
+tier
+
