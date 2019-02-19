@@ -1,0 +1,8 @@
+Got 43/53 first time.  Mostly common sense.  A couple of stupid specifics
+like how much GB storage does a new SQL server DB have.
+
+2 "answers" seem to be wrong - new secgroups don't have inbound rules
+so they can't allow any inbound traffic to that secgroup.
+
+can't remember what the other one was.
+

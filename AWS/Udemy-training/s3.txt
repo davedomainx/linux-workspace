@@ -1,0 +1,4 @@
+s3 RRS availability is 4 9s (not 11 9s).  That's Reduced Redundancy 
+Storage.
+
+s3 durability IS 11 9s.

@@ -1,0 +1,4 @@
+Don't conduct vuln scans within VPC without alerting AWS first.
+
+Hm - when creating a security group, all inbound traffic is
+allowed by default

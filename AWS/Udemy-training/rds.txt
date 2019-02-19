@@ -1,0 +1,16 @@
+Automated backups are enabled by default for new DB instances.
+
+default backup retention period is one day if creating DB isntance
+using RDS API // AWS CLI, or 7 days if creating DB instance via AWS
+console.
+
+RDS does not currentlky support increasing storage on an SQL server 
+DB instance.
+
+If you must run a DB on an EC2 instance then use EBS as the storage
+option.
+
+If you need application to check whether request generated an error
+then you look for an error node in the response from amazon RDS API.
+
+Aurora stores 6 copies of data!
