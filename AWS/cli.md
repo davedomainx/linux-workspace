@@ -59,3 +59,7 @@ aws ssm start-automation-execution --document-name "AWSSupport-TroubleshootRDP" 
 
 #
 aws ssm start-automation-execution --document-name "ManageRDPSettings" --parameters "InstanceId=INSTANCEID,RDPPortAction=Modify, RDPPort=3389, NLASettingAction=Disable,RemoteConnections=Enable"
+
+== acm ==
+
+aws acm describe-certificate --certificate xxx
