@@ -1,0 +1,26 @@
+Ubuntu 18.10 install (kubuntu kernel-panics)
+
+Nuke everything
+Encrypt
+Allow 3rd party repos
+
+sudo apt install tasksel
+sudo taskel install kubuntu-desktop
+# If SSDM was not installed
+[ sudo apt install ssdm ; sudo dpkg-reconfigure ssdm ]
+sudo apt install gufw
+	turn it on
+	allow port 22
+
+apt update
+apt upgrade
+apt install intel-microcode
+apt install nvidia-driver-390
+	this turns on UEFI Secure Boot.
+	Machine-Owner Key (Mok) needs to be created.
+	Enroll Mok + Change Secure Boot state.
+	reboot.
+	Enroll Mok screen comes up.
+	you'll be prompted to enter the Mok password twice.
+	Continue Boot.
+

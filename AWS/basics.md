@@ -28,3 +28,6 @@ unset http_proxy https_proxy HTTPS_PROXY HTTP_PROXY AWS_DEFAULT_PROFILE
 aws ec2 describe-regions --output table
 echo -e "[profile account]\nregion = from_above" >> config
 ```
+
+aws configure list
+aws sts get-caller-identity

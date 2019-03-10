@@ -18,10 +18,15 @@ ec2 price models
 	dedicated hosts
 		physical ec2 server
 
-ebs vs instance store (ephermeral).
+instance store (ephermeral) vs EBS.
+
 	I really need to ace what this is.
+
 	Instance store/ephermeral cannot be stopped - if the host
 		fails you lose the data.
+
+	Instance stores are fragile - they exist only for the lifetime
+	of the instance.
 
 	ebs can be stopped - you wont lose the data
 
@@ -29,6 +34,8 @@ ebs vs instance store (ephermeral).
 	tell it not to delete the root volume
 
 	ebs cannot be detached if it is the root volume of an instance.
+	ebs can be detached if it is not the root volume of an instance.
+
 
 cloudwatch
 	is for perofmrance monitoring

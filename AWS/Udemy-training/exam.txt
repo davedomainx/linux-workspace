@@ -6,3 +6,6 @@ so they can't allow any inbound traffic to that secgroup.
 
 can't remember what the other one was.
 
+===
+
+Note that SCP overrides IAM permissions (used in consolidated billing)
