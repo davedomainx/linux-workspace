@@ -24,3 +24,10 @@ apt install nvidia-driver-390
 	you'll be prompted to enter the Mok password twice.
 	Continue Boot.
 
+====
+Kubuntu
+not as good on laptop as on desktop
+
+make sure have
+look + feel : Modern 
+theme : Oxygen
