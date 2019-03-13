@@ -31,3 +31,4 @@ not as good on laptop as on desktop
 make sure have
 look + feel : Modern 
 theme : Oxygen
+seems better
