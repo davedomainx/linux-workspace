@@ -1,0 +1,5 @@
+# Useful for checking public keys from AWS
+openssl rsa -in ./cert.pem -out cert.key
+ssh-keygen -y -f ./cert.key > cert.pub
+ssh-keygen -l -f cert.pub
+
