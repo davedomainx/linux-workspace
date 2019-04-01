@@ -1,0 +1,3 @@
+# Because I never remember sudo syntax
+user1 ALL=/sbin/halt, /bin/kill, /etc/init.d/httpd
+user2 ALL= NOPASSWD: /sbin/halt
