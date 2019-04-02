@@ -1,0 +1,6 @@
+# Find out what authentication methods are supported (used)
+authconfig --test
+# Change auth method (note sha512 isdefault on C7)
+authconfig --passalgo=sha512 --update
+# Set hashed SHA512 password string
+python3 -c 'import crypt,getpass; print(crypt.crypt(getpass.getpass(), crypt.mksalt(crypt.METHOD_SHA512)))'
