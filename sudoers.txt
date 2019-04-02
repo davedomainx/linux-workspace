@@ -2,3 +2,5 @@
 # always remember the full path to the program!
 user1 ALL=/sbin/halt, /bin/kill, /etc/init.d/httpd
 user2 ALL= NOPASSWD: /sbin/halt
+# There needs to be a blank empty line at the bottom of an /etc/sudoers.d/99-user file
+
