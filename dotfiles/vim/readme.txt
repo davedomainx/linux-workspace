@@ -1,6 +1,10 @@
-https://voxpupuli.org/blog/2019/04/08/puppet-lsp-vim/
+:CocConfig
+:verbose imap
 
 ==
+https://voxpupuli.org/blog/2019/04/08/puppet-lsp-vim/
+==
+
 Needs vim 8.1
 http://www.theubuntumaniac.com/2018/09/install-vim-810374-on-ubuntu-1604-1804.html
 
@@ -18,8 +22,7 @@ https://linux4one.com/how-to-install-yarn-on-ubuntu-18-04/
 Then run:
 yarn global add vim-node-rpc
 
-Once all are installed then just run ":PluginInstall" from
-within ~/.vimrc
+Once all are installed run ":PlugInstall" in vimrc
 
 ==
 
@@ -47,3 +50,14 @@ Put this into your .rubocop.yml.
   require: rubocop-performance
 
 More information: https://github.com/rubocop-hq/rubocop-performance
+
+vim +CocConfig
+	adjust paths to own environment
+
+==
+Bash Language Server
+
+vimrc:
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+
