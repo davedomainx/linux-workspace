@@ -1,0 +1,2 @@
+dmsetup ls --tree -o blkdevname
+dmsetup ls --tree -o device
