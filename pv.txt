@@ -1,0 +1,1 @@
+pv -petrab -s 1G -S < /dev/urandom > outfile
