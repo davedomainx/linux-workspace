@@ -1,5 +1,17 @@
-ES1240v6 : Kaby Lake
-	3.7Ghz
+Supermicro Motherboard X11SSL-CF
+Intel C236/C232 chipset
+LGA 1151 socket : Skylake + Kaby Lake rev 1
+
+Xeon 12x5 : HD graphics P630
+
+ES v1230 v6
+	best value/buck
+	3.5 Ghz 4 cores/8 threads
+	247 EUD amazon.de
+
+
+ES v1240 v6
+	3.7 Ghz
 	360 EUD
 	ECC
 
