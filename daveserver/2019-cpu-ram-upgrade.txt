@@ -1,4 +1,4 @@
-ES1240v6 
+ES1240v6 : Kaby Lake
 	3.7Ghz
 	360 EUD
 	ECC
