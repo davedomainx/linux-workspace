@@ -1,0 +1,13 @@
+Lots of issues with tmux mouse copy-selection-and-cancel in vi[m]
+
+screen-256 vs xterm-256 : no difference
+
+konsole : edit current Profile : Mouse : "Copy on select" should be ticked
+
+This works outside of vi, eg, drag-select-copy to system clipboard
+
+bind-key -T copy-mode-vi 'r' send -X rectangle-toggle
+
+Something in vi is blocking the mouse select operation
+
+need to use shift.. lol..
