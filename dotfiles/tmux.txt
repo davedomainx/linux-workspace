@@ -1,13 +1,91 @@
+Getting things into the system clipboard:
+
+Inside Tmux:
+1. tmux = copy-selection-and-cancel (drag+drop)
+  a. vim inside tmux = shift and mouse select
+  b. everything else = copy-selection-and-cancel (drag+drop)
+
+Outside Tmux:
+2. vim = shift and mouse select
+3. firefox = autocopyselection2clipboard
+4. konsole = double click, or select AND mouseclick (to force the copy)
+
+==== X11
+shift-select and middle-click seem to be related somehow ..
+think this is X-Windows stuff
+
+From https://askubuntu.com/questions/12047/inconsistent-copy-and-paste-behaviour-is-there-a-fix
+
+Mode NAME    Text Copy method         Text Paste  method
+----------   ---------------------    -------------------
+PRIMARY      currently selected       mouse middle-click
+CLIPBOARD    Control+C selection      Control+V
+
+====
+
 Lots of issues with tmux mouse copy-selection-and-cancel in vi[m]
 
 screen-256 vs xterm-256 : no difference
 
 konsole : edit current Profile : Mouse : "Copy on select" should be ticked
 
-This works outside of vi, eg, drag-select-copy to system clipboard
+okay vim using shift-select can now copy to system clipboard, need to 
+paste from system clipboard to vim..
 
-bind-key -T copy-mode-vi 'r' send -X rectangle-toggle
+vim has 0 as default register.  + is the system clipboard.  
+vim needs to have +clipboard/+xterm_clipboard support ..
 
-Something in vi is blocking the mouse select operation
+> vi --version|grep --color clipboard
++clipboard         +jumplist          +persistent_undo   +vertsplit
++emacs_tags        +mouse_dec         -sun_workshop      +xterm_clipboard
 
-need to use shift.. lol..
+so it should be simply :set clipboard=unnamedplus
+
+okay.  
+mouse-select does not actually *copy* into the clipboard...
+think this is X11 stuff - mouse select
+you need to explictly ctrl-c to get things into the clipboard..
+
+konsole # xprop _NET_WM_PID WM_CLASS (click in terminal)
+  xterm-256 # echo $TERM
+    tmux #
+      vim #
+
+===konsole 
+	- select - ctrl c
+		cant paste into vim..
+	- select - right click - pastes to system clipboard
+		weird ..
+
+=== firefox 
+	autocopyselection2clipboard (acs2c)
+	unselect after copying : unticked (messes up google-search)
+	copy notification : useful to see
+	selection in input fields : unticked (if used, acs2c copies
+						selected text in input
+						fields to clipboard.
+						just use ctrl-c to copy
+						or rightlick copy)
+						
+===plasma/kubuntu clipboard
+	
+kubuntu clipboard - configure - sync contents of clipboard and selection
+
+https://unix.stackexchange.com/questions/213840/how-to-toggle-or-turn-off-text-selection-being-sent-to-the-clipboard
+
+Yes, there's also another solution hidden for OP: Set the checkbox 
+at Ignore selection and Plasma's clipboard manager will never 
+overwrite your Ctrl-V clipboard again. If your clipboard content is 
+overwritten with the PRIMARY selection contents, it's not X11's fault, 
+it's usually a clipboard manager at work.
+
+===xterm
+
+xterm : ~/.Xresources:
+xterm*VT100.Translations: #override \
+                 Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
+                 Ctrl Shift <Key>C:    copy-selection(CLIPBOARD)
+xterm*VT256.Translations: #override \
+                 Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
+                 Ctrl Shift <Key>C:    copy-selection(CLIPBOARD)
+xrdb ~/.Xresources

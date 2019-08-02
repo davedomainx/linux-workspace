@@ -1,13 +1,14 @@
-Supermicro Motherboard X11SSL-CF
+Supermicro Motherboard X11SSL-CF 
 Intel C236/C232 chipset
-LGA 1151 socket : Skylake + Kaby Lake rev 1
+LGA 1151 H4 single socket : Skylake + Kaby Lake rev 1
 
 Xeon 12x5 : HD graphics P630
 
 ES v1230 v6
-	best value/buck
+	best value/buck.  higher specs models not worth $$
 	3.5 Ghz 4 cores/8 threads
-	247 EUD amazon.de
+	247 EUD amazon.de ??
+	282 EUD amazon.de 1.August.2019
 
 
 ES v1240 v6
