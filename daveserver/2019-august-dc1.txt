@@ -1,0 +1,103 @@
+# https://medium.com/@rootsecdev/how-to-build-a-server-2016-domain-controller-non-gui-and-make-it-secure-4e784b393bac
+
+# http://stuffjasondoes.com/2018/07/20/creating-a-new-forest-and-promoting-the-first-domain-controller-with-windows-server-2016/
+
+daveserver (ds):
+/root/dc1.sh # destroys + re-provisions dc1.
+
+beelink:
+ssh ds -L 5901:127.0.0.1:5901
+# in another shell:
+spicy -h localhost -p 5901 -w # spice password in ds:/root/dc1.sh
+
+# spicy should bring up server2016 install stanza
+Language : English
+Time.. : English (world)
+Keyboard .. : Irish # TODO: wrong
+
+Click 'Install now'
+Select 'Windows Server 2016 Standard Evaluation' + next
+'I accept' + next
+Custom Install
+Browse -> CD Drive E: (virtio-win0.1.1) -> viostor -> 2k16 -> amd64 -> ok
+Select 'RedHat VirtIO SCSI controller (E:\viostor\.....)' + next
+Select 'Drive 0 Unallocated space' + next
+
+Windows starts installing + reboots
+Reconnect GUI via spicy or 'ssh -Y ds virt-manager'
+ctrl-alt-del to unlock
+"Adminsitrators password must be changed before signing in"
+
+* Administrator + Password
+
+sconfig
+2 dc1 # dont restart
+8 1 1 S # Network Adapter, Change IP address, Static, <IP>, <Mask>, <GW>
+( may need to try the settings above again )
+9 # Set timezone + time
+10 2 
+7 E # Enable Remote Desktop
+13 # restart computer
+
+=== install 1 ===
+
+# Unlock computer with Adminstrator Password from above
+powershell
+Get-WindowsFeature AD-Domain-Services
+Get-WindowsFeature AD-Domain-Services | Install-WindowsFeature
+Import-Module ADDSDeployment
+Install-ADDSForest
+DomainName : davedomain.org
+safeModeAdministratorPassword : < >
+confirm safeModeAdministratorPassword : < >
+Y # The target server will be configured as a domain controller and restarted ..
+# lots of good debug output
+
+# When computer reboots, "applying computer settings" for 5 minutes ..
+# Unlock computer with Adminstrator Password from above
+powershell
+New-ADUser -Name "darnold" -GivenName David -Surname Arnold -SamAccountName darnold -UserPrincipalName darnold@davedomain.org
+Get-ADUser darnold # Note enabled=false
+Set-ADAccountPassword 'CN=darnold,CN=users,DC=davedomain,DC=org' -Reset -NewPassword (ConvertTo-SecureString -AsPlainText "XXXXX" -Force)
+Enable-ADAccount -Identity darnold
+Add-ADGroupMember 'Domain Admins' darnold
+Get-ADGroupMember 'Domain Admins' # Administrator + darnold 
+
+# Then try these from remote machine that is domain joined
+Get-ADDomainController dc1
+Get-ADForest davedomain.org
+Get-Service adws,kdc,netlogon,dns
+Get-ADDomain | select domainMode
+Get-ADForest | fl Name,ForestMode
+
+# GPO => GPMC
+Get-WindowsFeature -Name GPMC | Install-WindowsFeature
+# No Group Policy Editor ever appeared, so remvoed GPM from Role
+Server Mananger -> Remove Roles+Features -> Features -> Remove Group Policy Mgt.
+Server Mananger -> Remove Roles -> Features -> Add Group Policy Mgt.
+
+
+=== install 2 ===
+
+I thought that Forest was not installed properly, but it seems 
+to be okay.  The below shows how can install Foretst
+
+# Unlock computer with Adminstrator Password from above
+powershell
+Get-WindowsFeature AD-Domain-Services
+Get-WindowsFeature AD-Domain-Services | Install-WindowsFeature
+Import-Module ADDSDeployment
+Install-ADDSForest
+-CreateDnsDelegation:$false
+-DatabasePath "C:\Windows\NTDS"
+-DomainMode "Windows2016Domain"
+-DomainName "davedomain.org"
+-DomainNetbiosName "DAVEDOMAIN"
+-ForestMode "Windows2016Forest"
+-InstallDns:$true
+-LogPath "C:\Windows\NTDS"
+-NoRebootOnCompletion:$false
+-SysvolPath "C:\Windows\SYSVOL"
+-Force:$true
+
+=== postinstall info ===
