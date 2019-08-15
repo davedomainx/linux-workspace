@@ -41,3 +41,10 @@ sudo pdsh -a yum -q updateinfo info --cve CVE-2017-1000366|dshbak -c
 
 http://virtuallyhyper.com/2013/03/rhcsa-and-rhce-chapter-6-package-management/
 http://www.cyberciti.biz/faq/yum-history-command/
+
+# install specific version
+apt-cache policy
+apt install elasticsearch=6.5.3
+
+yum --showduplicates list elasticsearch
+yum install elasticsearch-6.5.3
