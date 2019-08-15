@@ -1,0 +1,83 @@
+# https://heiko-sieger.info/running-windows-10-on-linux-using-kvm-with-vga-passthrough/
+# http://www.tuncaysahin.nl/remote-management-with-server-manager/
+
+daveserver (ds):
+/root/win10rsat.sh
+
+beelink:
+ssh ds -L 5901:127.0.0.1:5901
+# in another shell
+spicy -h localhost -p 5901 -w < password from ds:/root/win10rsat.sh >
+
+# Spicy should be at Win10 Install screen
+.. keyboard : United Kingdom
+Select 'Install Now'
+'I accept' + next
+Custom Install : Load Driver : Browse
+.. CD Drive (E:) virtio-win-0.1.1 -> viostor -> w10 -> amd64 -> RedHat SCSI driver .. -> next
+select 'Drive 0 Unallocated space' -> next
+
+# Reboots
+# 2-5 minutes 'Getting ready' + Reboots
+# 20+ minutes 'Just a moment'
+# on ds : virsh reset win10rsat
+
+Install finishes -> Cortana BS
+powershell
+notepad.exe drivers\etc\hosts # should be in c:\system\windows32
+192.168.122.100 dc1.davedomain.org dc1
+# save/exit
+ping dc1 # should work
+Rename-Computer -NewName win10rsat -LocalCredential darnold -PassThru
+
+# Install RSAT
+Search -> Optional Features -> Add feature
+RSAT : Active Directory Domain Services + Lightweight Directory Services Tools
+RSAT : Server Manager
+RSAT : Group Policy Management Tools
+Start -> Poweroff -> Update + Restart Computer
+
+Search -> Server Manager
+All Servers -> Add Server -> DNS -> dc1
+	should return 'dc1.davedomain.org 192.168.122.100'
+Connect fails with WinRM errors	
+
+powershell
+Get-Item WSMan:\localhost\Client\TrustedHosts
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "dc1,dc1.davedomain.org,dc2,dc2.davedomain.org" –Force
+
+# For about 10 minutes says WinRM connection fails
+# then it came good 
+
+# DNS issues - can't contact domain controller
+# win10rsat is a DHCP client and
+# Primary DNS suffix is not set to davedomain.org by DHCP 
+# should fix this properly but for now:
+
+Rightclick Newtork icon -> Open Network + Internet Settings
+Ethernet -> Change Adapter Options -> Intel -> Properties -> TCP/IPv4 -> Properties -> Use following DNS:
+<IP of DC1>
+8.8.8.8 # secondary
+
+Advanced -> DNS
+Select 'append primary and connection specific dns suffixes'
+DNS suffix for this connection : davedomain.org
+tick 'Register this connection's addreses in DNS'
+tick 'use this connection's DNS suffix in DNS'
+
+Powershell
+ipconfig /release
+ipconfig /renew
+ipconfig /all
+	# Seems that "Primary DNS Suffix = davedomain.org" MUST be set for domain join to work
+
+Add-Computer -DomainName "davedomain" -Restart ## Reboots automatically if successful
+
+At reboot, can login as DAVEDOMAIN\darnold
+
+# Server Manager
+Add Server -> Active Directory -> Domain Controllers -> dc1 #
+righclick DC1 -> AD Admin Center -> works now
+
+Manage -> Server Manager Properties
+Server manager refresh period (minutes) : 2 # 10 is default, which is too low
