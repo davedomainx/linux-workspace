@@ -8,11 +8,14 @@ Inside Tmux:
 Outside Tmux:
 2. vim = shift and mouse select
 3. firefox = autocopyselection2clipboard
-4. konsole = double click, or select AND mouseclick (to force the copy)
+	messes up select->search ..
+4. konsole = double click, or select AND middle-mouseclick (to force the copy)
 
 ==== X11
 shift-select and middle-click seem to be related somehow ..
 think this is X-Windows stuff
+
+https://www.cyberciti.biz/faq/xclip-linux-insert-files-command-output-intoclipboard/
 
 From https://askubuntu.com/questions/12047/inconsistent-copy-and-paste-behaviour-is-there-a-fix
 
@@ -42,7 +45,7 @@ vim needs to have +clipboard/+xterm_clipboard support ..
 so it should be simply :set clipboard=unnamedplus
 
 okay.  
-mouse-select does not actually *copy* into the clipboard...
+mouse-select does not actually *copy* *into* the clipboard...
 think this is X11 stuff - mouse select
 you need to explictly ctrl-c to get things into the clipboard..
 
@@ -80,6 +83,8 @@ overwritten with the PRIMARY selection contents, it's not X11's fault,
 it's usually a clipboard manager at work.
 
 ===xterm
+
+refuse to deal with this shit
 
 xterm : ~/.Xresources:
 xterm*VT100.Translations: #override \
