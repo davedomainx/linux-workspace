@@ -37,8 +37,6 @@ Configure-SMRemoting.exe –Enable
 
 https://everythingsysadmin.wordpress.com/category/server-core/
 
-https://4sysops.com/archives/enable-server-manager-remote-management-for-windows-server-2016-core/
-
 https://gal.vin/2018/04/12/domain-controller-windows-server-core-walkthrough/
 
 https://devops.profitbricks.com/tutorials/install-and-configure-remote-server-administration-tools-on-windows-10/
@@ -118,6 +116,8 @@ Created Admin Account in sconfig
 	In SErver Manager, select server, right click, manage as:
 	DC1\darnold
 	and can now move on
+
+	Try entering blank username/password - clears cached credentials..
 
 	after install, probably need to manage as
 	DAVEDOMAIN\darnold but not working ?
