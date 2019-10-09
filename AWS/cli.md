@@ -31,6 +31,8 @@ aws ec2 describe-images --owners aws-marketplace --filters 'Name=product-code,Va
 aws ec2 describe-images --owners aws-marketplace --filters Name=product-code,Values=aw0evgkw8e5c1q413zgy5pjce --query 'Images[*].[CreationDate,Name,ImageId]' --filters "Name=name,Values=CentOS Linux 7*"  --output table|sort -r
 
 General:
+aws ec2 describe-images --owner self --query 'Images[*].{id:ImageId}' --output text
+
 aws ec2 describe-images --owners self --filters 'Name=name,Values=jenkins-qa-slave-windows-2008*' --query 'Images[*].{Name:Name,ImageId:ImageId}'
 
 aws ec2 describe-images --image-ids ami-3548444c
