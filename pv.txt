@@ -1,1 +1,3 @@
 pv -petrab -s 1G -S < /dev/urandom > outfile
+# doesnt display as expected
+pv -petrab -s 1G -S < //home/darnold/Downloads/CentOS-7-x86_64-DVD-1810.iso > /dev/sda

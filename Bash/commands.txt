@@ -60,3 +60,7 @@ BEG=$(date +%s.%3N)
 ENDX=$(date +%s.%3N)
 runtime=$(python -c "print(${ENDX} - ${BEG})")
 echo $runtime
+
+=====
+find . -type f -mtime +60 -print0 |xargs -r0 ls --
+find . -type f -mtime +60 -print0 |xargs -r0 rm
