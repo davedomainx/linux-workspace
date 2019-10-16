@@ -60,4 +60,5 @@ venv -> lib/python2.7/site-packages/fortiosapi/fortiosapi.py:
 ===
 
 unsecured https not allowed
+fixed - https on fortigate was set to non-443 port
 
