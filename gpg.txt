@@ -1,3 +1,5 @@
+https://www.digitalocean.com/community/tutorials/how-to-use-gpg-to-encrypt-and-sign-messages
+
 [root@share ~]# cat /root/.rpmmacros
 %_signature gpg
 %_gpg_path /root/.gnupg
