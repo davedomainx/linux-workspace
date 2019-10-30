@@ -1,3 +1,5 @@
+https://medium.com/@superseb/get-your-certificate-chain-right-4b117a9c0fce
+
 convert from crt/key to pem:
 openssl x509 -in der -in <cert> -out <cert>_crt.pem -outform PEM
 openssl rsa -in <key> -out <key>_key.pem -outform PEM
