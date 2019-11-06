@@ -1,0 +1,2 @@
+vboxmanage controlvm VM poweroff
+vboxmanage unregistervm VM --delete
