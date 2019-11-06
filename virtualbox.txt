@@ -1,2 +1,5 @@
+vboxmanage import VM.ova
+VBoxManage modifyvm VM --natfp1 "guestssh,tcp,,2222,,22"
+VBoxManage modifyvm VM --natfp1 "guesthttp,tcp,,8080,,8888"
 vboxmanage controlvm VM poweroff
 vboxmanage unregistervm VM --delete
