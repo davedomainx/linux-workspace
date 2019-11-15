@@ -1,3 +1,6 @@
+vboxmanage list vms
+vboxmanage list runningvms
+vboxmanage export VM -o test-export.ova
 vboxmanage import VM.ova
 VBoxManage modifyvm VM --natfp1 "guestssh,tcp,,2222,,22"
 VBoxManage modifyvm VM --natfp1 "guesthttp,tcp,,8080,,8888"
