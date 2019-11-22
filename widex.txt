@@ -1,0 +1,68 @@
+22.November
+===========
+Tried turning off phone, but still getting beeps ...........
+it seems better today though...
+
+21.November
+===========
+Posted to https://forum.hearingtracker.com/t/widex-beyond-330-intermittent-beeping/48847/3
+
+Research suggests that IOS 13 might be a culprit. 
+Seems to be related to MFI bugs
+
+IOS 13 was released September 19...  That is a little later
+than when I think I started to notice the problems...
+
+I manually upgraded to 13.2.3 (wish I kept the previous 
+version somewhere)
+
+Following up to the 'beeping happens on start of audio event'.
+
+It seems to take a while 5, 10, 60 minutes to start beeping when 
+I arrive in the Office....
+
+20.November
+===========
+I have noticed it seems to happen at the start of some audio event,
+eg keyboard activity, mouse click activity, sudden noise
+
+Moving out of the office for a short while, then moving back in 
+seems to help ?
+
+it also happens at home when I have bluetooth speakers hooked up to my
+laptop.
+
+We did get new WAPs
+
+===
+
+Still getting feedback/beeps even after:
+
+. temporary new unit to replace my old unit while it was being refreshed.
+. complete refresh of hearing aid.
+. new mould.
+
+Tried : removing the dell usb receiver and using wired keyboard/mice
+	still happens ..
+
+Tried : disabling bluetooth on my phone
+	still happens ..
+
+====
+
+Hearing aid issues - possibly bluetooth related
+
+Original email sent 6.October
+
+I've been getting a significant amount of what seems to be Bluetooth interference (such as a half-second beep every 5 seconds for 1 minute) with my hearing aid at my work.  The following seems to be relevant factors:
+
+. It only happens in the Work office, not outside in the street or at home or anywhere else really.
+. The beeping/feedback is very intermittent in frequency/duration etc.
+. When I am alone early in the office, the beeping/feedback is almost non-existent.
+. As soon as colleagues arrive at work and start using their computers (and bluetooth mice/keyboard and bluetooth headsets), then the inteference starts.
+. I've tried the following : Removing my own Bluetooth keyboard/Mice.  Turning off Bluetooth on my iphone.
+. I've been trying to correlate my colleagues actions with the feedback/inteference, but nothing obvious is standing out.
+
+If you have any suggestions on what to do or try out I'd be grateful. It's getting to the point where it's becoming more than just an annoyance.
+
+Many thanks - Dave
