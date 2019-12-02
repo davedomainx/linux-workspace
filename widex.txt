@@ -4,8 +4,34 @@ Disabled 2.4Ghz at work
 	first did just the 3 near my office
 	then did the remaining 2
 	nmcli dev wifi
-still getting beeping ...
+still getting beeping (old receiver )...
 
+swapped over to fusion AS (new receiver)
+	beeping is _much_ worse!? 
+
+had a look at the new receiver - it is broadly bigger
+than the old aid, but it seems to be narrower towards
+the tip.  NOt sure of that makes a big enough difference ?
+
+Tried swapping old receiver into fusion AS
+	no difference, still bad beeping
+
+In Wifi Virtual Controller, tried setting:
+RF : Radio : ARM/WIDS Override to 'Off' from 'dynamic'
+	no difference still bad beeping
+
+In Wifi Virtual Controller, tried setting:
+RF : ARM : Band steering mode 'Force 5Ghz' from 'Prefer 5Ghz'
+	no difference, still bad beeping
+
+Tried setting iphone to airplane mode.
+Tried turning off wifi on Dell XPS15.
+
+     hm, that improved it.
+     or is it the "change something, it works okay for 5mins,
+	then goes back to fucking up what it was"
+
+     then goes back to what it was..
 
 22.November
 ===========
