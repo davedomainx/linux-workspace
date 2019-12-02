@@ -1,3 +1,12 @@
+2.December
+===========
+Disabled 2.4Ghz at work
+	first did just the 3 near my office
+	then did the remaining 2
+	nmcli dev wifi
+still getting beeping ...
+
+
 22.November
 ===========
 Tried turning off phone, but still getting beeps ...........
