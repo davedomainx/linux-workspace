@@ -67,3 +67,8 @@ aws ssm start-automation-execution --document-name "ManageRDPSettings" --paramet
 == acm ==
 
 aws acm describe-certificate --certificate xxx
+
+== s3 ==
+
+aws s3api list-buckets
+aws s3 ls
