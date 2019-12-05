@@ -1,3 +1,85 @@
+. The beeping seems to get progressively worse during the course of a day.
+. I can make the beeping go away temporarily by leaving my desk.
+. It's beeping at the start of a sound/audio event (typing, mechanical sounds)
+. The beeping is virtually non-existent outside of the Office.
+
+5.December
+==========
+
+Beyond 330, new receiver
+0920 : Arrive to empty office, no coworkers
+
+0925 : 10 beeps in 1 minute (bad)
+
+0926 : Switch to Beyond 330, old receiver
+	( I feel the quality of hearing is better on old receiver )
+0949 : no beeps since
+0956 : 3 beeps, dead silent office
+1000-1230 : No noticable beeps
+1400 : Returned to Office
+1418 : no beeps since 1400
+1700 : quiet day
+
+4.December
+==========
+
+Beyond 330, old receiver
+
+0815 : Arrive to empty Office, no coworkers
+2.4Ghz is turned off on the WAPs
+Wifi +Bluetooth are turned off on the Laptop ..
+
+nmcli dev wifi # confirm off
+sudo systemctl disable bluetooth --now
+sudo systemctl status bluetooth
+
+It gradually gets worse throughout the day ..
+
+1030 : Office still empty, seems like beeping is starting
+to pick up a little ..
+
+======================================
+
+1035 : Switch to Fusion + Old Receiver
+
+1040 : starts beeping more frequently
+	it's picking up typing/mechanical sounds and beeping ..
+
+1043 : try Fusion + old receiver
+	beeps immediately ...
+1100 : I was away from desk for a few minutes, beeping stops
+1101 : back at desk, beeping starts up ......
+	
+1115 : away from desk for 5 minutes, beeping stops
+	back at desk, beeping starts almost immediately (typing)
+
+1120 : 2 coworkers are now in office, doing office things
+
+1120 : I powered off an old PC at my desk to see if it 
+
+======================================
+
+1120 : Switch to Beyond 330 + New Receiver
+
+1130 : no beeps
+1131 : one beep
+1137 : no beeps
+1139 : one beep
+1140 : two beeps
+1202 : no beeps 
+1211 : 3,4,5,8 beeps
+	no sound events at all (quiet office), but still getting beeping
+1215 : no beeps since 1211
+1216 : one beep
+1217-1257 : unnoticeable
+1258 : 4-5 beeps over a minute (quiet office)
+
+1300-1400 : lunch.  no beeps
+1400-1415 : no beeps, active office (coworkers talking, typing etc)
+1427 : 5 beeps, audio events (typing, coworkers talking)
+
+======================================
+
 2.December
 ===========
 Disabled 2.4Ghz at work
@@ -24,6 +106,7 @@ In Wifi Virtual Controller, tried setting:
 RF : ARM : Band steering mode 'Force 5Ghz' from 'Prefer 5Ghz'
 	no difference, still bad beeping
 
+@1415:
 Tried setting iphone to airplane mode.
 Tried turning off wifi on Dell XPS15.
 
@@ -32,6 +115,10 @@ Tried turning off wifi on Dell XPS15.
 	then goes back to fucking up what it was"
 
      then goes back to what it was..
+
+@1445:
+Turned off airplane mode on iphone (now normal mode)
+Left wifi turned off
 
 22.November
 ===========
