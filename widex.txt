@@ -3,7 +3,21 @@
 . It's beeping at the start of a sound/audio event (typing, mechanical sounds)
 . The beeping is virtually non-existent outside of the Office.
 
-5.December
+9.December (Colleague N. is in office)
+=========
+Beyond 330, old receiver
+2.4Ghz wifi is turned off
+
+Arrive Office 1030
+1055 : 3-4 beeps
+1100 : reboot laptop to finish installing system updates
+1110 : no beeps since
+1120-1125 : left office 5 minutes
+1145 : one beep
+1221 : two beeps
+1239 : 4-5 beeps (dead quiet office)
+
+5.December (colleage N. not in office)
 ==========
 
 Beyond 330, new receiver
@@ -24,9 +38,9 @@ Beyond 330, new receiver
 ==========
 
 Beyond 330, old receiver
+2.4Ghz is turned off on the WAPs
 
 0815 : Arrive to empty Office, no coworkers
-2.4Ghz is turned off on the WAPs
 Wifi +Bluetooth are turned off on the Laptop ..
 
 nmcli dev wifi # confirm off
