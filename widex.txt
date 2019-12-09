@@ -1,30 +1,50 @@
-. The beeping seems to get progressively worse during the course of a day.
-. I can make the beeping go away temporarily by leaving my desk.
+. I've had better results at work from 5.December onwards with the following combination:
+	. Old HA (Widex Beyond 330 + Old Receiver)
+	. Turning off wifi+bluetooth on my work-laptop
+. For some reason, the beeping is much worse with the temporary Fusion HA ?!
+. In general, the beeping seems to get worse during the course of a day.
+. The beeping goes away if I leave my desk.
 . It's beeping at the start of a sound/audio event (typing, mechanical sounds)
 . The beeping is virtually non-existent outside of the Office.
 
 9.December (Colleague N. is in office)
 =========
-Beyond 330, old receiver
-2.4Ghz wifi is turned off
+Beyond 330, old receiver.
+2.4Ghz wifi is turned off at work.
+wifi+bluetooth turned off on the work-laptop.
 
 Arrive Office 1030
 1055 : 3-4 beeps
-1100 : reboot laptop to finish installing system updates
+1100 : reboot work-laptop to finish installing system updates
 1110 : no beeps since
 1120-1125 : left office 5 minutes
 1145 : one beep
 1221 : two beeps
 1239 : 4-5 beeps (dead quiet office)
+1345 : Lunch
+1430 : Returned to Office, 2 colleagues on Bluetooth headsets making 
+	calls all day.
 
-5.December (colleage N. not in office)
+1620 : Switched to Fusion + Old Receiver (for testing)
+1621 : 2 beeps
+	. strange audio performance, sounds weird
+	. turned HA off/on
+	. volume went off 
+1624 : changed battery
+1626 : 5 beeps
+1627 : 3 beeps
+1635 : 5 beeps
+1642 : 4 beeps
+1645-1700 : 5 or so beeps every minute
+
+5.December (colleague N. not in office)
 ==========
-
 Beyond 330, new receiver
+2.4Ghz wifi is turned off at Work
+wifi+bluetooth turned off on the work-laptop.
+
 0920 : Arrive to empty office, no coworkers
-
 0925 : 10 beeps in 1 minute (bad)
-
 0926 : Switch to Beyond 330, old receiver
 	( I feel the quality of hearing is better on old receiver )
 0949 : no beeps since
@@ -38,40 +58,28 @@ Beyond 330, new receiver
 ==========
 
 Beyond 330, old receiver
-2.4Ghz is turned off on the WAPs
+2.4Ghz wifi is turned off at Work
 
 0815 : Arrive to empty Office, no coworkers
-Wifi +Bluetooth are turned off on the Laptop ..
 
+Confirm that Wifi +Bluetooth are turned off on the Laptop ..
 nmcli dev wifi # confirm off
 sudo systemctl disable bluetooth --now
 sudo systemctl status bluetooth
 
-It gradually gets worse throughout the day ..
-
 1030 : Office still empty, seems like beeping is starting
 to pick up a little ..
 
-======================================
-
 1035 : Switch to Fusion + Old Receiver
-
 1040 : starts beeping more frequently
 	it's picking up typing/mechanical sounds and beeping ..
 
-1043 : try Fusion + old receiver
-	beeps immediately ...
 1100 : I was away from desk for a few minutes, beeping stops
 1101 : back at desk, beeping starts up ......
-	
 1115 : away from desk for 5 minutes, beeping stops
 	back at desk, beeping starts almost immediately (typing)
-
 1120 : 2 coworkers are now in office, doing office things
-
-1120 : I powered off an old PC at my desk to see if it 
-
-======================================
+1120 : I powered off an old PC at my desk to see if it helps (it didnt)
 
 1120 : Switch to Beyond 330 + New Receiver
 
@@ -88,11 +96,9 @@ to pick up a little ..
 1217-1257 : unnoticeable
 1258 : 4-5 beeps over a minute (quiet office)
 
-1300-1400 : lunch.  no beeps
+1300-1400 : lunch.
 1400-1415 : no beeps, active office (coworkers talking, typing etc)
 1427 : 5 beeps, audio events (typing, coworkers talking)
-
-======================================
 
 2.December
 ===========
