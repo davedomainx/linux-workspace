@@ -6,6 +6,78 @@
 . The beeping goes away if I leave my desk.
 . It's beeping at the start of a sound/audio event (typing, mechanical sounds)
 . The beeping is virtually non-existent outside of the Office.
+. I don't know if work Colleague N. has anything to do with the beeping
+. The beeps are different in tone/type of sound
+
+12.December
+===========
+Beyond 330, new receiver.
+2.4Ghz wifi is turned off at work.
+wifi+bluetooth turned off on the work-laptop.
+
+0855 : Arrive completely empty Office.
+0859 : 5 beeps (Bad).
+0910 : Switch back to old receiver. 10 beeps
+	left desk
+0911 : Returned to desk
+
+11.December
+===========
+Beyond 330, old receiver.
+2.4Ghz wifi is turned off at work.
+wifi+bluetooth turned off on the work-laptop.
+
+0900 : Arrive completely empty Office
+0908 : 1 beep
+0914 : 4 beeps
+	turned HA off/on
+0918 : 1 beep
+	
+0920 : switched to Fusion + New Receiver
+
+0922 : Beeping reguarly, every 5-10 seconds
+0924 : Turned iphone to Airplane mode
+0931 : Beeping reguarly, every 5-10 seconds
+0933 : Beeping reguarly, every 5-10 seconds
+
+0934 : switched to Fusion + Old Receiver
+
+0937 : 3 beeps
+0938 : 2 beeps
+0947 : 10 beeps
+0948 : 5 beeps
+
+0950 : Switched back to Beyond 330 + New Receiver
+Turned iphone back on.
+
+1028 : 1 beep
+	colleagues are now in office, bluetooth headsets
+1053 : 1 beep
+1330 : 1 beep (empty office)
+1331 : 1 beep (empty office)
+1450 : Return to Office
+1700 : No beeps in 2+ hours
+
+10.December
+===========
+Beyond 330, old receiver.
+2.4Ghz wifi is turned off at work.
+wifi+bluetooth turned off on the work-laptop.
+
+0900 : Arrive completely empty Office
+0921 : 2 beeps
+0933 : 2 beeps
+1000 : Colleague N. arrives Office
+1033 : 1 beep
+1049 : 2 beeps
+1110 : 1 beep
+1113 : 2 beep
+	switched HA off/on
+1114 : beep, different noise-level
+1135 : left office
+1142 : back at desk
+1341 : No beeps for 2+ hours ..
+1345 : 2 beeps
 
 9.December (Colleague N. is in office)
 =========
@@ -13,7 +85,7 @@ Beyond 330, old receiver.
 2.4Ghz wifi is turned off at work.
 wifi+bluetooth turned off on the work-laptop.
 
-Arrive Office 1030
+1030 : Arrive Office
 1055 : 3-4 beeps
 1100 : reboot work-laptop to finish installing system updates
 1110 : no beeps since
