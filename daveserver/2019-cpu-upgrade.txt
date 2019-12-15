@@ -1,0 +1,74 @@
+Glacially slow when running windows VMs.
+I cheaped out when I specced the server in 2016, need to upgrade.
+
+currently has 2 core 2 processors Intel Celeron G4400T
+
+http://www.cpu-world.com/Sockets/Socket_1151_H4_LGA1151.html
+
+System Information
+Manufacturer: Supermicro
+Product Name: X11SSL-CF
+Serial Number : VM15CS023044
+
+LGA 1151 Socket
+this socket was revised with coffee lake processors and introduced with the 300 chipsets.
+
+So any Kaby lake proc should work on the X11SSL-CF
+it is coffee lake have to be careful of.
+
+The X11SSL-CF should support all Kaby Lake based CPU’s (like the E3-V6) with BIOS version 2.0+.
+
+xeon e3 1240 looks like sweet spot
+1230 v6 looks best
+https://www.servethehome.com/intel-xeon-e3-1240-v6-linux-benchmarks-review-first-kaby-lake-xeon-e3-cpu/
+
+i7-8700 on ark.intel.com has a FCLGA1151 socket, which is apparently the same thing as LGA1151
+
+https://linustechtips.com/main/topic/847993-lga1151-vs-fclga1151/
+
+Hmm seems to be divided into
+skylake 100 series chipsets
+kaby lake 200 series chipsets
+coffee lake 300 series chipsets
+
+z170 vs 236 chipset
+
+https://www.tomshardware.com/news/intel-c232-c236-chipsets-xeon,31051.html
+
+do I actually have a 232 or 236 chipset?  232 didnt have virtualisation support ?
+
+===
+bios upgrade worked as expected.
+subsequent boots timing out at centos boot
+dev-mapper-centos\x2droot.device
+not sure if it's finding the SSDs..
+it seems to be rebooting during POST
+
+prolly need to turn on sthg in BIOS
+SATA - hard drives - the SSDs were set at hard drive (not SSD)
+
+SSDs were not found in the boot disk select screen
+hmm if it cant find the ssds how is it booting to centos ? (MBR on the raid1 SSD..)
+
+try power on device ssd in bios SATA.
+
+try cold power on.
+
+then try sata mode raid (was AHCI).
+
+meh it wasnt the boot order was it..
+the ssds were in the bios boot select screen but no longer ..
+
+okay the SSDs are now in bios advanced as Intel RSTE raid devices
+the 4x hard drives also in bios advanced as LSI SAS
+
+bingo - saw the SSD info screen (ctrl i)
+also "intel SSDs" is now a bios boot override option (but not bios boot ..)
+think it was these 2:
+sata mode selection : RAID
+sata raid option option rom/uefi driver : legacy rom
+
+and possibly also:
+pci/pce -> onboard sas option rom : legacy
+
+still boot looping ?
