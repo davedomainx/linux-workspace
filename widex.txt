@@ -9,6 +9,16 @@
 . I don't know if work Colleague N. has anything to do with the beeping
 . The beeps are different in tone/type of sound
 
+13.December
+==========
+
+0956 : 8 beeps
+1448-1450 : constant beeps every 5 seconds
+1500 : left desk
+1509-1510 : back at desk, constant beeping
+1512 : move away from desk, beeping stops
+1518 : back at desk, no beeping so far
+
 12.December
 ===========
 Beyond 330, new receiver.
@@ -20,6 +30,13 @@ wifi+bluetooth turned off on the work-laptop.
 0910 : Switch back to old receiver. 10 beeps
 	left desk
 0911 : Returned to desk
+0926 : Colleagues in Office, 10 beeps
+	left desk, turned HA off, turned HA on, returned to desk
+0930 : 8 beeps
+0933 : 5 beeps
+1000 : Ongoing intermittent beeping (10+ mins)
+	rebooted laptop to see if it would help (no)
+1350-1400 : Ongoing intermittent beeping (10+ mins)
 
 11.December
 ===========
