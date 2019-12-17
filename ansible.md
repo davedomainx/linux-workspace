@@ -64,6 +64,8 @@ ansible all -m setup -i inventory -u username -a "filter=*distribution"
 
 ansible -m ping all -vvv -i ./inventory -u username
 
+ansible all -m setup -i inventory -u username --tree /tmp/factsx
+
 === initial bootstrap config
 # need to connect first to remote device to do initial bootstrap config
 ansible -i inventory  -m ping all -u admin --ask-pass
