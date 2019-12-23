@@ -9,6 +9,23 @@
 . I don't know if work Colleague N. has anything to do with the beeping
 . The beeps are different in tone/type of sound
 
+23.December
+===========
+Beyond 330, old receiver.
+2.4Ghz wifi is turned off at work.
+wifi+bluetooth turned off on the work-laptop.
+"Universal" program on HA
+
+0845 - arrive to empty office
+0846 - 2 beeps
+	switched to "Work" program
+
+19.December
+===========
+. Audiologist John created new program "work" and adjusted all IG soft
+volumes down by 1.
+. Seemed to work when I was at work - no beeps
+
 13.December
 ==========
 
