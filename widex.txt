@@ -19,6 +19,9 @@ wifi+bluetooth turned off on the work-laptop.
 0845 - arrive to empty office
 0846 - 2 beeps
 	switched to "Work" program
+	no beeps since
+1250 - back at Office, "Universal" program, 2 beeps
+	switched to "Work" program
 
 19.December
 ===========
