@@ -1,7 +1,13 @@
+Run these when installing a new plugin
+:source %
+:PluginInstall
+
 :CocConfig
 :verbose imap
 
 ==
+Install puppet-language syntax support in vim
+
 https://voxpupuli.org/blog/2019/04/08/puppet-lsp-vim/
 ==
 
