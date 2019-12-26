@@ -15,3 +15,9 @@ gpg --import secring.gpg
 gpg --list-keys
 gpg --list-secret-keys
 createrepo --update < path_to_repo >
+
+====
+jenkins - gpg sign sudoe'd through a different user (buildme) - sudoers file
+
+jenkins ALL=(buildme) NOPASSWD: /usr/bin/gpg --batch --yes --no-tty --detach-sig --armor *, /usr/bin/gpg --list-keys, /usr/bin/id
+Defaults:jenkins !requiretty

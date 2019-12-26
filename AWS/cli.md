@@ -67,3 +67,10 @@ aws ssm start-automation-execution --document-name "ManageRDPSettings" --paramet
 == acm ==
 
 aws acm describe-certificate --certificate xxx
+
+== s3 ==
+
+aws s3api list-buckets
+aws s3 ls
+time aws s3 rm s3://bucket_name --dryrun --recursive --exclude "*" --include "Oct24-accesslogging2018-10-25*"
+
