@@ -1,0 +1,9 @@
+https://www.tecmint.com/upgrade-centos-7-to-centos-8/
+
+epel-release & yum-utils # already installed
+yum install rpmconf
+rpmconf -a
+package-cleanup --leaves
+package-cleanup --orphans
+yum install dnf
+dnf -y remove yum yum-metadata-parser
