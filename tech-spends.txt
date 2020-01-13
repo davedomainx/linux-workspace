@@ -1,0 +1,32 @@
+2015: 	
+	Asus Zenbook : 1333 EUD
+
+2016:
+	fritzbox 7490 : 199 EUD
+	daveserver:
+		case : 99 EUD
+		2x SSDs : 170 EUD
+		G4400 : 66 EUD
+		4x 3TB : 502 EUD
+		PSU : 70 EUD
+		Cables/accessories : 50 EUD
+	rpi3 : 40 EUD
+	nikon camera : 410 EUD
+
+2018: 
+	iphone XS 64GB : 768 EUD
+	beelink x55 8G 128G Intel HD605 Graphics : 220 EUD
+	mouse : 88 EUD
+	keyboard : 90 EUD
+
+2019: 
+	4k monitor : 295 EUD
+	VESA monitor : 100 EUD
+	VESA mount : 50 EUD
+	rpi4 : 70 EUD
+	daveserver upgrades:
+		1230 V6 : 282 EUD
+		
+2020: 
+	ipad air 2019 256GB space grey : 712 EUD
+
