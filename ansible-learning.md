@@ -1,5 +1,17 @@
 ansible itvm -m setup -i inventory
 
+ansible_user in inventory file, not 'user'
+
+copy module files to toplevel "modules/" directory
+--module_path=./modules
+
+iptables_raw: 
+# Open TCP port 22, but insert it before port 80 (default weight is 40)
+- iptables_raw:
+    name: allow_tcp_22
+    rules: '-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT'
+    weight: 35
+
 Note very strange behaviour with command/shell + grep
 	need register, ignore_errors: yes, and failed_when ..
 
