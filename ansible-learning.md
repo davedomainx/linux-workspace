@@ -2,8 +2,21 @@ ansible itvm -m setup -i inventory
 
 ansible_user in inventory file, not 'user'
 
-copy module files to toplevel "modules/" directory
+- name: Include Main Firewall playbook
+  include: roles/firewall/tasks/main.yml
+
+If you ever get the below error with iptables_raw,
+then it cannot find/locate the playbook and/or the
+iptables_raw.py file ...
+
+
+
+copy module files to toplevel "library/" directory
+-or-
+specify following option, but doesnt seem to work reliably..
 --module_path=./modules
+
+ansible -m debug -a 'msg={{ lookup("config", "DEFAULT_MODULE_PATH")}}' localhost
 
 iptables_raw: 
 # Open TCP port 22, but insert it before port 80 (default weight is 40)
