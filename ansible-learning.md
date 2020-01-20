@@ -1,4 +1,13 @@
+https://sites.google.com/site/mrxpalmeiras/ansible/ansible-cheat-sheet?tmpl=%2Fsystem%2Fapp%2Ftemplates%2Fprint%2F&showPrintDialog=1
+
 ansible itvm -m setup -i inventory
+
+ansible -m ping -i inventory somehostgroup --private-key=~/.ssh/xxx -u yyy
+
+# dump remote facts into /tmp/remotefacts/<hostname>
+ansible -i inventory -m setup --tree /tmp/remotefacts/
+
+facter ansible module ( no easy way to tell if machine is physical/virtual .. )
 
 ansible_user in inventory file, not 'user'
 
