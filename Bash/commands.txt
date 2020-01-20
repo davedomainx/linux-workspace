@@ -64,3 +64,6 @@ echo $runtime
 =====
 find . -type f -mtime +60 -print0 |xargs -r0 ls --
 find . -type f -mtime +60 -print0 |xargs -r0 rm
+
+===
+nmon - good system overview tool
