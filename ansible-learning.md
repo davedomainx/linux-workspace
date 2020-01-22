@@ -1,5 +1,9 @@
 https://sites.google.com/site/mrxpalmeiras/ansible/ansible-cheat-sheet?tmpl=%2Fsystem%2Fapp%2Ftemplates%2Fprint%2F&showPrintDialog=1
 
+https://www.digitalocean.com/community/cheatsheets/how-to-use-ansible-cheat-sheet-guide
+
+ansible all -a "uname -a" -i ./inventory
+
 ansible itvm -m setup -i inventory
 
 ansible -m ping -i inventory somehostgroup --private-key=~/.ssh/xxx -u yyy
@@ -63,3 +67,12 @@ https://medium.com/design-and-tech-co/end-to-end-automated-environment-with-vagr
 +     - "{{ item in ansible_facts.services }}"
 +     - "ansible_facts.services.{{ item }}.state == 'running'"
 
+==
+Looks like need to cast variables to get expected behaviour
+
+- name: Copy epel-7 repo file
+    copy:                   
+      src: files/epel-7.orig                                                     
+      dest: /etc/yum.repos.d/epel.repo                                           
+~   when: refresh_epel_repos.changed|bool == True and ansible_distribution_major_version|int ==   7
++   notify: yum-clean-all                                                             
