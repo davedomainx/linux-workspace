@@ -15,3 +15,8 @@ rsync --rsh="trickle -s -d 20000 -u 20000 -t 4 -l 10 ssh" --progress --stats --b
 
 preserve root permissions:
 sudo rsync -aP --rsync-path "sudo rsync" --bwlimit=20000 source destination/
+
+rsync clean out dest, mirror and then nuke source (leaving directory structure)
+# 1-Delete files in dest not in source
+# 2-Delete source after successful xfer
+rsync -aP --progress --delete --remove-source-files CentOS-8.1.1911 /var/storage/rpm/isos
