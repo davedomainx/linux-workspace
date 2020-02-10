@@ -1,3 +1,12 @@
+=== 
+fixed in two ways:
+ - the beeping went away by itself
+ - new program 'Office' to reduce the soft-ambient noise
+
+7.Feb : beeping came back
+  working in server room on solaris servers ...
+  hair-driers installed in bathrooms ...
+
 . I've had better results at work from 5.December onwards with the following combination:
 	. Old HA (Widex Beyond 330 + Old Receiver)
 	. Turning off wifi+bluetooth on my work-laptop
