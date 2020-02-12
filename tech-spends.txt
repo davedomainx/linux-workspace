@@ -24,6 +24,7 @@
 	VESA monitor : 100 EUD
 	VESA mount : 50 EUD
 	rpi4 : 70 EUD
+	mini hdmi : 30
 	daveserver upgrades:
 		1230 V6 : 282 EUD
 		
