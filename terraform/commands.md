@@ -18,3 +18,6 @@ Although Transit Gateway in AWS is under 'VPC', all the code/docco/cli has
 aws ec2 describe-transit-gateway-attachments
 
 # terraform will not destroy resources it does not explictly manage
+
+# Route table creation timeout issues..
+https://www.reddit.com/r/Terraform/comments/cqm9kn/adding_multiple_routes_to_route_table/
