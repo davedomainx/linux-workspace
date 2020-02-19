@@ -1,1 +1,12 @@
 https://programmaticponderings.com/tag/packer/
+
+Automated DevOps Environment
+
+. building
+. testing
+. packaging
+. deploying
+
+What exactly is spinnaker ?
+What solution is spinnaker trying to solve ?
+How does spinnaker fit into our org ?
