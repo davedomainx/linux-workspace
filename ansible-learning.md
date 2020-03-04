@@ -76,3 +76,10 @@ Looks like need to cast variables to get expected behaviour
       dest: /etc/yum.repos.d/epel.repo                                           
 ~   when: refresh_epel_repos.changed|bool == True and ansible_distribution_major_version|int ==   7
 +   notify: yum-clean-all                                                             
+
+=
+template/j2 variable issues - try to keep conditionals as simple as possible ..
+{% if ansible_distribution_release == "bionic" %}
+  # Required for successful 18.04 TLS connection
+  ldap_tls_reqcert = never
+  ldap_tls_cacert= /etc/ssl/certs/local-ca.crt
