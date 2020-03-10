@@ -74,3 +74,8 @@ aws s3api list-buckets
 aws s3 ls
 time aws s3 rm s3://bucket_name --dryrun --recursive --exclude "*" --include "Oct24-accesslogging2018-10-25*"
 
+== Security Groups ==
+
+aws ec2 describe-security-groups --filters Name=vpc-id,Values=vpc-xxxx --query "SecurityGroups[*].{Name:GroupName,Group:GroupId,Desc:Description}"
+
+aws ec2 revoke-security-group-ingress --group-id sg-a09689c7 --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 0, "ToPort": 65535, "UserIdGroupPairs": [{"GroupId": "sg-b6038dd3","UserId": "XXXXX"}]}]'
