@@ -76,6 +76,82 @@ time aws s3 rm s3://bucket_name --dryrun --recursive --exclude "*" --include "Oc
 
 == Security Groups ==
 
+# revoking those awful nested secgroups ..
+
+aws ec2 delete-security-group --group-id=sg-a09689c7
+
+An error occurred (DependencyViolation) when calling the DeleteSecurityGroup operation: resource sg-a09689c7 has a dependent object
+
+> aws ec2 describe-security-groups --group-id=sg-a09689c7
+{
+    "SecurityGroups": [
+        {
+            "Description": "web-services-elasticache",
+            "GroupName": "web-services-elasticache",
+            "IpPermissions": [],
+            "OwnerId": "XXX",
+            "GroupId": "sg-a09689c7",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "web-services-elasticache"
+                }
+            ],
+            "VpcId": "vpc-xxxx"
+        }
+    ]
+}
+
+
+# delete ingress and egress entries
+aws ec2 revoke-security-group-ingress --group-id sg-a09689c7 --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 0, "ToPort": 65535, "UserIdGroupPairs": [{"GroupId": "sg-b6038dd3","UserId": "XXXXX"}]}]'
+
+ aws ec2 revoke-security-group-egress --group-id sg-a09689c7 --ip-permissions '[{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}]}]'
+
+> aws ec2 describe-security-groups --group-id=sg-a09689c7
+{
+    "SecurityGroups": [
+        {
+            "Description": "web-services-elasticache",
+            "GroupName": "web-services-elasticache",
+            "IpPermissions": [],
+            "OwnerId": "379066572991",
+            "GroupId": "sg-a09689c7",
+            "IpPermissionsEgress": [],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "web-services-elasticache"
+                }
+            ],
+            "VpcId": "vpc-99f836fc"
+        }
+    ]
+}
+
+Turns out there was an elasticache interface with the SecurityGroupsaattached.  Deleting the elasticache cluster and then deleting
+the security group works now:
+
 aws ec2 describe-security-groups --filters Name=vpc-id,Values=vpc-xxxx --query "SecurityGroups[*].{Name:GroupName,Group:GroupId,Desc:Description}"
 
-aws ec2 revoke-security-group-ingress --group-id sg-a09689c7 --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 0, "ToPort": 65535, "UserIdGroupPairs": [{"GroupId": "sg-b6038dd3","UserId": "XXXXX"}]}]'
+== rds ==
+
+aws rds modify-db-instance --no-deletion-protection --db-instance-identifier <db-name>
+
+aws rds delete-db-instance --db-instance-identifier <db-name> --final-db-snapshot-identifier <db-name>-last
+
+# this seems to fail if a snapshot is actively being generated ..
+aws rds describe-db-snapshots --query="reverse(sort_by(DBSnapshots, &SnapshotCreateTime))"
