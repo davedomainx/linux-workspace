@@ -1,1 +1,9 @@
 watch -n 2 ss -napet '( sport = :8080 or sport = :8443 )'
+ss src :22
+
+# on client
+openssl s_client -connect hostname:636 -showcerts
+# on ldapserver
+ss src :636
+< connection from client should be displayed >
+
