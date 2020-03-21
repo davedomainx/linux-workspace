@@ -14,20 +14,21 @@ dnf upgrade
 dnf -y upgrade http://mirror.bytemark.co.uk/centos/8/BaseOS/x86_64/os/Packages/centos-release-8.0-0.1905.0.9.el8.x86_64.rpm
 dnf -y upgrade https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
-# didnt work, kernel is protected
+# didnt work, kernel is protected, 
 
-# 
 dload C8 ISO
-Attach to 192.168.1.2 - Remote Console - Console Redirection.  Plug it in.
+Attach ISO to 192.168.1.2 - Remote Console - Console Redirection - Plug it in.
 F11 - boot - ATEN CD
 Install as per normal
 Del - show only UEFI devices - move Intel Boot to bottom - Centos 8 to top - save and exit
 Boots normally
 
-Install ZFS 0.8.2, no issues, but see /data/backups/dec2019/zpool* for status of the dying HDD ..
+Install ZFS 0.8.2, no issues, but see /data/backups/dec2019/zpool* for status of the dying HDD .. probably initated by the ZFS scrub I did in mid-Dec 2019
 
 beelink: /etc/systemd/system/home.mount
 systemctl restart home.mount
 
 Eir router - changed daveserver static IP maps, 
 rebooted daveserver + rebooted beelink - all good
+
+==
