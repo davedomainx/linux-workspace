@@ -1,6 +1,12 @@
 #!/bin/bash
 iatest=$(expr index "$-" i)
 
+source $HOME/.ssh/ssh-find-agent.sh
+set_ssh_agent_socket
+
+/usr/bin/ssh-add -l >> /dev/null 2>&1 
+[ $? -eq 1 ] && /usr/bin/ssh-add && /usr/bin/ssh-add ~/.ssh/id_openssh
+
 #######################################################
 # SOURCED ALIAS'S AND SCRIPTS BY zachbrowne.me
 #######################################################
@@ -59,8 +65,15 @@ alias snano='sedit'
 # To have colors for ls and all grep commands such as grep, egrep and zgrep
 export CLICOLOR=1
 export LS_COLORS='no=00:fi=00:di=00;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:*.xml=00;31:'
-#export GREP_OPTIONS='--color=auto' #deprecated
-alias grep="/usr/bin/grep $GREP_OPTIONS"
+#alias grep="/usr/bin/grep $GREP_OPTIONS"
+# print filename and line number
+#alias grep="grep -iIHrn --color=always"
+# w = exact word match
+alias grepw="grep -iIHrnw --color=always"
+# v = negate
+alias grepv="grep -iIHrv --color=always"
+# c = count
+alias grepc="grep -iIHrc --color=always"
 unset GREP_OPTIONS
 
 # Color for manpages in less makes manpages a little easier to read
@@ -97,8 +110,12 @@ alias web='cd /var/www/html'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# special sudo command to evaluate aliases before invoking sudo itself
+alias sudo='sudo '
+alias dmesg='dmesg -T'
 alias gpgr='gpg -d ~/IT/Security/Credentials/readme.txt.gpg'
 alias gpgp='gpg -o ~/IT/Security/Credentials/setup_packer.sh -d ~/IT/Security/Credentials/setup_packer.sh.gpg'
+
 
 # Edit this .bashrc file
 alias ebrc='edit ~/.bashrc'
@@ -132,9 +149,6 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-
-# cd into the old directory
-alias bd='cd "$OLDPWD"'
 
 # Remove a directory and all files
 alias rmd='/bin/rm  --recursive --force --verbose '
@@ -209,40 +223,9 @@ alias ungz='tar -xvzf'
 # Show all logs in /var/log
 alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
 
-# SHA1
-alias sha1='openssl sha1'
-
 #######################################################
 # SPECIAL FUNCTIONS
 #######################################################
-
-# Use the best version of pico installed
-edit ()
-{
-	if [ "$(type -t jpico)" = "file" ]; then
-		# Use JOE text editor http://joe-editor.sourceforge.net/
-		jpico -nonotice -linums -nobackups "$@"
-	elif [ "$(type -t nano)" = "file" ]; then
-		nano -c "$@"
-	elif [ "$(type -t pico)" = "file" ]; then
-		pico "$@"
-	else
-		vim "$@"
-	fi
-}
-sedit ()
-{
-	if [ "$(type -t jpico)" = "file" ]; then
-		# Use JOE text editor http://joe-editor.sourceforge.net/
-		sudo jpico -nonotice -linums -nobackups "$@"
-	elif [ "$(type -t nano)" = "file" ]; then
-		sudo nano -c "$@"
-	elif [ "$(type -t pico)" = "file" ]; then
-		sudo pico "$@"
-	else
-		sudo vim "$@"
-	fi
-}
 
 # Extracts any archive(s) (if unp isn't installed)
 extract () {
@@ -279,27 +262,6 @@ ftext ()
 	# optional: -F treat search term as a literal, not a regular expression
 	# optional: -l only print filenames and not the matching lines ex. grep -irl "$1" *
 	grep -iIHrn --color=always "$1" . | less -r
-}
-
-# Copy file with a progress bar
-cpp()
-{
-	set -e
-	strace -q -ewrite cp -- "${1}" "${2}" 2>&1 \
-	| awk '{
-	count += $NF
-	if (count % 10 == 0) {
-		percent = count / total_size * 100
-		printf "%3d%% [", percent
-		for (i=0;i<=percent;i++)
-			printf "="
-			printf ">"
-			for (i=percent;i<100;i++)
-				printf " "
-				printf "]\r"
-			}
-		}
-	END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
 }
 
 # Copy and go to the directory
@@ -468,13 +430,13 @@ install_bashrc_support ()
 netinfo ()
 {
 	echo "--------------- Network Information ---------------"
-	/sbin/ifconfig | awk /'inet addr/ {print $2}'
+	/usr/sbin/ip | awk /'inet addr/ {print $2}'
 	echo ""
-	/sbin/ifconfig | awk /'Bcast/ {print $3}'
+	/usr/sbin/ip | awk /'Bcast/ {print $3}'
 	echo ""
-	/sbin/ifconfig | awk /'inet addr/ {print $4}'
+	/usr/sbin/ip | awk /'inet addr/ {print $4}'
 
-	/sbin/ifconfig | awk /'HWaddr/ {print $4,$5}'
+	/usr/sbin/ip | awk /'HWaddr/ {print $4,$5}'
 	echo "---------------------------------------------------"
 }
 
@@ -483,10 +445,10 @@ alias whatismyip="whatsmyip"
 function whatsmyip ()
 {
 	# Dumps a list of all IP addresses for every device
-	# /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }' |awk -F: '{ print $1 ": " $3 }';
+	# /sbin/ip |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }' |awk -F: '{ print $1 ": " $3 }';
 
 	# Internal IP Lookup
-	echo -n "Internal IP: " ; /sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}'
+	echo -n "Internal IP: " ; /usr/sbin/ip eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}'
 
 	# External IP Lookup
 	echo -n "External IP: " ; wget http://smart-ip.net/myip -O - -q
@@ -558,15 +520,6 @@ mysqlconfig ()
 	fi
 }
 
-# For some reason, rot13 pops up everywhere
-rot13 () {
-	if [ $# -eq 0 ]; then
-		tr '[a-m][n-z][A-M][N-Z]' '[n-z][a-m][N-Z][A-M]'
-	else
-		echo $* | tr '[a-m][n-z][A-M][N-Z]' '[n-z][a-m][N-Z][A-M]'
-	fi
-}
-
 # Trim leading and trailing spaces (for scripts)
 trim()
 {
@@ -606,8 +559,8 @@ function __setprompt
 
 	# Show error exit code if there is one
 	if [[ $LAST_COMMAND != 0 ]]; then
-		# PS1="\[${RED}\](\[${LIGHTRED}\]ERROR\[${RED}\])-(\[${LIGHTRED}\]Exit Code \[${WHITE}\]${LAST_COMMAND}\[${RED}\])-(\[${LIGHTRED}\]"
-		PS1="\[${DARKGRAY}\](\[${LIGHTRED}\]ERROR\[${DARKGRAY}\])-(\[${RED}\]Exit Code \[${LIGHTRED}\]${LAST_COMMAND}\[${DARKGRAY}\])-(\[${RED}\]"
+		PS1="\[${RED}\](\[${LIGHTRED}\]ERROR\[${RED}\])-(\[${LIGHTRED}\]Exit Code \[${WHITE}\]${LAST_COMMAND}\[${RED}\])-(\[${LIGHTRED}\]"
+		#PS1="\[${DARKGRAY}\](\[${LIGHTRED}\]ERROR\[${DARKGRAY}\])-(\[${RED}\]Exit Code \[${LIGHTRED}\]${LAST_COMMAND}\[${DARKGRAY}\])-(\[${RED}\]"
 		if [[ $LAST_COMMAND == 1 ]]; then
 			PS1+="General error"
 		elif [ $LAST_COMMAND == 2 ]; then
@@ -647,11 +600,12 @@ function __setprompt
 	fi
 
 	# Date
-	PS1+="\[${DARKGRAY}\](\[${CYAN}\]\$(date +%a) $(date +%b-'%-m')" # Date
-	PS1+="${BLUE} $(date +'%-I':%M:%S%P)\[${DARKGRAY}\])-" # Time
+	#PS1+="\[${DARKGRAY}\](\[${CYAN}\]\$(date +%a) $(date +%b-'%-m')" # Date
+	#PS1+="${BLUE} $(date +'%-I':%M:%S%P)\[${DARKGRAY}\])-" # Time
 
 	# CPU
-	PS1+="(\[${MAGENTA}\]CPU $(cpu)%"
+	#PS1+="(\[${MAGENTA}\]CPU $(cpu)%)"
+	PS1+="\[${MAGENTA}\](CPU $(cpu)%)"
 
 	# Jobs
 	#PS1+="\[${DARKGRAY}\]:\[${MAGENTA}\]\j"
@@ -667,17 +621,20 @@ function __setprompt
 	if [ $SSH2_IP ] || [ $SSH_IP ] ; then
 		PS1+="(\[${RED}\]\u@\h"
 	else
-		PS1+="(\[${RED}\]\u"
+		PS1+="\[${LIGHTBLUE}\](\u@$(hostname)"
 	fi
 
 	# Current directory
-	PS1+="\[${DARKGRAY}\]:\[${BROWN}\]\w\[${DARKGRAY}\])-"
+	#PS1+="\[${DARKGRAY}\]:\[${BROWN}\]\w\[${DARKGRAY}\])-"
+	PS1+="\[${DARKGRAY}\]:\[${BROWN}\]\w\[${LIGHTBLUE}\])"
 
 	# Total size of files in current directory
-	PS1+="(\[${GREEN}\]$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed 's/total //')\[${DARKGRAY}\]:"
+	#PS1+="(\[${GREEN}\]$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed 's/total //')\[${DARKGRAY}\]:"
+	PS1+="\[${GREEN}\]($(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed 's/total //')\[${DARKGRAY}\]:"
 
 	# Number of files
-	PS1+="\[${GREEN}\]\$(/bin/ls -A -1 | /usr/bin/wc -l)\[${DARKGRAY}\])"
+	#PS1+="\[${GREEN}\]\$(/bin/ls -A -1 | /usr/bin/wc -l)\[${DARKGRAY}\])"
+	PS1+="\[${GREEN}\]\$(/bin/ls -A -1 | /usr/bin/wc -l))"
 
 	# Skip to the next line
 	PS1+="\n"
@@ -699,6 +656,6 @@ function __setprompt
 }
 PROMPT_COMMAND='__setprompt'
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/lib/go-1.12/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
