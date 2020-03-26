@@ -1,0 +1,440 @@
+If you are looking for a way to manage your configuration files, please check out Config.
+
+    Ansible
+    Apache HTTP Server
+    BIND
+    CoreOS
+    CUPS
+    DHCP
+    Docker Compose
+    Exim
+    Fluentd
+    HAProxy
+
+    JSON
+    Kickstart
+    Lighttpd
+    monit
+    MySQL
+    Nagios
+    NGINX
+    OpenNTPD
+    OpenLDAP
+    PHP
+
+    Postfix
+    PostgreSQL
+    Puppet
+    Rsyslogd
+    Samba
+    Splunk
+    Squid
+    SSH
+    Syslogd
+
+    syslog-ng
+    tcpd
+    Terraform
+    Travis
+    Varnish
+    vsftpd
+    XML
+    Xorg
+    YAML
+
+Ansible
+
+ansible-playbook --check will not make any changes on remote systems. Any module instrumented to support "check mode" will report what changes they would have made rather than making them.
+
+Command:
+
+ansible-playbook sample.yml --check
+
+Documentation: http://docs.ansible.com/ansible/latest/playbooks_checkmode.html
+
+Apache HTTP Server
+
+configtest runs a configuration file syntax test. It parses the configuration files and either reports Syntax Ok or detailed information about the particular syntax error.
+
+Commands:
+
+apachectl configtest
+apachectl -t
+httpd -t
+
+Documentation: https://httpd.apache.org/docs/2.4/programs/apachectl.html
+
+BIND
+
+named-checkconf checks the syntax, but not the semantics, of a named configuration file. named-checkzone checks the syntax and integrity of a zone file.
+
+Commands:
+
+named-checkconf
+named-checkconf /etc/named.conf
+named-checkzone domain.com /var/named/zone.domain.com
+
+Documentation:
+
+    https://linux.die.net/man/8/named-checkconf
+    https://linux.die.net/man/8/named-checkzone
+
+CoreOS
+
+The online tool validates the Ignition and coreos-cloudinit configs used with CoreOS Container Linux servers.
+
+Tool: https://coreos.com/validate Documentation: https://coreos.com/validate
+
+CUPS
+
+cupsd -f -t runs cupsd in the foreground and tests the configuration file for syntax errors.
+
+Commands:
+
+cupsd -f -t
+cupsd -f -t -c cupsd.conf
+
+Documentation: https://www.cups.org/doc/man-cupsd.html
+
+DHCP
+
+dhcpd -t will test the configuration file for correct syntax, but will not attempt to perform any network operations. dhcpd -T can be used to test the lease database file in a similar way.
+
+Commands:
+
+dhcpd -t
+dhcpd -t -cf dhcpd.conf
+dhcpd -T
+
+Documentation: https://linux.die.net/man/8/dhcpd
+
+Docker Compose
+
+docker-compose config validates the Docker Compose file.
+
+Command:
+
+docker-compose -f docker-compose.yml config
+
+Documentation: https://docs.docker.com/compose/reference/config
+
+Exim
+
+exim -bV checks that the configuration file is syntactically valid.
+
+Command:
+
+exim -bV
+
+Documentation: https://github.com/Exim/exim/wiki/TestingExim
+
+Fluentd
+
+fluentd --dry-run checks the Fluentd configuration without plugins start.
+
+Command:
+
+fluentd --dry-run -c fluent.conf
+
+Documentation: https://docs.fluentd.org/v1.0/articles/config-file#check-configuration-file
+
+HAProxy
+
+haproxy -c checks the config file and exits with code 0 if no error was found, or exits with code 1 if a syntax error was found.
+
+Command:
+
+haproxy -c -f haproxy.cfg
+
+Documentation: https://linux.die.net/man/1/haproxy
+
+JSON
+
+python -m json.tool provides a simple command line interface to validate and pretty-print JSON objects.
+
+Command:
+
+python -m json.tool sample.json &gt; /dev/null
+
+Documentation: https://docs.python.org/3/library/json.html#module-json.tool
+
+Kickstart
+
+ksvalidator verifies the syntax of a kickstart file, a text file that contains configuration information for a Red Hat Enterprise Linux installation.
+
+Command:
+
+ksvalidator -i
+
+Documentation: https://www.mankier.com/1/ksvalidator
+
+Lighttpd
+
+lighttpd -t tests the configuration file for syntax errors and exits.
+
+Command:
+
+lighttpd -t -f lighttpd.conf
+
+Documentation: https://linux.die.net/man/8/lighttpd
+
+monit
+
+monit -t run the syntax check for the control file.
+
+Command:
+
+monit -t
+
+Documentation: https://linux.die.net/man/1/monit
+
+MySQL
+
+mysqld --help --verbose checks the MySQL configuration.
+
+Command:
+
+mysqld --help --verbose 1&gt;/dev/null
+
+Documentation: https://dev.mysql.com/doc/refman/5.7/en/server-options.html
+
+Nagios
+
+nagios -v verifies the information in the configuration files. Nagios will not start monitoring any hosts.
+
+Commands:
+
+nagios -v
+nagios -v nagios.cfg
+
+Documentation: https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/4/en/verifyconfig.html
+
+NGINX
+
+nginx -t checks the configuration file for correct syntax and tries to open files referred in configuration. gixy is a NGINX configuration static analyzer.
+
+Commands:
+
+nginx -t
+nginx -t -c nginx.conf
+gixy
+
+Documentation:
+
+    https://www.nginx.com/resources/wiki/start/topics/tutorials/commandline
+    https://github.com/yandex/gixy
+
+OpenNTPD
+
+ntpd -n runs Configtest mode. It only checks the configuration file for validity.
+
+Command:
+
+ntpd -n
+
+Documentation: https://man.openbsd.org/ntpd
+
+OpenLDAP
+
+slapd -Tt tests whether the configuration file is correct or not.
+
+Commands:
+
+slapd -Tt
+slapd -Tt -f /etc/openldap/slapd.conf
+
+Documentation: https://linux.die.net/man/8/slapd
+
+PHP
+
+php -i shows PHP information.
+
+Command:
+
+php -i
+
+Documentation: http://php.net/manual/en/features.commandline.options.php
+
+Postfix
+
+postfix check warns about bad directory/file ownership or permissions, and creates missing directories.
+
+Command:
+
+postfix check
+
+Documentation: http://www.postfix.org/postfix.1.html
+
+PostgreSQL
+
+pg_ctl reload sends the postgres process a SIGHUP signal, causing it to reread its configuration files (postgresql.conf, pg_hba.conf). Validation errors will prevent the config from being reloaded, and errors will be logged into the Postgres log file.
+
+Command:
+
+pg_ctl reload
+
+Documentation: https://www.postgresql.org/docs/9.5/static/app-pg-ctl.html
+
+Puppet
+
+puppet parser validate validates the syntax of one or more Puppet manifests. It validates the Puppet DSL syntax without compiling a catalog or syncing any resources.
+
+Commands:
+
+puppet parser validate
+puppet parser validate manifest.pp
+
+Documentation: https://puppet.com/docs/puppet/5.3/man/parser.html
+
+Rsyslogd
+
+rsyslogd -N 1 checks the configuration file for correctness. This option is meant to verify a config file.
+
+Command:
+
+rsyslogd -N 1 -f /etc/rsyslog.conf
+
+Documentation: https://linux.die.net/man/8/rsyslogd
+
+Samba
+
+testparm is a simple test program to check an smbd configuration file for internal correctness.
+
+Command:
+
+testparam -s
+
+Documentation: https://www.samba.org/samba/docs/man/manpages-3/testparm.1.html
+
+Splunk
+
+splunk cmd btool check checks for typos in stanza and setting names. This is the same conf checker that runs on splunk start.
+
+Command:
+
+splunk cmd btool check
+
+Documentation: http://docs.splunk.com/Documentation/Splunk/7.0.1/Troubleshooting/Usebtooltotroubleshootconfigurations
+
+Squid
+
+squid -k parse verifies the squid.conf file is valid.
+
+Command:
+
+squid -k parse
+
+Documentation: https://linux.die.net/man/8/squid
+
+SSH
+
+sshd -t is test mode. Only checks the validity of the configuration file and sanity of the keys. sshd -T is extended test mode. Checks the validity of the configuration file, outputs the effective configuration to stdout and then exits.
+
+Commands:
+
+sshd -t
+sshd -T
+
+Documentation: https://linux.die.net/man/8/sshd
+
+Syslogd
+
+syslogd -d turns on debug mode, and writes much debug information on the current tty.
+
+Commands:
+
+syslogd -d
+syslogd -d -f /etc/syslog.conf
+
+Documentation: https://linux.die.net/man/8/syslogd
+
+syslog-ng
+
+syslog-ng -s verifies the syslog-ng configuration file is syntactically correct and exits.
+
+Commands:
+
+syslog-ng -s -f syslog-ng.conf
+syslog-ng --syntax-only --cfgfile=syslog-ng.conf
+
+Documentation: https://linux.die.net/man/8/syslog-ng
+
+tcpd
+
+tcpdchk examines your tcp wrapper configuration and reports all potential and real problems it can find.
+
+Command:
+
+tcpdchk
+
+Documentation: https://www.freebsd.org/cgi/man.cgi?query=tcpdchk
+
+Terraform
+
+terraform validate validates the syntax of the terraform files. Terraform performs a syntax check on all the terraform files in the directory.
+
+Command:
+
+terraform validate
+
+Documentation: https://www.terraform.io/docs/commands/validate.html
+
+Travis
+
+travis lint validates a .travis.yml reduces common build errors such as invalid YAML, missing language keys and unsupported runtime versions.
+
+Command:
+
+travis lint .travis.yml
+
+Documentation: https://docs.travis-ci.com/user/travis-lint
+
+Varnish
+
+varnishd -C compiles the vlc file and if there's a problem, displays a compiler error.
+
+Command:
+
+varnishd -C -f sample.vlc
+
+Documentation: https://linux.die.net/man/1/varnishd
+
+vsftpd
+
+vsftpd olisten=NO starts vsftpd and runs the configuration check, without listening on the network.
+
+Command:
+
+vsftpd olisten=NO
+
+Documentation: https://linux.die.net/man/8/vsftpd
+
+XML
+
+xmllint --schema validates an XML file against an XML schema. xmllink is part of libxml.
+
+Command:
+
+xmllint --noout --schema sample.xsd sample.xml
+
+Documentation: http://xmlsoft.org/xmllint.html
+
+Xorg
+
+Xorg -config tests manually created Xorg configuration files.
+
+Command:
+
+Xorg -config xorg.conf
+
+Documentation: https://www.freebsd.org/doc/handbook/x-config.html
+
+YAML
+
+yaml.rb module provides a Ruby interface for data serialization in YAML format.
+
+Command:
+
+ruby -e "require 'yaml'; puts YAML.load_file('./data.yaml')"
+
+Documentation: https://ruby-doc.org/stdlib-1.9.3/libdoc/yaml/rdoc/YAML.html
