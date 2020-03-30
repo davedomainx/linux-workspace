@@ -1,0 +1,2 @@
+# multiline input from script
+xargs -0 -p -t -n1 terraform import
