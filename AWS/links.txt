@@ -3,3 +3,5 @@ https://cloudsoft.io/aws-transit-gateway-in-action-vpn-to-vpcs-connectivity/
 https://www.sumologic.com/aws/s3/10-things-might-not-know-using-s3/
 
 https://www.bogotobogo.com/DevOps/AWS/
+
+http://aws-cloud.guru/terraform-nested-double-for-loop/
