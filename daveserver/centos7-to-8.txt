@@ -32,3 +32,37 @@ Eir router - changed daveserver static IP maps,
 rebooted daveserver + rebooted beelink - all good
 
 ==
+
+brctl (via bridge-utils) is gone
+	nmcli -f bridge c s
+
+==
+
+dnf upgrade .. also upgraded the kernel
+	on reboot, zfs was gone
+	must follow procedure to uninstall and reinstall zfs again
+
+wget http://download.zfsonlinux.org/epel/zfs-release.el8_1.noarch.rpm
+dnf remove zfs zfs-kmod spl spl-kmod libzfs2 libnvpair1 libuutil1 libzpool2 zfs-release
+dnf install ./zfs-release.el8_1.noarch.rpm
+dnf autoremove
+dnf clean metadata
+dnf install zfs
+zfs list
+/sbin/modprobe zfs
+systemctl restart zfs
+systemctl restart zfs-mount
+systemctl restart zfs-share
+systemctl restart zfs-import-cache
+zfs list
+systemctl restart home.mount
+
+< allow the following through the firewall : 111, 2049 and mountd (rpcinfo -p) >
+
+should now be able to mount zfs FS via NFS
+
+==
+
+got sick of firewall-cmd and iptables.
+switched to native-nftables.
+
