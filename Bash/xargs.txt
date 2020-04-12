@@ -1,2 +1,28 @@
+xargs
+  -t print output command
+  -n1 do 1 line at a time (useful for multiline output)
+  -i .. {} # https://superuser.com/questions/655264/xargs-i-replace-str-option-difference
+
+# safe find + list
+find . -type f -mtime +60 -print0 |xargs -r0 ls --
+# safe find + delete
+find . -type f -mtime +60 -print0 |xargs -r0 rm
+
 # multiline input from script
 xargs -0 -p -t -n1 terraform import
+
+# 
+nft list tables |xargs -i -t -n1 nft flush {}
+nft flush table ip filter
+nft flush table ip6 filter
+nft flush table bridge filter
+nft flush table ip security
+nft flush table ip raw
+nft flush table ip mangle
+nft flush table ip nat
+nft flush table ip6 security
+nft flush table ip6 raw
+nft flush table ip6 mangle
+nft flush table ip6 nat
+nft flush table bridge nat
+
