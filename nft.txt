@@ -1,0 +1,57 @@
+Docker bricked my KVM firewall
+I am sick of firewall-cmd and over iptables
+
+https://www.theurbanpenguin.com/using-nftables-in-centos-8/
+
+https://home.regit.org/netfilter-en/nftables-quick-howto/
+
+# turn off firewalld
+systemctl disable --now firewalld
+systemctl mask firewalld
+reboot
+
+systemctl enable nftables.service --now
+
+# create our basic table
+nft add chain inet filter INPUT \
+{ type filter hook input priority 0 \; policy accept \; }
+
+# all rules all chains
+nft list ruleset
+
+nft list tables
+
+nft list table inet filter
+
+# 3 good rules to get started
+nft add rule inet filter INPUT iif lo accept
+nft add rule inet filter INPUT ct state established,related accept
+nft add rule inet filter INPUT tcp dport 22 accept
+
+# Get handle - useful for insert/delete/adds
+nft list table inet filter -a
+
+# this added the rule at the end (after DROP), so ping still dont work
+nft add rule inet filter INPUT icmp type echo-request accept
+
+# find the relevant handle ..
+nft list table inet filter -a
+
+# delete the rule at position $handle
+nft delete rule inet filter INPUT handle 9
+
+# insert the rule at a good early position (near loopback)
+nft add rule inet filter INPUT position 2 icmp type echo-request accept
+
+# persist nftables through reboot
+nft list ruleset > /etc/sysconfig/nftables.conf
+
+# nuke it
+nft flush table inet filter
+nft delete table inet filter
+
+# restore it
+nft -f /etc/sysconfig/nftables.conf
+
+reboot
+
