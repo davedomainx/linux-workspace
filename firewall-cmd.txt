@@ -1,0 +1,44 @@
+sudo firewall-cmd --list-all
+sudo firewall-cmd --reload              # keep connections
+sudo firewall-cmd --complete-reload     # drop connections
+sudo firewall-cmd --list-all
+sudo firewall-cmd --remove-service=ssh --permanent
+sudo firewall-cmd --add-rich-rule 'rule family="ipv4" source address="x.x.x.x" service name="ssh" accept' --permanent
+sudo firewall-cmd --remove-rich-rule 'rule family="ipv4" source address="x.x.x.x" service name="ssh" accept' --permanent
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-all-rules
+firewall-cmd --add-service=https --permanent
+firewall-cmd --add-service=http --permanent
+firewall-cmd --add-service=tftp --permanent
+firewall-cmd --add-service=xmpp-client --permanent
+firewall-cmd --add-service=xmpp-server --permanent
+firewall-cmd --reload
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-service=https
+firewall-cmd --permanent --zone=public --list-services
+firewall-cmd --permanent --zone=public --add-port=53/tcp
+firewall-cmd --permanent --zone=public --add-port=53/udp
+firewall-cmd ---permanent -add-service=dhcp
+firewall-cmd --reload
+firewall-cmd --permanent --add-service=nfs
+firewall-cmd --permanent --add-service=mountd
+firewall-cmd --permanent --add-service=rpc-bind
+firewall-cmd --permanent --add-service=ftp
+firewall-cmd --permanent --add-port 8443/tcp # foreman-proxy
+firewall-cmd --permanent --add-port 8140/tcp # puppet
+firewall-cmd --permanent --add-port 5910-5930/tcp # server VNC consoles
+# firewall-cmd --list-ports # 5910-5930 were missing ..
+firewall-cmd --reload  ## to fix missing 5910-5930 ports
+firewall-cmd --permanent --direct --add-rule ipv6 filter INPUT  0 -p icmpv6 -j ACCEPT
+firewall-cmd --permanent --add-port=5910-5930/tcp # FIXME : better src restrictions
+firewall-cmd --permanent --add-service=nfs
+firewall-cmd --permanent --add-service=mountd
+firewall-cmd --permanent --add-service=rpc-bind
+firewall-cmd --permanent --add-service=ftp
+firewall-cmd --add-service=vnc-server --permanent
+firewall-cmd --add-service=libvirt --permanent
+firewall-cmd --list-all
+firewall-cmd --permanent --add-service=nfs
+firewall-cmd --permanent --add-service=mountd
+firewall-cmd --permanent --add-service=rpc-bind
+firewall-cmd --reload
