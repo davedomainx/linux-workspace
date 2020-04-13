@@ -43,6 +43,9 @@ nft delete rule inet filter INPUT handle 9
 # insert the rule at a good early position (near loopback)
 nft add rule inet filter INPUT position 2 icmp type echo-request accept
 
+# Range of ports with a source subnet
+nft add rule inet filter INPUT position 7 tcp dport 5900-5910 ip saddr { 192.168.1.0/24 } accept
+
 # persist nftables through reboot
 nft list ruleset > /etc/sysconfig/nftables.conf
 
