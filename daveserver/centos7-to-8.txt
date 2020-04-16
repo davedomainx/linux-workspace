@@ -84,3 +84,33 @@ advanced -> sata SSD -> Ensure "Power on SSD" is NOT selected
 pci/pce -> onboard sas option rom : legacy
 
 # 1st boot option should be 'Centos' and NOT 'Intel SSDs'
+
+==
+QEMU/kvm
+
+/data/backups/jun2019/daveserver-root/dc1.sh
+
+window1 : ssh remote_ip -L 5900:127.0.0.1:5900
+window2 : spicy -h localhost -p 5900 # password in dc1.sh above
+
+-- Cannot find DVD/CD nor hard drive
+
+Booting from DVD/CD ..
+Boot failed : could not read from cdrom (code 0004)
+Booting from Hard Disk ..
+Boot failed : not a bootable disk
+
+No bootable device.
+
+-- Bus/controller error ?
+. suspected virtio-win.iso, but it looks good - downloaded latest version, selinux
+looks good (fails even when off)
+. ah ok, specifying 'virtio' in the cdrom line removes the cdrom error
+
+--disk path=${WINISO},device=cdrom,perms=ro,bus=virtio \
+
+Sigh.... very stupid ... it is incredibly sensitive to cdrom/disk ordering ..
+
+-c ${WINISO} \
+--disk path=${WINVIRT},device=cdrom \
+--disk path=${WINDISK},bus=virtio \
