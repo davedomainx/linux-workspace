@@ -1,5 +1,5 @@
 Docker bricked my KVM firewall
-I am sick of firewall-cmd and over iptables
+I am sick of firewall-cmd and I am over iptables
 
 https://www.theurbanpenguin.com/using-nftables-in-centos-8/
 
@@ -23,10 +23,11 @@ nft list tables
 
 nft list table inet filter
 
-# 3 good rules to get started
+# 3 good rules to get started..
 nft add rule inet filter INPUT iif lo accept
 nft add rule inet filter INPUT ct state established,related accept
-nft add rule inet filter INPUT tcp dport 22 accept
+# .. add a counter to see packets/byte for this rule:
+nft add rule inet filter INPUT tcp dport 22 counter accept
 
 # Get handle - useful for insert/delete/adds
 nft list table inet filter -a
