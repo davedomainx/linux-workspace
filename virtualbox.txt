@@ -6,3 +6,12 @@ VBoxManage modifyvm VM --natfp1 "guestssh,tcp,,2222,,22"
 VBoxManage modifyvm VM --natfp1 "guesthttp,tcp,,8080,,8888"
 vboxmanage controlvm VM poweroff
 vboxmanage unregistervm VM --delete
+
+== packer + Virtualbox ==
+Put these stanzas in your packer .json file.  
+bind address is 127.0.0.1 and that blocks remote vrdp. 0.0.0.0 allows remote vrdp.
+
+"vrdp_bind_address": "0.0.0.0"
+"vrdp_port_min": 5901,
+"vrdp_port_max": 5902,
+
