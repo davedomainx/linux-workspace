@@ -16,7 +16,10 @@ Requirements
 Thunderbolt 3
   Not sure if TB3 should be a hard requirement?
   USB4 coming out 2020-2021 - is backwards compatible with TB3 .. (maybe this is a case for TB3 ..)
-Vesa mount - ultrawides seem to come with 100x100 VESA mounts - Unfortunately most monitor arms seem to max out at 10kgs - AmazonBasics Height Adjustable Steel Monitor Stand
+Vesa mount
+  ultrawides seem to come with 100x100 VESA mounts
+  Unfortunately most monitor arms seem to max out at 10kgs
+  this is okay : AmazonBasics Height Adjustable Steel Monitor Stand
 
 Monitors - non TB3
 ==================
