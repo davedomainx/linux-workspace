@@ -13,19 +13,32 @@ Requirements
 ============
 3440x1440, 21:9
 34 inch
-Thunderbolt ( re-read again USB-C, USB3, Thunderbolt ... )
+Thunderbolt 3
+  Not sure if TB3 should be a hard requirement?
+  USB4 coming out 2020-2021 - is backwards compatible with TB3 .. (maybe this is a case for TB3 ..)
 Vesa mount - ultrawides seem to come with 100x100 VESA mounts - Unfortunately most monitor arms seem to max out at 10kgs - AmazonBasics Height Adjustable Steel Monitor Stand
 
-Monitors
-========
+Monitors - non TB3
+==================
+
 LG 34UC99-W
-  735 EUD amazon.de - excellent price but out of stock ..
+  735 EUD amazon.de - average price, out of stock
   USB-C (not thunderbolt)
   75Mhz refresh rate
   12 kgs
   100x100 VESA mount
   Freesync - best with AMD chipsets
-  
+
+Samsung C34H892WJU
+  649 EUD amazon.de - good price, in stock
+  USB-C (not thunderbolt)
+  100Mhz refresh rate
+  7.9 Kg
+  100x100 VESA Mount
+
+Monitors - TB3
+==============
+
 C34J791WTU
   831 EUD amazon.de - excellent price for TB3 capabilities..
   Thunderbolt x2 (!)
