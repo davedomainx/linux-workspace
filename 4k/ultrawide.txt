@@ -11,14 +11,18 @@ Will my vesa monitor arm handle 100x100 ?
 
 Requirements
 ============
-3440x1440
-USB-C ( re-read again USB-C, USB3, Thunderbolt ... )
+3440x1440, 21:9
+34 inch
+Thunderbolt ( re-read again USB-C, USB3, Thunderbolt ... )
 Vesa mount - ultrawides seem to come with 100x100 VESA mounts - Unfortunately most monitor arms seem to max out at 10kgs - AmazonBasics Height Adjustable Steel Monitor Stand
 
 Monitors
 ========
 LG 34UC99-W
+  Freesync - best with AMD chipsets
   75Mhz refresh rate
   735 EUD amazon.de - excellent price but out of stock ..
   12 kgs
   100x100 VESA mount
+  
+ 
