@@ -1,6 +1,24 @@
-The 4k and 2k monitor setup hasn't really worked out.  Too many issues with fractional scaling even after going to 20.04.
-Ultrawide seems to be an excellent productivity choice.
+The 4k and 2k monitor setup hasn't really worked out.  Too many issues with fractional scaling even after going to 20.04.  The 2k was meant to be the 'reading/browsing' monitor but the resolution squashes the width when in 90 degree orientation.
 
+Curved Ultrawide seems to be an excellent productivity choice.
+
+Note my rpi 4 has Thunderbolt and handles 4k resolution, so in theory it should be a suitable display-host, but it will be glacially slow.
+The beelink doesnt have Thunderbolt unfortunately.
+
+Will my vesa monitor arm handle 100x100 ?
+  No, need to purchase a 75x75 to 100x100 adapter - they are available
+  The monitor arm has a max weight of 6.5kgs and max size of 43-68.5 cm (17"-27")
+
+Requirements
+============
 3440x1440
+USB-C ( re-read again USB-C, USB3, Thunderbolt ... )
+Vesa mount - ultrawides seem to come with 100x100 VESA mounts - Unfortunately most monitor arms seem to max out at 10kgs - AmazonBasics Height Adjustable Steel Monitor Stand
 
+Monitors
+========
 LG 34UC99-W
+  75Mhz refresh rate
+  735 EUD amazon.de - excellent price but out of stock ..
+  12 kgs
+  100x100 VESA mount
