@@ -1,0 +1,6 @@
+The 4k and 2k monitor setup hasn't really worked out.  Too many issues with fractional scaling even after going to 20.04.
+Ultrawide seems to be an excellent productivity choice.
+
+3440x1440
+
+LG 34UC99-W
