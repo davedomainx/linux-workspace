@@ -19,10 +19,17 @@ Vesa mount - ultrawides seem to come with 100x100 VESA mounts - Unfortunately mo
 Monitors
 ========
 LG 34UC99-W
+  735 EUD amazon.de - excellent price but out of stock ..
+  USB-C (not thunderbolt)
   Freesync - best with AMD chipsets
   75Mhz refresh rate
-  735 EUD amazon.de - excellent price but out of stock ..
   12 kgs
   100x100 VESA mount
+  Freesync - best with AMD chipsets
   
- 
+C34J791WTU
+  831.94
+  Thunderbolt x2 (!)
+  100Mhz refresh
+  7.7 Kg
+  100x100 VESA mount
