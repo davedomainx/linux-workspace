@@ -1,8 +1,12 @@
-The 4k and 2k monitor setup hasn't really worked out.  Too many issues with fractional scaling even after going to 20.04.  The 2k was meant to be the 'reading/browsing' monitor but the resolution squashes the width when in 90 degree orientation.
+The 4k and 2k monitor setup hasn't really worked out.  Too many 
+issues with fractional scaling even after going to 20.04.  The 
+2k was meant to be the 'reading/browsing' monitor but the resolution 
+squashes the width when in 90 degree orientation.
 
 Curved Ultrawide seems to be an excellent productivity choice.
 
-Note my rpi 4 has Thunderbolt and handles 4k resolution, so in theory it should be a suitable display-host, but it will be glacially slow.
+Note my rpi 4 has Thunderbolt and handles 4k resolution, so in theory 
+it should be a suitable display-host, but it will be glacially slow.
 The beelink doesnt have Thunderbolt unfortunately.
 
 Will my vesa monitor arm handle 100x100 ?
@@ -13,9 +17,14 @@ Requirements
 ============
 3440x1440, 21:9
 34 inch
-Thunderbolt 3
-  Not sure if TB3 should be a hard requirement?
-  USB4 coming out 2020-2021 - is backwards compatible with TB3 .. (maybe this is a case for TB3 ..)
+Thunderbolt 3 ?
+  USB4 coming out 2020-2021 
+    USB4 backwards compatible with TB3 and USB-C
+      They all use the same connector : USB-C
+    I will need to replace the zenbook and beelink in the next couple of years.
+    maybe this is a strong case to get the TB3 for max flexibility options?
+    TB3 is basically adding 150-200 EUD to the cost of the monitor ..
+  USB-C connector might be the best option.
 Vesa mount
   ultrawides seem to come with 100x100 VESA mounts
   Unfortunately most monitor arms seem to max out at 10kgs
@@ -33,11 +42,25 @@ LG 34UC99-W
   Freesync - best with AMD chipsets
 
 Samsung C34H892WJU
-  649 EUD amazon.de - good price, in stock
+  649 EUD amazon.de - good price, in stock, 2 week delivery time
+    C34H890 = 719 EUD elara.ie
   USB-C (not thunderbolt)
   100Mhz refresh rate
-  7.9 Kg
+  7.9 kgs
   100x100 VESA Mount
+
+BenQ EX3501R # NOTE 35"
+  617 EUD amazon.de
+    goes to 667 when I hit order ..
+    because it doesn't do Prime delivery ..
+  USB-C
+  100Mhz
+  10.5 kgs
+  VESA Mount 
+    not sure 
+    https://www.benq.eu/en-eu/monitor/gaming/ex3501r/specifications.html says it has it
+
+https://www.tftcentral.co.uk/reviews/benq_ex3501r.htm
 
 Monitors - TB3
 ==============
