@@ -3,13 +3,11 @@ issues with fractional scaling even after going to 20.04.  The
 2k was meant to be the 'reading/browsing' monitor but the resolution 
 squashes the width when in 90 degree orientation.
 
-The 4k is starting to black out frequently on heavy duty apps.
+The 4k is starting to black out frequently on heavy duty apps.  Turning 
+the power on/off temporarily fixes it.
 
 Curved Ultrawide seems to be an excellent productivity choice.
 
-Will my vesa monitor arm handle 100x100 ?
-  No, need to purchase a 75x75 to 100x100 adapter - they are available
-  The monitor arm has a max weight of 6.5kgs and max size of 43-68.5 cm (17"-27")
 
 Requirements
 ============
@@ -25,7 +23,8 @@ That is 32:10 3840x1200
   Which is exactly the same as 2x 1920x1200 monitors side-by-side.
 
 KVM Switch
-  Would be nice to have
+  This would be nice to have.
+  Dell and Phillips seem to have these on their ultrawides.
 
 Thunderbolt 3 ?
   USB4 coming out 2020-2021 
@@ -37,9 +36,12 @@ Thunderbolt 3 ?
   USB-C connector might be the best option.
 
 Vesa mount
-  ultrawides seem to come with 100x100 VESA mounts
-  Unfortunately most monitor arms seem to max out at 10kgs
-  this is okay : AmazonBasics Height Adjustable Steel Monitor Stand
+  Ultrawides seem to come with 100x100 VESA mounts.
+  Unfortunately most monitor arms seem to max out at 10kgs.
+  this is okay : AmazonBasics Height Adjustable Steel Monitor Stand.
+  Will my 75x75 vesa monitor arm handle 100x100 ?
+  No, need to purchase a 75x75 to 100x100 adapter - they are available
+  The monitor arm has a max weight of 6.5kgs and max size of 43-68.5 cm (17"-27")
 
 Monitors - 44
 =============
@@ -100,6 +102,10 @@ BenQ EX3501R # NOTE 35"
 	Cancelled 27.April order and purchased this one ..
           ok, amazon no longer selling from this bgf.. company, now back at price-guard..
 	zzz
+	1.May
+	  Requestd cancel of order
+	2.May
+	 bgf.. say they have cancelled it, but order is still there in Amazon
   USB-C
   100Mhz
   10.5 kgs
@@ -107,16 +113,18 @@ BenQ EX3501R # NOTE 35"
     not sure 
     https://www.benq.eu/en-eu/monitor/gaming/ex3501r/specifications.html says it has it
 
-I think this is the best option for price, KVM and other considerations ..
-Wish there was more detail on the KVM though - hard to find..
 Philips 346B1C
-  624 EUD "laptop bits" - nope dodgy seller
+  624 EUD "laptop bits" - nope that is a dodgy seller
     https://www.amazon.de/-/en/gp/aag/main/ref=olp_merch_name_1?ie=UTF8&asin=B07YSC72Y2&isAmazonFulfilled=0&seller=A1MOKIBUTGP0XN
-  750 EUD from others
+  750 EUD from other amazons
+  622 EUD from elara.ie but not in until 28.May
   KVM switch
   100Mhz
-  1500R (max curvature)
-  75x75 VESA Mount
+  1500R (max curvature - a bit nervous about that..)
+    looks okay in the various unboxing youtubes
+  75x75 VESA Mount (says 100 x 100 in manual)
+  I think this is the best option for price, KVM and other considerations ..
+  https://www.reddit.com/r/ultrawidemasterrace/comments/g6eo0d/philips_346b1c_vs_samsung_cf791_review/
 
 Dell U3419W
   KVM switch
