@@ -8,15 +8,18 @@ the power on/off temporarily fixes it.
 
 Curved Ultrawide seems to be an excellent productivity choice.
 
+Thoughts
+========
+3440x1440, 21:9, 34"
+5120x1440, 32:9, 49"
 
-Requirements
-============
-3440x1440, 21:9
+38s and 43s have 1200 vertical resolution - which is same as old 1920x1200
+
 34 inch
   Starting to wonder if 34 will be enough.
     got a 28" and a 23" .. a 34" will practically be identical.
     If I'm spending 6-7-8 hundred euros should I go higher to get a really good monitor ?
-    Tape measure with my 4k and 2k setup is 43"
+    Tape measure diagonally with my 4k and 2k setup is 43"
   
 Strongly tempted to go for 43-44, but the resolutions aren't right.
 That is 32:10 3840x1200
@@ -24,7 +27,9 @@ That is 32:10 3840x1200
 
 KVM Switch
   This would be nice to have.
-  Dell and Phillips seem to have these on their ultrawides.
+  It seems to be standard on high-end monitors.
+  Dell and Phillips have these on their ultrawides.  
+  Dell seems to have best functionality.
 
 Thunderbolt 3 ?
   USB4 coming out 2020-2021 
@@ -42,6 +47,29 @@ Vesa mount
   Will my 75x75 vesa monitor arm handle 100x100 ?
   No, need to purchase a 75x75 to 100x100 adapter - they are available
   The monitor arm has a max weight of 6.5kgs and max size of 43-68.5 cm (17"-27")
+
+Monitors - 49
+=============
+
+3.May
+  Now starting to think 49 - 5120x1440 ..
+  The beelink can drive 5120x1440 - its less than 3840x2160 (4k).
+  
+
+Philips 499P9H/00
+  1050 EUD scan.co.uk (in stock, delivery same week, they ship to Ireland, 2 day notice)
+  5120 x 1440 @ 70 Hz*
+  USBC, DP 1.4, HDMI2
+  11kgs without stand, 15 kgs with stand
+  100x100 VESA
+  KVM switch
+  HDR400
+
+  it looks huge
+
+  bought!
+4.May
+  delayed til 2.June, ffs
 
 Monitors - 44
 =============
@@ -114,6 +142,7 @@ BenQ EX3501R # NOTE 35"
     https://www.benq.eu/en-eu/monitor/gaming/ex3501r/specifications.html says it has it
 
 Philips 346B1C
+  NOTE : new model 346P1CRH/01, but I can't find it for sale anywhere
   624 EUD "laptop bits" - nope that is a dodgy seller
     https://www.amazon.de/-/en/gp/aag/main/ref=olp_merch_name_1?ie=UTF8&asin=B07YSC72Y2&isAmazonFulfilled=0&seller=A1MOKIBUTGP0XN
   750 EUD from other amazons
