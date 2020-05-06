@@ -1,26 +1,36 @@
-bought a 49" monitor.
+bought a 49" monitor 5120x1440.
 I need something decent to drive the 49".
 
 My worsktation is a low-spec beelink NUC bought cheaply and the video isn't great.
 My windows laptop is 5 years old and only really used for WoW and for Conny's work.
 
-I do most of my heavy duty development off the SuperMicro "daveserver", which gets
-alot of use as a Vagrant/Virtual/Docker host.  
+I dont know whether to go for a Mac or go for Windows.
 
-I simply don't know what to get between these:
+I do most of my heavy duty development off the SuperMicro "daveserver", which gets
+alot of use as a Vagrant/Virtual/Docker host.
+
+As of May2020, windows laptops seem cheap
+
+7.May
+  thinking the Macs are the way to go - either mini or air.  Can dualboot.  Triple (Mac, Windows, Linux)
+  seems harder due to boot camp only liking 2 partitions?
 
 Laptops
 =======
 MacBook Air
-  Pros : Superb. Hook into the iMac.
-  Cons : 
+  Pros : Superb.
+  Cons : Can't do heavy duty stuff if I need to go mobile.  No native Windows. 
 MacBook Pro
   Pros : Everything
-  Cons : Costs, Weight
+  Cons : Costs, Weight.  No native Windows platform
 Windows
-  Pros : the Zenbook was superb
+  Pros : the Zenbook was superb.  Gaming.  Windows 10 native.
+  Cons : Might struggle to find a laptop to display 5120x1440.
 
 NUC
 ===
 mini Mac
+  Pros : Great kit for great price.  Can Triple boot MacOS, Linux, Windows 10..
+  Cons : Can't easily use it as a mobile device.
 generic NUC
+  Pros : Windows native
