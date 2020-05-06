@@ -1,0 +1,45 @@
+darnold@beelink:~/Git/linux-workspace$ sudo do-release-upgrade -d
+
+Some third party entries in your sources.list were disabled. You can
+re-enable them after the upgrade with the 'software-properties' tool
+or your package manager.
+
+Not enough free space in /boot..
+sudo apt autoremove
+
+==
+5.4.0 kernel : wireguard built in
+
+==
+sshd
+/etc/ssh/ssh_config.d/ this is now a thing
+did a 3 way merge 
+	AllowUser darnold 
+	/etc/ssh/ssh_config.d/
+
+==
+It tried a few times to uninstall/reinstall VirtualBox
+
+==
+took about 30 minutes all up - reboot at the end
+made the mistake of doing this from the nfs account! dangerous!
+
+==
+SDDM apparently broke.  Starts up but never connects to Xorg - 
+complained about missing auth file, but file was there, owned by SDDM ..
+
+switched to lightdm, had to modify file to use plain plasma, rebooted, 
+lightdm displays, can now login to Xorg.
+
+==
+Many KDE system settings crash ..
+
+==
+apt install tasksel
+Install kubuntu-desktop
+	ffs it uninstalls all (?) packages sigh ....
+
+== 
+Did a complete re-install with the 20.04 ISO
+	The cryptsetup was ok
+Yep, works fine
