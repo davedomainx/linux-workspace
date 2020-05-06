@@ -1,0 +1,26 @@
+bought a 49" monitor.
+I need something decent to drive the 49".
+
+My worsktation is a low-spec beelink NUC bought cheaply and the video isn't great.
+My windows laptop is 5 years old and only really used for WoW and for Conny's work.
+
+I do most of my heavy duty development off the SuperMicro "daveserver", which gets
+alot of use as a Vagrant/Virtual/Docker host.  
+
+I simply don't know what to get between these:
+
+Laptops
+=======
+MacBook Air
+  Pros : Superb. Hook into the iMac.
+  Cons : 
+MacBook Pro
+  Pros : Everything
+  Cons : Costs, Weight
+Windows
+  Pros : the Zenbook was superb
+
+NUC
+===
+mini Mac
+generic NUC
