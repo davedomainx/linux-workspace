@@ -1,0 +1,21 @@
+PC-Hardware that I've had (that I can remember)
+
+PCs
+Beige box.
+Acer-all-in-one.
+
+Laptops
+Old MacBook : 2006-2012 : almost never used
+Zenbook : 2015-2020 : superb
+
+NUCS
+rpi 3 (2018-)
+rpi 4 (2019-)
+both rpis rarely used.  The 3 isn't powerful enough and the 4 has heat issues.
+
+beelink x55 : 2018-2020 : Pretty good for price.
+
+Monitors
+Samsung 27 : 1920x1200 : Fine, no VESA mount
+Philips 24 : 1920x1200 : Fine
+AOC 27 : 4k : 1x Dead pixel on unpacking, power-resume issues [with beelink] ?
