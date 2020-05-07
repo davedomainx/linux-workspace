@@ -1,0 +1,11 @@
+Mac mini
+i7 3.2 Ghz 6-core 12-thread 8th generation burstable to 4.6Ghz
+  i7-8700B
+
+vs
+
+SuperMicro
+ES v1230 v6 3.5 Ghz 4-core 8-thread
+
+----------------
+https://cpu.userbenchmark.com/Compare/Intel-Xeon-E3-1230-v6-vs-Intel-Core-i7-8700/m268848vs3940
