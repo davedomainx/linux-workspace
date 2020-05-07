@@ -1,19 +1,63 @@
 bought a 49" monitor 5120x1440.
-I need something decent to drive the 49".
+I want (need) something decent to drive the 49".
 
-My worsktation is a low-spec beelink NUC bought cheaply and the video isn't great.
+------------------------
+Hardware rationalisation
+
+Starting to get an increasing number of devices.  Time to clean up a bit ?
+
+rpi 3
+rpi 4
+beelink NUC
+Zenbook Laptop
+SuperMicro server
+
+My worsktation is a low-spec beelink NUC bought on the cheap and it seems to struggle 
+driving 4k resolution, and/or it has issues with the 4k monitor.
 My windows laptop is 5 years old and only really used for WoW and for Conny's work.
 
-I dont know whether to go for a Mac or go for Windows.
+Is there a single-solution which can care for the functionality of the below?
+. beelink Linux NUC
+. zenbook windows Laptop
+. SuperMicro server (ZFS Storage)
+No.
+  Combine the NUC and Laptop - just get a good laptop ..
+    I need to be mobile.
+      The question is : how much oomph to go mobile is required ?
+
+  MacAir 13
+    1.2 Ghz i7 4-core 8-thread boostable to 3.8 Ghz
+    16G RAM
+    1 TB SSD
+    2100 EUD
+
+  MacBook Pro 13
+    2.3 Ghz i7 4-core 8-thread boostable to 4.1 Ghz
+    16G RAM
+    1 TB SSD
+    2729 EUD
+
+  MacBook Pro 16
+    2.3 Ghz i9 8-core 16-thread (!) boostable to 4.8 Ghz
+    16G RAM
+    1 TB SSD
+    3330 EUD
+    This is actually by far the best bang for buck - 16" and ridiculous CPU
+    
+  Keep the SuperMicro
+
 
 I do most of my heavy duty development off the SuperMicro "daveserver", which gets
 alot of use as a Vagrant/Virtual/Docker host.
+  The SuperMicro (built 2016) is starting to show it's age a bit..
+  Think need to keep the SuperMicro for the 6TB ZFS storage and ECC memory.
+  Or - really should consider cloud-storage ..
+    Cloud-based Fileserver (stupid..)
 
-As of May2020, windows laptops seem cheap
+As of May2020, windows laptops seem very cheap
 
 7.May
-  thinking the Macs are the way to go - either mini or air.  Can dualboot.  Triple (Mac, Windows, Linux)
-  seems harder due to boot camp only liking 2 partitions?
+  thinking Macs are the way to go - either mini or air.  Can dual/triple boot.
 
 Laptops
 =======
@@ -31,6 +75,6 @@ NUC
 ===
 mini Mac
   Pros : Great kit for great price.  Can Triple boot MacOS, Linux, Windows 10..
-  Cons : Can't easily use it as a mobile device.
+  Cons : Can't easily use it as a mobile device.  Costly if I get 1-2TB SSDs for Triple-boot.
 generic NUC
   Pros : Windows native
