@@ -29,6 +29,7 @@ Search for any recent instance of your sender.example.org vhos
 #
 
 notify{"The value is: ${yourvar}": }
+puppet apply --verbose -e 'if $osfamily == "RedHat" { notify{ $osfamily:}}'
 
 #
 
