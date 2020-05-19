@@ -4,16 +4,14 @@ issues with fractional scaling even after going to 20.04.  The
 squashes the width when in 90 degree orientation.
 
 The 4k is starting to black out frequently on heavy duty apps.  Turning 
-the power on/off temporarily fixes it.
+the power on/off temporarily fixes it.  Probably xorg related.
 
 Curved Ultrawide seems to be an excellent productivity choice.
 
 Thoughts
 ========
-3440x1440, 21:9, 34"
 5120x1440, 32:9, 49"
-
-38s and 43s have 1200 vertical resolution - which is same as old 1920x1200
+3440x1440, 21:9, 34"
 
 34 inch
   Starting to wonder if 34 will be enough.
@@ -25,8 +23,14 @@ Strongly tempted to go for 43-44, but the resolutions aren't right.
 That is 32:10 3840x1200
   Which is exactly the same as 2x 1920x1200 monitors side-by-side.
 
+38s and 43s have 1200 vertical resolution - which is same as old 1920x1200
+
+49 inch
+  5120x1440
+
 KVM Switch
-  This would be nice to have.
+  This would be nice to have, but not essential.
+    Mainly for when setting up hardware.
   It seems to be standard on high-end monitors.
   Dell and Phillips have these on their ultrawides.  
   Dell seems to have best functionality.
@@ -52,7 +56,7 @@ Monitors - 49
 =============
 
 3.May
-  Now starting to think 49 - 5120x1440 ..
+  Now starting to think 49" 
   The beelink can drive 5120x1440 - its less than 3840x2160 (4k).
   
 
@@ -68,8 +72,15 @@ Philips 499P9H/00
   it looks huge
 
   bought!
+
 4.May
   delayed til 2.June, ffs
+15+18.May
+  2 chats with scan.co.uk live support
+  monitor allegedy in Ireland since 15.May but no sight of it in tracking
+19.May
+  email from scan.co.uk - should have it by 21.May ...
+  
 
 Monitors - 44
 =============
