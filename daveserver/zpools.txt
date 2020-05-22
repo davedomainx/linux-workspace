@@ -26,3 +26,72 @@ eg zfs create .. -V data/backups
 this seems to have blocked all attempts at setting quota/mountpoint etc.
 zfs destroy data/backups
 zfs create data/backups  # mountpoint got set automatically
+
+22May2020
+[root@daveserver ~]# zfs get compression data   -      -      -      -      -      -
+NAME  PROPERTY     VALUE     SOURCE
+data  compression  off        local
+[root@daveserver ~]# zfs set compression=lz4 data
+[root@daveserver ~]# zfs get compression data
+NAME  PROPERTY     VALUE     SOURCE
+data  compression  lz4       local
+[root@daveserver ~]#
+
+ZIL and L2ARC stuff:
+https://pthree.org/2012/12/06/zfs-administration-part-iii-the-zfs-intent-log/
+https://gist.github.com/tobert/d583ae84371b851314cf
+http://www.brendangregg.com/blog/2009-06-26/slog-screenshots.html
+https://jrs-s.net/2019/05/02/zfs-sync-async-zil-slog/
+  See also https://jrs-s.net/author/admin/page/4/ for qcow performance increases
+
+gdisk /dev/sdg
+gdisk /dev/sdh
+create 6GB (ZIL) and 52GB (L2ARC) partitions
+
+ZIL:
+ata-SATA3_64GB_SSD_2020032100031-part1 (/dev/sdg1)
+ata-SATA3_64GB_SSD_2020032100076-part1 (/dev/sdh1)
+
+zpool add data log mirror \
+ata-SATA3_64GB_SSD_2020032100031-part1 \
+ata-SATA3_64GB_SSD_2020032100076-part1
+
+L2ARC:
+ata-SATA3_64GB_SSD_2020032100031-part2 (/dev/sdg2)
+ata-SATA3_64GB_SSD_2020032100076-part2 (/dev/sdh2)
+
+zpool add data cache \
+ata-SATA3_64GB_SSD_2020032100031-part2 \
+ata-SATA3_64GB_SSD_2020032100076-part2
+
+If ever I lose the 2 SLOGS : zpool import -m
+
+==========
+
+nothing is ever writing to the SLOG ..
+  writes need to be sync to force the flush
+  NFS is sync on client
+    192.168.1.99:/data/home on /home type nfs4 (rw,relatime,sync,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=192.168.1.9,local_lock=none,addr=192.168.1.99)
+  NFS is sync on server
+    data/home  sharenfs  sec=sys,root_squash,rw=192.168.1.0/24,sync  local
+
+zpool iostat -v 1
+
+[root@daveserver ~]# zfs get sync data
+NAME  PROPERTY  VALUE     SOURCE
+data  sync      standard  default
+[root@daveserver ~]# zfs set sync=always data
+[root@daveserver ~]# zfs get sync data
+NAME  PROPERTY  VALUE     SOURCE
+data  sync      always    local
+
+[root@daveserver system]# zfs get sharenfs data/home
+NAME       PROPERTY  VALUE                                  SOURCE
+data/home  sharenfs  sec=sys,root_squash,rw=192.168.1.0/24  local
+[root@daveserver system]# zfs set sharenfs=sec=sys,root_squash,rw=192.168.1.0/24,sync data/home
+[root@daveserver system]# zfs get sharenfs data/home
+NAME       PROPERTY  VALUE                                       SOURCE
+data/home  sharenfs  sec=sys,root_squash,rw=192.168.1.0/24,sync  local
+[root@daveserver system]#
+
+Bought 2x cheap SSDs to act as SLOGs/L2ARC
