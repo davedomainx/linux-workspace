@@ -83,10 +83,18 @@ Philips 499P9H/00
 20.May
   got it!
   beelink can drive 5120x1440 @ 70Hz as long as it's on leftmost HDMI
-    when on the rightmost HDMI, it seems to fail to hit the full resolution
+    when on the rightmost HDMI, it fails to hit the full resolution.
 
   picture quality is superb @ 70 Hz
   NO DEAD PIXELS !!! YAY !!!
+
+22.May
+  Trying:
+    Office Image : enchance text + dampen brightness
+    SmartContrast : on : analyses screen and adjustes backlight and contrast
+    SmartResponse : Fast
+
+22.May
   
 
 Monitors - 44
