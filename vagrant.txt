@@ -1,0 +1,19 @@
+Should be possible to use zvols to host the Vagrant/VirtualBox disk images.
+
+https://ramsdenj.com/2016/07/21/making-a-zvol-backed-virtualbox-vm-on-linux.html
+
+== Vagrant + Ansible
+# replace ~ with the real Vagrant dir on ZFS 
+cd ~/Vagrant/ansible
+python3 -m venv venv
+source ~/Vagrant/ansible/venv/bin/activate
+# pip3 install --upgrade pip3
+pip3 install --upgrade pip
+pip3 install ansible
+
+== Vagrant ssh
+ed25519 compat is still a thing as of vagrant 2.2.9 and the year 2020 !?
+https://github.com/hashicorp/vagrant/issues/9886
+sudo /opt/vagrant/embedded/bin/gem install ed25519 -v '>= 1.2, < 2.0' -i /opt/vagrant/embedded/gems/$(vagrant --version |cut -f2 -d' ')
+sudo /opt/vagrant/embedded/bin/gem install bcrypt_pbkdf -v '>= 1.0, < 2.0' -i /opt/vagrant/embedded/gems/$(vagrant --version |cut -f2 -d' ')
+
