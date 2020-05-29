@@ -30,4 +30,6 @@
 		
 2020: 
 	ipad air 2019 256GB space grey : 712 EUD
-
+	philips 49 : 1050 EUD
+	daveserver upgrades:
+	  3x small SSDS for cache/slog : 100 EUD
