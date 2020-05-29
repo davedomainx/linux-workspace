@@ -47,6 +47,7 @@ http://www.brendangregg.com/blog/2009-06-26/slog-screenshots.html
 https://jrs-s.net/2019/05/02/zfs-sync-async-zil-slog/
   ** See also https://jrs-s.net/author/admin/page/4/ for qcow performance increases
 https://www.slideshare.net/dpavlin/cuc2013-zfs
+http://tobert.github.io/post/2015-01-22-ioping.html
 
 gdisk /dev/sdg
 gdisk /dev/sdh
