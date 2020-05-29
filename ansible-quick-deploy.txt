@@ -7,7 +7,7 @@ Get environment ready:
 Get Ansible ready:
 
 . Create Vault "ansible_vault.yml" which contains:
-..  become/sudo password
+..  sudo_password: ...
 . Create text-file "ansible_vault.txt" with password of vault
 . Create 'inventory' file
 . Create 'group_of_hosts.yml'
@@ -20,7 +20,7 @@ Get Ansible ready:
 .. vars_files:
 ... - "ansible_vault.yml"
 .. vars:
-... - ansible_become_password: "{{ variable from ansible_vault.yml }}"
+... - ansible_become_password: "{{ sudo_password }}" # from ansible_vault.yml
 
 'Role-based Ansible Structure'
 USE THIS METHOD!  So logical and clean to follow..
