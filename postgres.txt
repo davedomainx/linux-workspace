@@ -1,0 +1,16 @@
+Postgres user/group/role access permission madness
+https://marcyes.com/2016/0922-messing-with-postgresql-users-and-permissions/
+
+psql -Upostgres  #
+\c
+\l
+\dt
+\d+
+
+====
+Windows chocolately
+cinst postgresql-9.6
+# There is no default password with postgres, so this should work ..
+"C:\Program Files\PostgreSQL\9.6\bin\psql.exe" -Upostgres -dsqli -f C:\sql.sql.txt
+
+"destination": "C:\\Users\\Administrator\\AppData\\Roaming\\postgresql\\ppgpass.conf"
