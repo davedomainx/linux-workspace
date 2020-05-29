@@ -30,6 +30,8 @@ aws ec2 describe-images --owners aws-marketplace --filters 'Name=product-code,Va
 
 aws ec2 describe-images --owners aws-marketplace --filters Name=product-code,Values=aw0evgkw8e5c1q413zgy5pjce --query 'Images[*].[CreationDate,Name,ImageId]' --filters "Name=name,Values=CentOS Linux 7*"  --output table|sort -r
 
+aws ec2 describe-images --owners aws-marketplace --filters Name=product-code,Values=aw0evgkw8e5c1q413zgy5pjce --query 'Images[*].[CreationDate,Name,ImageId]' --filters "Name=name,Values=CentOS Linux 6*"  --output table|sort -r
+
 General:
 
 for i in $(aws ec2 describe-images --owner self --query 'Images[*].{id:ImageId}' --output text); do aws ec2 describe-instances --filters "Name=image-id,Values=$i" ;done
