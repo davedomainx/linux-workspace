@@ -22,8 +22,6 @@ If you ever get the below error with iptables_raw,
 then it cannot find/locate the playbook and/or the
 iptables_raw.py file ...
 
-
-
 copy module files to toplevel "library/" directory
 -or-
 specify following option, but doesnt seem to work reliably..
@@ -76,7 +74,6 @@ Looks like need to cast variables to get expected behaviour
       dest: /etc/yum.repos.d/epel.repo                                           
 ~   when: refresh_epel_repos.changed|bool == True and ansible_distribution_major_version|int ==   7
 +   notify: yum-clean-all                                                             
-
 =
 template/j2 variable issues - try to keep conditionals as simple as possible ..
 {% if ansible_distribution_release == "bionic" %}
