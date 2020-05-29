@@ -1,3 +1,4 @@
 https://shapeshed.com/jq-json/
+https://arjanvandergaag.nl/blog/wrestling-json-with-jq.html
 
 jq '.' file.json
