@@ -1,1 +1,0 @@
-https://fedoraproject.org/wiki/How_to_Deploy_Openstack_on_RHEL6_using_Foreman_including_provisioning
