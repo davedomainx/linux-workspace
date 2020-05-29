@@ -1,0 +1,7 @@
+# CKSUM error Dec2019
+# no further errors since 
+ST3000VN000-1HJ166
+
+29May2020:
+/dev/sdd
+198 Offline_Uncorrectable   0x0010   100   100   000    Old_age   Offline      -       16
