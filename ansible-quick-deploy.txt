@@ -1,0 +1,34 @@
+Get environment ready:
+
+. Install the Virtual Environment
+. Install python3
+. Install ansible
+
+Get Ansible ready:
+
+. Create Vault "ansible_vault.yml" which contains:
+..  become/sudo password
+. Create text-file "ansible_vault.txt" with password of vault
+. Create 'inventory' file
+. Create 'group_of_hosts.yml'
+.. hosts: group_of_hosts 
+.. gather_facts: true
+.. become: true
+.. roles
+... common
+... default
+.. vars_files:
+... - "ansible_vault.yml"
+.. vars:
+... - ansible_become_password: "{{ variable from ansible_vault.yml }}"
+
+'Role-based Ansible Structure'
+USE THIS METHOD!  So logical and clean to follow..
+mkdir roles{common,default}
+
+'Traditional Ansible Structure'
+Try to avoid
+
+Run the playbook:
+
+ansible-playbook -vvi ./inventory --vault-password-file ansible_vault.txt ./vmguests.yml
