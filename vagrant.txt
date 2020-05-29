@@ -12,8 +12,27 @@ pip3 install --upgrade pip
 pip3 install ansible
 
 == Vagrant ssh
+trying to get Vagrant ssh working with my own private key.
 ed25519 compat is still a thing as of vagrant 2.2.9 and the year 2020 !?
 https://github.com/hashicorp/vagrant/issues/9886
 sudo /opt/vagrant/embedded/bin/gem install ed25519 -v '>= 1.2, < 2.0' -i /opt/vagrant/embedded/gems/$(vagrant --version |cut -f2 -d' ')
 sudo /opt/vagrant/embedded/bin/gem install bcrypt_pbkdf -v '>= 1.0, < 2.0' -i /opt/vagrant/embedded/gems/$(vagrant --version |cut -f2 -d' ')
 
+ssh -i ssh_key vagrant@localhost -p 2222
+
+for some reason the ssh public key is not being added to 
+  ~vagrant/.ssh/authorized_keys in the Vagrant config.. when I 
+  add it manually and reload sshd, it works perfectly ..
+
+== Vagrant ssh - own ssh key
+Seems need a 2-run process to get your private key added 
+and working with Vagrant .. this should NOT be required ..
+
+1. Run vagrant up with a shell-provisioner to add your private key
+   to ~vagrant/.ssh/authorized_keys:
+   config.vm.provision "copy ssh public key", type: "shell",
+    inline: "echo \"ssh private key\" >> /home/vagrant/.ssh/authorized_keys"
+2. Add all the other config.ssh.* options as required.
+   Run vagrant provision and your own ssh credential
+
+I would have thought Vagrant should be able to gracefully handle this!
