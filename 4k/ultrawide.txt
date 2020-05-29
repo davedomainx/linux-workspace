@@ -1,10 +1,12 @@
 The 4k and 2k monitor setup hasn't really worked out.  Too many 
 issues with fractional scaling even after going to 20.04.  The 
-2k was meant to be the 'reading/browsing' monitor but the resolution 
-squashes the width when in 90 degree orientation.
+2k was meant to be the 'reading/browsing' monitor but the 2k 
+resolution squashes the width when in 90 degree orientation.
 
-The 4k is starting to black out frequently on heavy duty apps.  Turning 
-the power on/off temporarily fixes it.  Probably xorg related.
+The 4k is starting to black out frequently on heavy duty apps.  
+Turning the power on/off temporarily fixes it.  Probably xorg 
+related. ** Seems to be related to the rightmost HDMI port on
+the beelink.
 
 Curved Ultrawide seems to be an excellent productivity choice.
 
@@ -94,8 +96,7 @@ Philips 499P9H/00
     SmartContrast : on : analyses screen and adjustes backlight and contrast
     SmartResponse : Fast
 
-22.May
-  
+  Getting used to the Monitor
 
 Monitors - 44
 =============
