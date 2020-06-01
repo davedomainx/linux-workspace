@@ -1,3 +1,4 @@
+https://kbroman.org/github_tutorial/pages/branching.html
 https://opensource.com/life/16/7/how-restore-older-file-versions-git
 
 ssh git@<git_server> info
@@ -25,3 +26,23 @@ git push -f origin master # potentially dangerous in shared repos
 
 git commit -am "test" --dry-run
 
+== Branching ==
+
+git branch blow-it-up
+git checkout blow-it-up
+.. git checkout -b blow-it-up # one liner for branch+checkout
+git add somefile 
+
+< something critical came up, need to go back to master and create a new branch 
+for a quick sec >
+
+git checkout master
+git checkout -b critical
+do some work
+git commit ..
+git push -u origin HEAD #  -u important 
+
+git checkout master
+git merge critical
+git branch -d critical # delete it locally
+git push origin --delete critical # delete it remotely
