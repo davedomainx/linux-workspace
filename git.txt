@@ -30,6 +30,15 @@ git config --local -l
 cd ~/Git/Work/some_repo
 git config user.email # daves@work.address.com
 
+== Useful ==
+
+# show committed but not pushed
+https://stackoverflow.com/questions/2016901/viewing-unpushed-git-commits/21391629
+
+git diff origin/master..HEAD 
+git log --branches --not --remotes
+git log --branches --not --remotes --simplify-by-decoration --decorate --oneline --graph
+
 == Reset ==
 
 git reset HEAD~		# last commit
