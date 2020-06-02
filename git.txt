@@ -3,20 +3,34 @@ https://opensource.com/life/16/7/how-restore-older-file-versions-git
 
 ssh git@<git_server> info
 
+== Config ==
+
 git config --global user.name "David Arnold"
 git config --global user.email "davedomainx@users.noreply.github.com"
 - OR -
 cd to repo
 git config user.email "davedomainx@users.noreply.github.com"
 
-git clone ssh://git@git_server/some/path/to/repo
-# modify ~ssh/.config for github
 git config --local -l
 git remote -v
 # Wrong - needs to connect as 'git' user ..
 git remote set-url origin ssh://git@github.com/davedomainx/linux-workspace.git
 git remote -v
 git config --local -l
+
+~/.gitconfig:
+[includeIf "gitdir:~/Work/Git"/]
+  path = .gitconfig-work # actually ~/.gitconfig-work
+
+~/.gitconfig-work
+[user]
+  name = David Arnold
+  email = daves@work.address.com
+
+cd ~/Git/Work/some_repo
+git config user.email # daves@work.address.com
+
+== Reset ==
 
 git reset HEAD~		# last commit
 
@@ -46,3 +60,42 @@ git checkout master
 git merge critical
 git branch -d critical # delete it locally
 git push origin --delete critical # delete it remotely
+
+== Branching : show differences ==
+
+git log --oneline --graph --decorate --abbrev-commit master..somebranch
+git log master..somebranch
+
+git diff master..somebranch
+git diff master..aws-provider-upgrade -- prod/dbpg-alto.tf
+
+git difftool -t meld master..somebranch
+
+git config --global diff.tool meld
+git config --global --add difftool.prompt false
+
+== Branching : real-life ==
+
+I did the following in context of upgrading a Terraform provider.
+I wanted to make a directory to move some files to allow
+a terraform init -upgrade to succeed.  Branch+Checkout
+
+git checkout -b aws-provider-upgrade
+mkdir original && mv "some_files" original/
+terraform init -upgrade # successful ..
+git checkout master
+ 
+I expected to be back at the immediate stage prior to running 
+"git checkout -b aws-provider-upgrade", eg, no 'original/some_files*'
+
+however the changes I made (mkdir original && mv some_files original) 
+in the "aws-provider-upgrade" branch carried through after I switched
+back to master ?
+
+https://stackoverflow.com/questions/29415049/git-feature-branch-changes-being-carried-over-to-master
+  Uncomitted changes don't belong to any branch
+
+confirm this by switching the branches:
+
+git checkout aws-provider-upgrade
+git checkout master
