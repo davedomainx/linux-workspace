@@ -1,0 +1,6 @@
+https://zwischenzugs.com/2017/04/23/things-i-wish-i-knew-before-using-jenkins-pipelines/
+
+https://gist.github.com/chinshr/aa87da01ec28335e3ffd
+https://gist.github.com/abayer/925c68132b67254147efd8b86255fd76
+
+https://wilsonmar.github.io/jenkins2-pipeline/
