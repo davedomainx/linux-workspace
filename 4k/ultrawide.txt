@@ -98,6 +98,32 @@ Philips 499P9H/00
 
   Getting used to the Monitor
 
+3.June
+  KVM switch with Keyboard and Mouse receiver plugged into USB slots (monitor).
+
+  It's all about mapping the Video Inputs to the USB inputs.
+
+  https://www.reddit.com/r/ultrawidemasterrace/comments/fk2ycj/philips_499p9h_kvm/
+
+  Unfortunately I seem to get different results with whatever device is plugged
+  into the USB-C input (monitor).
+
+  I also seem to need to switch _both_ the USB inputs and the Video Inputs to
+  get the video/keyboard working .. I could have sworn I only needed to switch
+  the Video Input to get the USB inputs switched with the RPI4 ?
+
+  USB-A input (monitor)
+
+  The RPI4 worked fine (doublecheck)
+    Switch to USB-C input
+
+  The Dell XPS 9570 gives intermittent results (allegedly high-end laptop)
+    Switch to USB-C input
+
+4.June
+  its a great monitor but needs to come in at 200 EUD cheaper with no
+  webcame, no speakers and a working/fixed KVM switch.
+
 Monitors - 44
 =============
 
