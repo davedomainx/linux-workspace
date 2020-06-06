@@ -8,6 +8,7 @@ Acer-all-in-one.  Think bought in Gero and took to Berlin.
 -------
 Laptops
 White MacBook : 2006-2012 : almost never used.  Bought Apple store NYC, sold when I left Gero.
+  This was Apple pre-iphone ....
 Zenbook : 2015-2020 : superb.  Bought in Berlin.
 
 ----
@@ -16,10 +17,16 @@ rpi 3 (2018-)
 rpi 4 (2019-)
 both rpis rarely used.  The 3 isn't powerful enough and the 4 has heat issues.
 
-beelink x55 : 2018-2020 : Pretty good for price.  Issues driving 4k resolution.
+beelink x55 : 2018-2020 : Excellent, main home workstationgoo for price.  Issues driving 4k resolution.
 
 --------
 Monitors
-Samsung 27 : 1920x1200 : Fine, no VESA mount.  In garage.
-Philips 24 243V5 : 1920x1200 : Fine, VESA mount.
-AOC 27 U2879VF : 4k : No VESA mount, 1x Dead pixel on unpacking, power-resume issues [with beelink] ?
+Samsung 27 : 1920x1200 : Fine, no VESA mount, stupid shape of back of monitor means even VESA adapters
+probably not worth it.
+  Threw in electrical recycle garbage May2020.
+
+Philips 24 243V5 : 1920x1200 : Fine, VESA mount, will keep even if almost no use/requirement for it.
+
+AOC 27 U2879VF : 4k : No VESA mount, 1x Dead pixel on unpacking, power-resume issues [with beelink], 
+                     at Work-Office since May2019 for further testing/evaluation, again stupid shape
+                     on back of monitor means 
