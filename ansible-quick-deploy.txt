@@ -16,7 +16,13 @@ Get Ansible ready:
 .. become: true
 .. roles
 ... common
-... default
+.... tasks
+.... handlers
+.... files
+.... templates
+.... vars
+.... defaults
+..... main.yml # just variables, lowest precedence
 .. vars_files:
 ... - "ansible_vault.yml"
 .. vars:
@@ -32,3 +38,25 @@ Try to avoid
 Run the playbook:
 
 ansible-playbook -vvi ./inventory --vault-password-file ansible_vault.txt ./vmguests.yml
+
+===
+
+It is very useful to test on local vagrant images first.  On the Vagrant host:
+
+vagrant ssh-config|grep IdentityFile
+  IdentityFile Vagrant/ubuntu/18.04/.vagrant/machines/default/virtualbox/private_key
+
+scp -P 2202 -i Vagrant/ubuntu/18.04/.vagrant/machines/default/virtualbox/private_key Vagrant/ubuntu/18.04/.vagrant/machines/default/virtualbox/private_key vagrant@127.0.0.1:
+
+# in the Vagrantfile, ensure you map the Git repo between host and guest:
+config.vm.synced_folder "/home/user/Git", "/Git"
+
+vagrant ssh
+
+cd /Git
+echo "127.0.0.1" > inventory
+
+ansible-galaxy install gabops.python
+ansible-galaxy install geerlinguy.elasticsearch
+
+ansible-playbook --private-key ~/private-key -u vagrant -i inventory main.yml
