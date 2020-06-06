@@ -59,4 +59,4 @@ echo "127.0.0.1" > inventory
 ansible-galaxy install gabops.python
 ansible-galaxy install geerlinguy.elasticsearch
 
-ansible-playbook --private-key ~/private-key -u vagrant -i inventory main.yml
+ansible-playbook --private_key ~/private-key -u vagrant -i inventory main.yml

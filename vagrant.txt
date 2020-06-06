@@ -55,12 +55,13 @@ scp -P 2202 -i Vagrant/ubuntu/18.04/.vagrant/machines/default/virtualbox/private
 # in the Vagrantfile, ensure you map the Git repo between host and guest:
 config.vm.synced_folder "/home/user/Git", "/Git"
 
-vagrant ssh
+vagrant {up,provision,ssh}
 
 cd /Git
 echo "127.0.0.1" > inventory
 
 ansible-galaxy install gabops.python
-ansible-galaxy install geerlinguy.elasticsearch
+ansible-galaxy install geerlingguy.pip
+ansible-galaxy install geerlingguy.elasticsearch
 
-ansible-playbook --private-key ~/private-key -u vagrant -i inventory main.yml
+ansible-playbook --private_key ~/private-key -u vagrant -i inventory main.yml
