@@ -36,3 +36,31 @@ and working with Vagrant .. this should NOT be required ..
    Run vagrant provision and your own ssh credential
 
 I would have thought Vagrant should be able to gracefully handle this!
+
+==
+
+https://stackoverflow.com/questions/46256727/why-does-vagrant-use-2-ssh-private-keys
+
+==
+
+===
+
+It is very useful to test on local vagrant images first.  On the Vagrant host:
+
+vagrant ssh-config|grep IdentityFile
+  IdentityFile Vagrant/ubuntu/18.04/.vagrant/machines/default/virtualbox/private_key
+
+scp -P 2202 -i Vagrant/ubuntu/18.04/.vagrant/machines/default/virtualbox/private_key Vagrant/ubuntu/18.04/.vagrant/machines/default/virtualbox/private_key vagrant@127.0.0.1:
+
+# in the Vagrantfile, ensure you map the Git repo between host and guest:
+config.vm.synced_folder "/home/user/Git", "/Git"
+
+vagrant ssh
+
+cd /Git
+echo "127.0.0.1" > inventory
+
+ansible-galaxy install gabops.python
+ansible-galaxy install geerlinguy.elasticsearch
+
+ansible-playbook --private-key ~/private-key -u vagrant -i inventory main.yml
