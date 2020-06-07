@@ -60,8 +60,6 @@ vagrant {up,provision,ssh}
 cd /Git
 echo "127.0.0.1" > inventory
 
-ansible-galaxy install gabops.python
-ansible-galaxy install geerlingguy.pip
-ansible-galaxy install geerlingguy.elasticsearch
+ansible-galaxy install gabops.python && ansible-galaxy install geerlingguy.pip && ansible-galaxy install geerlingguy.elasticsearch && ansible-galaxy install geerlingguy.java
 
-ansible-playbook --private_key ~/private-key -u vagrant -i inventory main.yml
+ansible-playbook --private-key ~/private_key -e "is_vagrant=True" -u vagrant -i inventory main.yml
