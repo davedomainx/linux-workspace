@@ -2,6 +2,9 @@ https://sites.google.com/site/mrxpalmeiras/ansible/ansible-cheat-sheet?tmpl=%2Fs
 
 https://www.digitalocean.com/community/cheatsheets/how-to-use-ansible-cheat-sheet-guide
 
+# quick get filtered facts on localhost
+ansible localhost -m setup -a 'filter=*distribution*'
+
 ansible all -a "uname -a" -i ./inventory
 
 ansible itvm -m setup -i inventory
