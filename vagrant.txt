@@ -57,9 +57,9 @@ config.vm.synced_folder "/home/user/Git", "/Git"
 
 vagrant {up,provision,ssh}
 
+# Following is now handled by a provision script
 cd /Git
 echo "127.0.0.1" > inventory
-
 ansible-galaxy install gabops.python && ansible-galaxy install geerlingguy.pip && ansible-galaxy install geerlingguy.elasticsearch && ansible-galaxy install geerlingguy.java
 
 ansible-playbook --private-key ~/private_key -e "is_vagrant=True" -u vagrant -i inventory main.yml
