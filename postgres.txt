@@ -1,3 +1,5 @@
+psql postgresql://username:password@hostname:port/database
+
 Postgres user/group/role access permission madness
 https://marcyes.com/2016/0922-messing-with-postgresql-users-and-permissions/
 
