@@ -58,5 +58,6 @@ echo "127.0.0.1" > inventory
 
 ansible-galaxy install gabops.python
 ansible-galaxy install geerlinguy.elasticsearch
+ansible-galaxy role install elastic.elasticsearch,7.7.0
 
 ansible-playbook --private_key ~/private-key -u vagrant -i inventory main.yml
