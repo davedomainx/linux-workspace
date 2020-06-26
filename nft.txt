@@ -47,6 +47,10 @@ nft add rule inet filter INPUT position 2 icmp type echo-request accept
 # Range of ports with a source subnet
 nft add rule inet filter INPUT position 7 tcp dport 5900-5910 ip saddr { 192.168.1.0/24 } accept
 
+# Comment a rule
+nft add rule inet filter INPUT position 8 tcp dport 2207 ip saddr { 192.168.1.0/24 } counter accept comment \"Vagrant : Ce
+ntos7\"
+
 # persist nftables through reboot
 nft list ruleset > /etc/sysconfig/nftables.conf
 
