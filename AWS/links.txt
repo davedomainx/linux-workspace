@@ -2,6 +2,8 @@ https://asecure.cloud/
 
 https://cloudsoft.io/aws-transit-gateway-in-action-vpn-to-vpcs-connectivity/
 
+https://labs.detectify.com/2017/07/13/a-deep-dive-into-aws-s3-access-controls-taking-full-control-over-your-assets/
+
 https://www.sumologic.com/aws/s3/10-things-might-not-know-using-s3/
 
 https://www.bogotobogo.com/DevOps/AWS/
