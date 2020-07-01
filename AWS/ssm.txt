@@ -1,0 +1,20 @@
+1) IAM settings
+Create IAM role which allows sts:AssumeRole
+
+            "Action": "sts:AssumeRole",
+            "Principal": {
+               "Service": ["ec2.amazonaws.com"]
+            },
+            "Effect": "Allow",
+            "Sid": ""
+        }
+
+Create IAM instance profile
+  role = above
+Create IAM role policy attachment
+  role = above
+  policy_arn = arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+2) Install SSM agent on EC2s
+
+3) Session Manager ...
