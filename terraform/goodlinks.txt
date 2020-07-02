@@ -1,1 +1,3 @@
 https://tech.instacart.com/terraforming-rds-bonus-anecdote-da1437b0403b
+
+https://www.trek10.com/blog/beginners-guide-to-using-terraform-with-aws
