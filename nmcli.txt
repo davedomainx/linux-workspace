@@ -1,0 +1,1 @@
+nmcli general logging level TRACE domains ALL,VPN_PLUGIN
