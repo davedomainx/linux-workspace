@@ -1,5 +1,7 @@
 https://zwischenzugs.com/
 
+https://jon.sprig.gs/blog/
+
 https://fabianlee.org/2019/02/16/kvm-virt-manager-to-connect-to-a-remote-console-using-qemussh/
 
 https://github.com/mrlesmithjr
