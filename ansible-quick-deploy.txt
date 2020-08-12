@@ -1,17 +1,21 @@
-Get environment ready:
+Get basic environment ready:
 
 . Install the Virtual Environment
 . Install python3
 . Install ansible
 
-Get Ansible ready:
+Install collections if required:
+
+. ansible-galaxy collection install fortinet.fortios:1.0.12
+(installs into:~/.ansible/collections/ansible_collections)
+
+Start work on Ansible:
 
 . Create Vault "ansible_vault.yml" which contains:
 ..  sudo_password: ...
 . Create text-file "ansible_vault.txt" with password of vault
 . Create 'inventory' file
-. Create 'group_of_hosts.yml'
-.. hosts: group_of_hosts 
+. Create 'main.yml'
 .. gather_facts: true
 .. become: true
 .. roles
