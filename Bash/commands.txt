@@ -67,3 +67,10 @@ find . -type f -mtime +60 -print0 |xargs -r0 rm
 
 ===
 nmon - good system overview tool
+
+===
+<node>i-038e4e6e782af65ff</node>
+# to get just the node information
+# cut on '-' and then cut on the '<'
+grep "<node>i-" *|cut -d "-" -f2 |cut -d "<" -f1
+
