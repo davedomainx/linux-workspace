@@ -121,8 +121,19 @@ Philips 499P9H/00
     Switch to USB-C input
 
 4.June
-  its a great monitor but needs to come in at 200 EUD cheaper with no
-  webcame, no speakers and a working/fixed KVM switch.
+  its a great monitor but really needs the following to be removed to reduce the price
+    . no webcam
+    . no speakers 
+    . no ethernet port
+
+  the following should have been added
+    . another USB-C input
+
+18.August
+  The Picture-by-Picture function works very well
+  Need to downsize each screen resolution to 2560x1440
+  Then it's just a matter of using the KVM switch to switch the input between the screens
+  There's no way to keyboard-shortcut the kvm-switch inputs ?
 
 Monitors - 44
 =============
