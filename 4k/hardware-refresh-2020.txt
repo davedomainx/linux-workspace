@@ -93,3 +93,19 @@ mini Mac
   Cons : Can't easily use it as a mobile device.  Costly if I get 1-2TB SSDs for Triple-boot.
 generic NUC
   Pros : Windows native
+
+Zenbook
+=======
+
+UM425IA : not out yet as of 18.Aug.2020
+
+  . CPU : AMD Ryzen 7 4700U
+	4700U doesn't do SMP, so locked to 8 cores / 8 threads
+        4800U does SMP, 8 cores / 16 threads
+
+  . GPU : AMD Radeon Vega 7 
+    Does the graphics output 4k (can I use it on the ultrawdide ?)
+    Yes ? https://en.wikichip.org/wiki/amd/ryzen_7/4700u#Graphics
+
+  . 2x typeC
+
