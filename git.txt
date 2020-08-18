@@ -22,7 +22,7 @@ git config --local -l
 [includeIf "gitdir:~/Work/Git"/]
   path = .gitconfig-work # actually ~/.gitconfig-work
 
-~/.gitconfig-work
+~/.gitconfig-work:
 [user]
   name = David Arnold
   email = daves@work.address.com
@@ -50,6 +50,8 @@ git push -f origin master # potentially dangerous in shared repos
 git commit -am "test" --dry-run
 
 == Branching ==
+
+git remote show origin
 
 git branch blow-it-up
 git checkout blow-it-up
