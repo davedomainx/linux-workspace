@@ -4,10 +4,29 @@ Get basic environment ready:
 . Install python3
 . Install ansible
 
-Install collections if required:
+Install fortios collections if required and remove fortiosapi and pyfg
 
 . ansible-galaxy collection install fortinet.fortios:1.0.12
 (installs into:~/.ansible/collections/ansible_collections)
+
+> pip uninstall fortiosapi
+Uninstalling fortiosapi-1.0.1:
+  Would remove:
+    /home/darnold/IT/Infra/Ansible/fortios2/lib/python2.7/site-packages/fortiosapi-1.0.1.dist-info/*
+    /home/darnold/IT/Infra/Ansible/fortios2/lib/python2.7/site-packages/fortiosapi/*
+Proceed (y/n)? y
+  Successfully uninstalled fortiosapi-1.0.1
+(CPU 3.9%)(darnold@l-itsa01:~/.ansible/collections/ansible_collections)
+> pip uninstall pyfg
+Uninstalling pyfg-0.50:
+  Would remove:
+    /home/darnold/IT/Infra/Ansible/fortios2/lib/python2.7/site-packages/pyfg-0.50-py2.7.egg
+Proceed (y/n)? y
+  Successfully uninstalled pyfg-0.50
+(CPU 3.9%)(darnold@l-itsa01:~/.ansible/collections/ansible_collections)
+>
+
+** fails - fortios required ...
 
 Start work on Ansible:
 
