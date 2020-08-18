@@ -1,0 +1,17 @@
+To use a provider from local system.
+export GOPATH=~/go # mkdir it if required
+Download+make a terraform provider
+providername will be in GOPATH/bin
+
+mkdir ~/.local/share/terraform/plugins/terraform.localhost.org/randomname/providername/1.0.0/linux_amd64
+cp $GOPATH/bin/providername !$/terraform-provider-providername
+
+In versions.tf file:
+
+terraform
+ required_providers
+  myprovidername
+   source = "terraform.localhost.org/randomname/providername"
+   version = ">= 1.0"
+
+terraform init should work at this point
