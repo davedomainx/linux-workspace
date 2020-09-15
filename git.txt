@@ -86,6 +86,11 @@ git difftool -t meld master..somebranch
 git config --global diff.tool meld
 git config --global --add difftool.prompt false
 
+== Cherry ==
+
+git cherry -v master branch1
+git log --cherry master branch1
+
 == Branching : real-life ==
 
 I did the following in context of upgrading a Terraform provider.
