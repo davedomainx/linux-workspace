@@ -32,6 +32,9 @@ aws ec2 describe-images --owners aws-marketplace --filters Name=product-code,Val
 
 aws ec2 describe-images --owners aws-marketplace --filters Name=product-code,Values=aw0evgkw8e5c1q413zgy5pjce --query 'Images[*].[CreationDate,Name,ImageId]' --filters "Name=name,Values=CentOS Linux 6*"  --output table|sort -r
 
+# New CentOS direct-publishing
+aws ec2 describe-images --owners 125523088429  --filters "Name=name,Values=CentOS*"
+
 General:
 
 for i in $(aws ec2 describe-images --owner self --query 'Images[*].{id:ImageId}' --output text); do aws ec2 describe-instances --filters "Name=image-id,Values=$i" ;done

@@ -1,3 +1,13 @@
+===
+
+gpg --recv-keys ID
+
+# must have previously imported or created secret key for ID ..
+gpg --export-secret-keys ID>release.key
+gpg --show-keys<release.key
+
+===
+
 https://www.digitalocean.com/community/tutorials/how-to-use-gpg-to-encrypt-and-sign-messages
 
 [root@share ~]# cat /root/.rpmmacros
