@@ -2,9 +2,11 @@
  
 # https://icesquare.com/wordpress/how-to-fix-the-mess-created-by-zfs-on-linux-after-update/
 
+# below worked Sep2020 when 'dnf update'
+
 yum erase zfs zfs-dkms libzfs2 spl spl-dkms libzpool2 -y
 reboot
-yum install zfs -y # may already be running when machin
+yum install zfs -y
 /sbin/modprobe zfs
 zfs import -a
 zfs list
