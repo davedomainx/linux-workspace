@@ -74,3 +74,6 @@ nmon - good system overview tool
 # cut on '-' and then cut on the '<'
 grep "<node>i-" *|cut -d "-" -f2 |cut -d "<" -f1
 
+===
+replace all occurences of X in last command
+!!:gs/search/replace/
