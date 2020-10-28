@@ -55,6 +55,11 @@ aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-99f836fc" --query 'Su
 
 aws ec2 describe-images --owners self --filters 'Name=name,Values=jenkins-qa-slave-windows-*' |jq '.Images | sort_by(.CreationDate) | . [] | {Name: .Name, Created: .CreationDate, Id: .ImageId}'
 
+== user data ==
+
+aws ec2 describe-instance-attribute --instance-id i-xxx --attribute userData --output text --query "UserData.Value" | base64 --decode
+aws ec2 get-console-output --instance-id i-xxx
+
 == ssm ==
 
 aws ssm start-automation-execution --document-name "AWSSupport-TroubleshootRDP" --parameters "InstanceId=XXX,Firewall=Disable" --region xxx
