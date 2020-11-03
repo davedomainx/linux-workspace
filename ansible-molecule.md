@@ -18,13 +18,45 @@ docker # ubuntu 20.04
   sudo usermod -aG docker username
   docker --version
 pip3 install molecule
-pip3 install docker
+pip3 install 'molecule[docker,lint]'
+pip3 install docker # unsure if required
 reboot # sanity
 
 Existing single role (mariadb)
 ------------------------------
 cd mariadb
-molecule init scenario -r mariadb -d docker # setup molecule in existing role
+# setup molecule in existing role (you must be inside the "mariadb" role)
+# molecule init scenario -r mariadb -d docker # setup molecule in existing role
+molecule init scenario -r mariadb -d docker
+molecule init scenario --role-name ant --driver-name docker
+
+molecule/default/molecule.yml:
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+  #platforms:
+  #- name: instance
+    #image: docker.io/pycontribs/centos:8
+    #image: docker.io/pycontribs/centos:7
+    #pre_build_image: true
+platforms:
+  - name: instance
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: "../../roles" # this is the important one to correctly locate the roles dir
+verifier:
+  name: ansible
+
+# Now can start building/testing
 
 molecule lint # simple linter to ensure everything setup
 
@@ -39,7 +71,7 @@ moleclue destroy # destroys the docker instance
 systemd/services testing
 ------------------------
 Default molecule docker images do not support systemd/services
-testing, so have to use a systemd enabled docker container
+testing, so have to use a systemd enabled docker container (geerlingguy)
 
 change platform in molecule.yml:
 platforms:
@@ -63,13 +95,15 @@ roles/mariadb/molecule/default/converge.yml:
 - name: Converge
   hosts: all
   gather_facts: false
+  vars:
+    set_dummy_var: somevar # temporarily set a variable to pass molecule
   roles:
      - directories
   tasks:
     - include_role:
         name: directories
 
-running 'molecule converge' will pull in the 
+running 'molecule converge' will pull in the 'directories' role
 
 -------------------------
 
