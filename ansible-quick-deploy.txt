@@ -84,3 +84,5 @@ ansible-galaxy install geerlinguy.elasticsearch
 ansible-galaxy role install elastic.elasticsearch,7.7.0
 
 ansible-playbook --private_key ~/private-key -u vagrant -i inventory main.yml
+
+ansible-playbook --extra-vars "packer_builder_type=virtualbox-iso" --connection=local --inventory 127.0.0.1, qa-node-centos7-mc-v2.yml
