@@ -1,3 +1,8 @@
+# for_each, for, setproduct
+https://stackoverflow.com/questions/57378648/needing-multiple-counts-on-a-terraform-resource
+
+https://stackoverflow.com/questions/60716579/terraform-creating-multiple-instances-with-for-each
+
 https://tech.instacart.com/terraforming-rds-bonus-anecdote-da1437b0403b
 
 https://www.trek10.com/blog/beginners-guide-to-using-terraform-with-aws
