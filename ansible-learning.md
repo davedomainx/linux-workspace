@@ -83,3 +83,7 @@ template/j2 variable issues - try to keep conditionals as simple as possible ..
   # Required for successful 18.04 TLS connection
   ldap_tls_reqcert = never
   ldap_tls_cacert= /etc/ssl/certs/local-ca.crt
+
+==
+sshd_config template - example:
+AllowUsers {% if is_vagrant is defined %}vagrant{% endif %} {% if is_aws %} {{ aws_username }} {% endif %} {{ sysadmins_local_account|join(' ') }} jenkins
