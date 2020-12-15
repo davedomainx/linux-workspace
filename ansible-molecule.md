@@ -30,17 +30,13 @@ cd mariadb
 molecule init scenario -r mariadb -d docker
 molecule init scenario --role-name ant --driver-name docker
 
+Replace initial molecule docker image with geerlingguy:
 molecule/default/molecule.yml:
 ---
 dependency:
   name: galaxy
 driver:
   name: docker
-  #platforms:
-  #- name: instance
-    #image: docker.io/pycontribs/centos:8
-    #image: docker.io/pycontribs/centos:7
-    #pre_build_image: true
 platforms:
   - name: instance
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
