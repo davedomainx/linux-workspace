@@ -1,4 +1,16 @@
+https://fy.blackhats.net.au/blog/html/2019/07/05/using_389ds_with_docker.html
+
+# Note that you MUST specify the server with -h or -H, otherwise you'll use 
+# whatevers configured in /etc/ldap/ldap.conf
+
+ldapsearch -ZZ -p 389 -h ldaptest -b "dc=example,dc=com" -D "uid=me,ou=People,dc=example,dc=com" -W
+
 # Note that TLS and SSL are different and require different connection types!
 
 ldapsearch -x -ZZ -H ldap://server -D  'cn=directory manager' -b "cn=encryption,cn=config" # TLS
 ldapsearch -x -H ldaps://server -D  'cn=directory manager' -b "cn=encryption,cn=config" # SSL
+
+# ALWAYS doublecheck you copy ACIs permitting authenticated users to view results!!
+# typically something like this 
+
+aci: (targetattr!="userPassword")(version 3.0; acl "Enable anonymous access"; allow (read, search, compare) userdn="ldap:///anyone";)
