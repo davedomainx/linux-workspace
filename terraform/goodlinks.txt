@@ -1,3 +1,8 @@
+# Splitting up monoliths
+https://thecloud.christmas/2019/11
+https://learn.hashicorp.com/terraform/modules/tf-code-management
+https://www.hashicorp.com/resources/evolving-infrastructure-terraform-opencredo
+
 # for_each, for, setproduct
 https://stackoverflow.com/questions/57378648/needing-multiple-counts-on-a-terraform-resource
 
