@@ -1,0 +1,78 @@
+== Branching ==
+
+# show committed but not pushed
+https://stackoverflow.com/questions/2016901/viewing-unpushed-git-commits/21391629
+
+git diff origin/master..HEAD 
+git log --branches --not --remotes
+git log --branches --not --remotes --simplify-by-decoration --decorate --oneline --graph
+
+git remote show origin
+
+git branch blow-it-up
+git checkout blow-it-up
+.. git checkout -b blow-it-up # one liner for branch+checkout
+git add somefile 
+
+< something critical came up, need to go back to master and create a new branch for a quick sec >
+
+git checkout master
+git checkout -b critical
+do some work
+git commit ..
+git push -u origin HEAD # git push -u origin HEAD
+  # NOTE : -u seems to mess up jenkinsPipeline ..
+
+git checkout master
+git merge critical
+git branch -d critical # delete it locally
+git push origin --delete critical # delete it remotely
+
+== Branching : show differences ==
+
+git log --oneline --graph --decorate --abbrev-commit master..somebranch
+git log master..somebranch
+
+git diff master..somebranch
+git diff master..aws-provider-upgrade -- prod/dbpg-alto.tf
+
+git difftool -t meld master..somebranch
+
+git config --global diff.tool meld
+git config --global --add difftool.prompt false
+
+== Branching : show unmerged ==
+
+git branch --no-merged master
+git log branch1 --not master --stat
+
+== Cherry ==
+
+git cherry -v master branch1
+git log --cherry master branch1
+
+== Branching : real-life ==
+
+I did the following in context of upgrading a Terraform provider.
+I wanted to make a directory to move some files to allow
+a terraform init -upgrade to succeed.  Branch+Checkout
+
+git checkout -b aws-provider-upgrade
+mkdir original && mv "some_files" original/
+terraform init -upgrade # successful ..
+git checkout master
+ 
+I expected to be back at the immediate stage prior to running 
+"git checkout -b aws-provider-upgrade", eg, no 'original/some_files*'
+
+however the changes I made (mkdir original && mv some_files original) 
+in the "aws-provider-upgrade" branch carried through after I switched
+back to master ?
+
+https://stackoverflow.com/questions/29415049/git-feature-branch-changes-being-carried-over-to-master
+  Uncomitted changes don't belong to any branch
+
+confirm this by switching the branches:
+
+git checkout aws-provider-upgrade
+git checkout master
