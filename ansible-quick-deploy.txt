@@ -30,10 +30,12 @@ Proceed (y/n)? y
 
 Start work on Ansible:
 
-. Create Vault "ansible_vault.yml" which contains:
+. Create Vaulted "thisfile.yml" which contains:
+ansible-vault encrypt --vault-password-file <plaintext_file> --output thisfile.yml it-thisfile.yml
 ..  sudo_password: ...
 . Create text-file "ansible_vault.txt" with password of vault
 . Create 'inventory' file
+. Create group_vars/X # linked to sections 'X' in inventory
 . Create 'main.yml'
 .. gather_facts: true
 .. become: true
