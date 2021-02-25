@@ -1,0 +1,13 @@
+ENI : Network Interface.  All EC2s instances are launched with a default, primary, un-modifiable ENI (eth0).
+You can attach additional ENIs to the instance.  You can have multiple IP addresses on the ENI.
+
+A primary private IPv4 address is assigned to the default ENI of the instance, or you can assign one
+yourself.
+
+Subnets have an 'auto assign public ipv4' setting.  
+
+Some AWS managed services also automatically create an ENI (Transit Gateway etc)
+
+EIP : Elastic IP address.  Persistent public IPv4 address.  Associate the EIP with an instance or an ENI.
+If you associate the EIP with the primary/default eth0, then whatever IPv4 address it had originally is 
+released back to AWS.
