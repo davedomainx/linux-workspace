@@ -42,3 +42,12 @@ firewall-cmd --permanent --add-service=nfs
 firewall-cmd --permanent --add-service=mountd
 firewall-cmd --permanent --add-service=rpc-bind
 firewall-cmd --reload
+# also need masquerade turned on in the zone
+firewall-cmd --direct --add-rule ipv4 nat POSTROUTING 0 -s 10.1.0.0/24 -o eth0 -j SNAT --to-source 192.168.20.20
+firewall-cmd --query-masquerade
+firewall-cmd --add-masquerade
+firewall-cmd --remove-masquerade
+iptables -t nat -S
+nft list ruleset|grep nat
+nft list table ip nat
+

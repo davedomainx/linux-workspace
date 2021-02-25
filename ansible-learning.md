@@ -79,6 +79,7 @@ Looks like need to cast variables to get expected behaviour
 +   notify: yum-clean-all                                                             
 =
 template/j2 variable issues - try to keep conditionals as simple as possible ..
+
 {% if ansible_distribution_release == "bionic" %}
   # Required for successful 18.04 TLS connection
   ldap_tls_reqcert = never
@@ -87,3 +88,11 @@ template/j2 variable issues - try to keep conditionals as simple as possible ..
 ==
 sshd_config template - example:
 AllowUsers {% if is_vagrant is defined %}vagrant{% endif %} {% if is_aws %} {{ aws_username }} {% endif %} {{ sysadmins_local_account|join(' ') }} jenkins
+
+== Complex? string conditionals
+
+Really need to understand quoting in ansible ...
+
+when: >
+  not ('"machine1"|string in request.name')
+  or not ('"machine2"|string in request.name')
