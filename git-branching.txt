@@ -80,4 +80,5 @@ git checkout master
 
 == Cleanup ==
 
+https://nickymeuleman.netlify.app/blog/delete-git-branches # very good
 https://gist.github.com/TBonnin/4060788
