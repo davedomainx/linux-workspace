@@ -43,6 +43,7 @@ git config --global --add difftool.prompt false
 
 == Branching : show unmerged ==
 
+git log --all --not master
 git branch --no-merged master
 git log branch1 --not master --stat
 
@@ -76,3 +77,7 @@ confirm this by switching the branches:
 
 git checkout aws-provider-upgrade
 git checkout master
+
+== Cleanup ==
+
+https://gist.github.com/TBonnin/4060788
