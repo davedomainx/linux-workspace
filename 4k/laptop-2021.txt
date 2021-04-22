@@ -1,0 +1,41 @@
+New laptop to replace the Zenbook 
+
+2021
+----
+Asus ROG Flow X13 
+  GV301 GV301QH-K5232T
+    top of the line spec - AMD Ryzen 9 5980, 16GB RAM, 4k screen (for 13 inches ..)
+posibly also:
+  GV301QH-K6294T : UK variant ?
+    5.May estimate on elara.ie
+      https://www.elara.ie/productdetail.aspx?manufacturer=ASUSTEK&mancode=GV301QH-K6294T
+      3700 EUD !?
+  
+
+
+2020
+Zenbook
+=======
+
+UM425IA : not out yet as of 18.Aug.2020
+
+  . CPU : AMD Ryzen 7 4700U
+	4700U doesn't do SMP, so locked to 8 cores / 8 threads
+        4800U does SMP, 8 cores / 16 threads
+
+  . GPU : AMD Radeon Vega 7 
+    Does the graphics output 4k (can I use it on the ultrawdide ?)
+    Yes ? https://en.wikichip.org/wiki/amd/ryzen_7/4700u#Graphics
+
+  . 2x typeC
+
+
+Lenovo Yoga Slim 7
+ ==================
+
+https://www.notebookcheck.net/The-Ryzen-7-4800U-is-an-Absolute-Monster-Lenovo-Yoga-Slim-7-14-Laptop-Review.456068.0.html
+https://www.campuspoint.de/mobile/notebooks/lenovocampus/consumer/yoga-serie/yoga-slim-7.html
+  890 EUD ?!
+
+https://www.komplett.ie/lenovo-yoga-slim-7-82a2005kmh/80057571/product
+  1200 EUD
