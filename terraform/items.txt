@@ -1,0 +1,10 @@
+Remote State
+============
+
+Need to specify how to utilise a different remote state..
+
+To use a remote state 'B' from another state 'A':
+  in B, create an output for whatever needs to be outputted
+  in A, specify B remote_state details as a data source - like so:
+     data.terraform_remote_state.B.outputs.variable_name
+
