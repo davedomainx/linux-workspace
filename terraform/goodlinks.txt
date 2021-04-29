@@ -1,3 +1,6 @@
+# 
+https://blog.gruntwork.io/how-to-manage-terraform-state-28f5697e68fa
+
 # Splitting up monoliths
 https://thecloud.christmas/2019/11
 https://learn.hashicorp.com/terraform/modules/tf-code-management
@@ -10,5 +13,10 @@ https://tech.instacart.com/terraforming-rds-bonus-anecdote-da1437b0403b
 
 https://www.trek10.com/blog/beginners-guide-to-using-terraform-with-aws
 
+=== Variables (surprisingly complicated in TF) ===
+
 # Good description of how data/variables/outputs bubble up and down
 https://freecontent.manning.com/provisioning-the-autoscaling-group/
+
+# tfvars vs tf
+https://amazicworld.com/difference-between-variable-tf-and-variable-tfvars-in-terraform/
