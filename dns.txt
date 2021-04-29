@@ -1,0 +1,27 @@
+https://zwischenzugs.com/2018/06/08/anatomy-of-a-linux-dns-lookup-part-i/
+https://fedoramagazine.org/systemd-resolved-introduction-to-split-dns/
+
+primary company.com is onPrem Bind9.
+
+subdomain aws.company.com is AWS R53.
+
+subdomain delegation has been setup on OnPrem Bind9 to refer aws.company.com
+to R53.
+
+Myself/Users see resolution issues now and then..
+
+sudo resolvectl dns
+.. (tun0) IP_address1, IP_address2 # These are the nameservers
+sudo resolvectl domain
+.. (tun0): ~. company.com
+sudo resolvectl query server.aws.company.com
+.. server.aws.company.com: IP_address             -- link: tun0
+dig server.aws.company.com
+dig @<IP address of AWS r53> server.aws.company.com
+sudo systemd-resolve --flush-caches
+
+===
+systemd-resolved
+# https://www.freedesktop.org/software/systemd/man/nss-resolve.html
+Recommended nsswitch.conf hosts line:
+hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
