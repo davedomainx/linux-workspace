@@ -1,0 +1,73 @@
+Usually one of the easiest parts of learning any computer language
+is understanding how variables work.
+
+In TF, this is surprisingly more difficult than you would think.
+
+== Global variables across modules/roots etc ==
+
+https://medium.com/datamindedbe/avoiding-copy-paste-in-terraform-two-approaches-for-multi-environment-infra-as-code-setups-b26b7251cb11
+
+The easiest(tm) is just symlinking to what you need/want - in this case, I just
+want to share around some common variables ('constants' really) - Office IP address,
+the names of our Engineering teams etc 
+
+I got the below - where each dir/ (except 'modules/') is a seperate TF state :
+
+base/
+  variables.tf
+  resources_which_really_dont_belong_anywhere_else.tf
+  main.tf
+  dev/
+    main.tf
+    variables.tf -> ../variables.tf
+  qa/
+    main.tf
+    variables.tf -> ../variables.tf
+  infra/
+    main.tf
+    variables.tf -> ../variables.tf
+  # 'modules/' is not a seperate state, it's included in the 'base/' state
+  modules/
+    nat_network/
+      main.tf
+      variables.tf -> ../../variables.tf # Bad!
+      outputs.tf
+
+== Locals ==
+
+1) workaround for TF's lack of variable-interpolation in variables
+2) shorten long-winded constructs
+
+---
+
+https://medium.com/@devopsslice/using-locals-or-local-value-in-terraform-8d717ff78b2f
+
+! NOTE
+! You declare/define a local variables with a "locals" block,
+! but you _use_ it with "local.variable" ( note the "locals", NOT "local"! )
+
+TF doesn't currently allow variable interpolation in variable names.
+The way to achieve this is to use a local like so:
+
+variable project {}
+variable environment {}
+
+locals {
+   #combined = "${var.project-var.environment}"
+   combined = var.project-var.environment
+}
+
+Use it as "local.combined" # note that is _local_
+
+---
+
+Another use case is to shorten references to a long-winded construct ..
+
+locals {
+   vpc_id = data.terraform_remote_state.this_state.outputs.vpc_id
+}
+
+resource "aws_security_group" "this" {
+ ..
+ vpc_id = local.vpc_id
+}
