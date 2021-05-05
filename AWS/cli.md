@@ -24,6 +24,14 @@ aws ec2 describe-instances --instance-id <instance> --query 'Reservations[*].Ins
 rdesktop -g 1440x900 -P -z -x l -r sound:off -u vagrant <IP above>:3389
 
 == Images ==
+
+Multiple values
+
+aws ec2 describe-images --owners self --filter "Name=name,Values=eng-*,dev-*,jenkins-mc*,jarvis-*" |jq '.Images | sort_by(.CreationDate) | . [] | {Name: .Name, Id: .ImageId, Created: .CreationDate}'
+
+aws ec2 describe-images --owners self --filter "Name=name,Values=eng-*,dev-*" |jq '.Images | sort
+_by(.CreationDate) | . [] | {Name: .Name, Created: .CreationDate, Id: .ImageId}'
+
 Centos:
 
 aws ec2 describe-images --owners aws-marketplace --filters 'Name=product-code,Values=aw0evgkw8e5c1q413zgy5pjce' --query 'sort_by(Images, &CreationDate)[-1].[ImageId]' --output 'text'
