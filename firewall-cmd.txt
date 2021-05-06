@@ -1,3 +1,16 @@
+## Ansible rich rule with source and port
+
+- name: Allow port 9999 from nominated clients
+  ansible.posix.firewalld:
+    rich_rule: "rule family=ipv4 source address={{ item }} port port=9999 protocol=tcp accept"
+    zone: public
+    permanent: yes
+    immediate: yes
+    state: enabled
+  loop: "{{ firewall_access }}"
+
+##
+
 sudo firewall-cmd --list-all
 sudo firewall-cmd --reload              # keep connections
 sudo firewall-cmd --complete-reload     # drop connections
