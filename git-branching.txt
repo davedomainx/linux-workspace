@@ -8,6 +8,7 @@ git log --branches --not --remotes
 git log --branches --not --remotes --simplify-by-decoration --decorate --oneline --graph
 
 git remote show origin
+git remote -v
 
 git branch blow-it-up
 git checkout blow-it-up
@@ -51,6 +52,16 @@ git log branch1 --not master --stat
 
 git cherry -v master branch1
 git log --cherry master branch1
+
+== Merge remote master branch into local branch ==
+
+# Maybe you got lazy and direct-commited into master and now you need to pull
+# those changes in master into local branch, with possible conflicts
+# -Xtheirs prefers the master branch when resolving conflicts
+
+
+git checkout mybranch
+git merge -Xtheirs origin/master
 
 == Branching : real-life ==
 
