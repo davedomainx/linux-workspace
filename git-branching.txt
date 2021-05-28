@@ -91,5 +91,8 @@ git checkout master
 
 == Cleanup ==
 
+git fetch --prune
+git remote prune origin --dry-run
+
 https://nickymeuleman.netlify.app/blog/delete-git-branches # very good
 https://gist.github.com/TBonnin/4060788
