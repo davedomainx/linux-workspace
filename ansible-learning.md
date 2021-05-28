@@ -7,6 +7,10 @@ https://www.digitalocean.com/community/cheatsheets/how-to-use-ansible-cheat-shee
 # list-tasks - very useful to see what tasks would be applied to a playbook
 ansible-playbook -i ./inventory --vault-password-file ~/vault.txt ./it-ca.yml --list-tasks
 
+# see where the tags are
+- { role: aws_nexus, tags: ["firewall"] } 
+ansible-playbook somefile.yml --list-tasks --tags=firewall
+
 ansible hostname -m setup -i hosts -u ansible --private-key <key>
 
 ansible localhost -m setup -a 'filter=*distribution*'
