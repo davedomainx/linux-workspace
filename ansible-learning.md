@@ -8,8 +8,18 @@ https://www.digitalocean.com/community/cheatsheets/how-to-use-ansible-cheat-shee
 ansible-playbook -i ./inventory --vault-password-file ~/vault.txt ./it-ca.yml --list-tasks
 
 # see where the tags are
+
 - { role: aws_nexus, tags: ["firewall"] } 
+..
+- name: Include additional playbook files
+  include: "{{ item }}"
+  loop:
+    - firewall.yml
+  tags: ["firewall"]
+
 ansible-playbook somefile.yml --list-tasks --tags=firewall
+
+#
 
 ansible hostname -m setup -i hosts -u ansible --private-key <key>
 
