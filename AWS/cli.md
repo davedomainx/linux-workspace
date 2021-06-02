@@ -11,6 +11,8 @@ Shows 'Images' as the toplevel, so I iterate over it like so:
 
 =====================================
 
+aws ec2 describe-tags --filters "Name=resource-id,Values=instance_id
+
 aws ec2 describe-instances
 aws ec2 describe-snapshots --query 'Snapshots[*].{Desc:Description,Owner:OwnerId,ID:SnapshotId}'
 
