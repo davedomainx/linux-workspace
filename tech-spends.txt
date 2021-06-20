@@ -33,3 +33,6 @@
 	philips 49 : 1050 EUD
 	daveserver upgrades:
 	  3x small SSDS for cache/slog : 100 EUD
+	  
+2021:
+	Asus G15 Zephyrus : 2400 EUD
