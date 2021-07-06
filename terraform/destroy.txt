@@ -1,0 +1,4 @@
+# some caution should be exercised ..
+
+terraform plan -destroy -target module.eng-vrt.aws_instance.this[0] -out vrt-destroy.plan
+terraform apply "vrt-destroy.plan"
