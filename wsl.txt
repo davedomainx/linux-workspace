@@ -1,0 +1,16 @@
+# ~/.bashrc:
+
+/usr/bin/keychain -q --nogui ~/.ssh/key1
+/usr/bin/keychain -q --nogui ~/.ssh/key2
+source $HOME/.keychain/G15-laptop-sh
+
+# ~/.keychain/G15-laptop-sh:
+SSH_AUTH_SOCK=/tmp/ssh-IUxEwshhexfL/agent.41; export SSH_AUTH_SOCK;
+SSH_AGENT_PID=42; export SSH_AGENT_PID;
+
+# Note : pkill ssh-agent if it plays up
+
+# Both of these should be identical
+
+ssh-add -l
+keychain --list
