@@ -1,3 +1,11 @@
+# ipv6 needs surrounding brackets in browser URL
+https://[ipv6_addr]/
+# add route
+ip -6 route add ipv6_addr/128 dev tun0
+# get route
+ip -6 route list match ipv6_addr table all
+
+
 9000 vs 9216
 
 With MTU size you need to leave enough room for the headers to be added.

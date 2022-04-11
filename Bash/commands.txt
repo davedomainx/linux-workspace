@@ -1,3 +1,7 @@
+# convert bytes to human-readable
+# or https://github.com/gonejack/hsize
+numfmt --to iec  387217685
+
 ps -eo pcpu,args |grep sge_shepherd|egrep -E '^[90-100].*[[:digit:]]*'
 
 ## show total memory usage of a threaded process..

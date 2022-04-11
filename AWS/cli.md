@@ -175,3 +175,18 @@ aws rds delete-db-instance --db-instance-identifier <db-name> --final-db-snapsho
 
 # this seems to fail if a snapshot is actively being generated ..
 aws rds describe-db-snapshots --query="reverse(sort_by(DBSnapshots, &SnapshotCreateTime))"
+
+== IAM ==
+
+> aws accessanalyzer list-analyzers --query 'analyzers[*].arn'
+[
+    "arn:aws:access-analyzer:eu-central-1:674917045434:analyzer/ConsoleAnalyzer-2b73dde5-0b52-4e17-a0fb-f908ad06444b"
+
+]
+(CPU 2.8%)(darnold@DESKTOP-RFQIJN5:~)(267M:88)
+> aws accessanalyzer list-findings --analyzer-arn arn:aws:access-analyzer:eu-central-1:674917045434:analyzer/ConsoleAnalyzer-2b73dde5-0b52-4e17-a0fb-f908ad06444b
+{
+    "findings": []
+
+}
+

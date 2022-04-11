@@ -2,6 +2,9 @@ https://sites.google.com/site/mrxpalmeiras/ansible/ansible-cheat-sheet?tmpl=%2Fs
 
 https://www.digitalocean.com/community/cheatsheets/how-to-use-ansible-cheat-sheet-guide
 
+# adhoc restrict to 'some_host' from inventory file 'dev' and only show ansible_hostname
+ansible some_host -i dev -m setup -a 'filter=ansible_hostname'
+
 # quick get filtered facts on localhost
 
 # list-tasks - very useful to see what tasks would be applied to a playbook

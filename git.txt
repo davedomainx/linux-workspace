@@ -19,7 +19,7 @@ git remote -v
 git config --local -l
 
 ~/.gitconfig:
-[includeIf "gitdir:~/Work/Git"/]
+[includeIf "gitdir:~/Git/Work"]
   path = .gitconfig-work # actually ~/.gitconfig-work
 
 ~/.gitconfig-work:
