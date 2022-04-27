@@ -10,6 +10,9 @@ Shows 'Images' as the toplevel, so I iterate over it like so:
 'Images[*].{Name:Name,ImageId:ImageId}'
 
 =====================================
+# Find resources not tagged with specific key
+aws resourcegroupstaggingapi get-resources --tags-per-page 100 | jq '.ResourceTagMappingList[] | select(contains({Tags: [{Key: "map-migrated"} ]}) | not)'
+=====================================
 
 aws ec2 describe-tags --filters "Name=resource-id,Values=instance_id
 
