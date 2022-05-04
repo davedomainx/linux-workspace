@@ -48,6 +48,11 @@ aws ec2 describe-images --owners aws-marketplace --filters Name=product-code,Val
 # New CentOS direct-publishing
 aws ec2 describe-images --owners 125523088429  --filters "Name=name,Values=CentOS*"
 
+# Volumes - change termination properties
+aws ec2 modify-instance-attribute --instance-id i-XXX --block-device-mappings "[{\"DeviceName\": \ "/dev/sdf\",\"Ebs\":{\"DeleteOnTermination\":false}}]"
+# no output, but it suceeded. refreshing the instance page/storage in AWS should show the volume is marked
+# for termination - Ah and it now also does not warn you about lingering storage/volumes ....
+
 General:
 
 for i in $(aws ec2 describe-images --owner self --query 'Images[*].{id:ImageId}' --output text); do aws ec2 describe-instances --filters "Name=image-id,Values=$i" ;done
