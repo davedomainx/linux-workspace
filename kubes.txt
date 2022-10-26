@@ -1,0 +1,1 @@
+https://blog.knoldus.com/how-to-setup-a-multinode-kubernetes-cluster-on-vagrant-vms/
