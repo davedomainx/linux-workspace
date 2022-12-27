@@ -1,10 +1,8 @@
-
-
 https://fy.blackhats.net.au/blog/html/2019/07/05/using_389ds_with_docker.html
-
 https://spin.atomicobject.com/2018/10/04/docker-command-line/
 
 watch "docker container ls --format 'table {{.Names}}\t{{.Status}}'"
-
 docker run -d -p 9999:9999 training/webapp:latest python app.py
 
+The ordering of arguments to docker run seems to be very precise ..
+docker run -v "/data/snapshot:/snapshot" -v "/data/node_data:/var/run/tezos/node" --rm --entrypoint "id" tezos/tezos:latest
