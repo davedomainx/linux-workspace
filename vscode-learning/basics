@@ -9,3 +9,11 @@ git config --global --add safe.directory ~/Git/linux-workspace/
 
 Adding repos to a workspace, and then saving that workspace
 seems to get the tree-view I like
+
+===
+
+Basic Git
+
+Bounce between Explorer + Source Code views
+  In source code view click the + to stage
+  Enter a message and then 'commit + push'
