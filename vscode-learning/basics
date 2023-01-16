@@ -1,0 +1,11 @@
+I have vim bindings turned on - works
+
+Doesn't seem to auto-pickup .gitconfig (?)
+  git config user.name # looks good
+  git config user.email # looks good
+  seems to be that user.name wasnt set inside this repo (?)
+
+git config --global --add safe.directory ~/Git/linux-workspace/
+
+Adding repos to a workspace, and then saving that workspace
+seems to get the tree-view I like
