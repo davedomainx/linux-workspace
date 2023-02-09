@@ -9,3 +9,8 @@ docker run -d -p 9999:9999 training/webapp:latest python app.py
 # prints out docker-compose.yml with variables expanded
 docker-compose --env-file=some_folder/.env config
 
+# Show how an image was built
+docker image history --no-trunc image_name > image_history
+
+# CMD vs entrypoint
+https://www.bmc.com/blogs/docker-cmd-vs-entrypoint/
