@@ -1,3 +1,18 @@
+#####
+
+Build + push image
+
+docker build -t <name> .
+# username=dockerhub username
+docker tag <name> <username>/<name>:<tag-version>
+# login to dockerhub, push tagged image and then run tagged image
+docker login -u <username>
+docker push <username>/<name>:<tag-version>
+docker run -ti <username>/<name>:<tag-version>
+
+#####
+
+
 https://fy.blackhats.net.au/blog/html/2019/07/05/using_389ds_with_docker.html
 
 https://spin.atomicobject.com/2018/10/04/docker-command-line/
