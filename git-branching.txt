@@ -1,3 +1,12 @@
+== Rebasing ==
+
+You checked out a branch from master and did some work to it. 
+In the meantime a colleague merged to master, changing the master branch.
+You now need to "rebase" your branch changes with the updated master branch.
+
+git checkout <branch>
+git pull --rebase origin master
+
 == Branching ==
 
  # Easy create new branch and set remote

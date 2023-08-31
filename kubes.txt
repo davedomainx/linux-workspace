@@ -3,3 +3,5 @@ https://blog.knoldus.com/how-to-setup-a-multinode-kubernetes-cluster-on-vagrant-
 
 Think this might be better:
 https://github.com/techiescamp/vagrant-kubeadm-kubernetes
+
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
