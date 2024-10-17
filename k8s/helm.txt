@@ -1,0 +1,74 @@
+helm works off charts
+
+apiversion: v2 (helm v3)
+apiversion: v1 (helm v2)
+
+Typical chart setup
+. service.yml    : kind=service, port setup
+. deployment.yml : kind=deployment, values retrieved from a template file (values.yaml)
+. values.yml     : KV store
+. chart.yml      : information about the Chart itself
+. templates/
+
+helm stores actions/results on the k8s cluster itself as metadata, embedded in k8s cluster as secrets
+
+how does helm know in which k8s cluster to deploy/use ?
+	seems to use the same scope as whatever kubectl is
+
+== useful plugins/links
+
+helm plugin install https://github.com/databus23/helm-diff
+helm diff revision prometheus 8 9 -n prometheus
+# Get the chart name
+helm get metadata prometheus -n prometheus
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm upgrade --debug --dry-run prometheus prometheus-community/kube-prometheus-stack -f ./dev-values.yaml -n prometheus
+
+==
+
+# Add a repo
+helm repo add bitnami https://charts.bitnami.com/bitnami
+# Install from repo with name amaze-surf with version
+helm install amaze-surf bitnami/apache --version x.y.z
+helm list # whats installed
+helm pull bitnami/wordpress # pull but not install
+helm pull --untar bitnami/wordpress # pull but untar
+helm install my-release ./wordpress # install from untarred directory 
+
+==
+
+#helm history prometheus --kubeconfig ~/.kube/config -n prometheus
+helm history prometheus -n prometheus
+helm get values prometheus -n prometheus --revision 9
+
+== my first actuall helm deploy :)
+
+darnold@DESKTOP-C08IW88:~/Git/Work/infrastructure/finoa-k8s-tools/prometheus$ helm history prometheus -n prometheus
+REVISION        UPDATED                         STATUS          CHART                           APP VERSION     DESCRIPTION
+1               Mon Apr 29 14:07:46 2024        superseded      kube-prometheus-stack-58.1.3    v0.73.1         Install complete
+2               Mon Apr 29 15:50:34 2024        pending-upgrade kube-prometheus-stack-58.1.3    v0.73.1         Preparing upgrade
+3               Mon Apr 29 15:53:56 2024        superseded      kube-prometheus-stack-58.1.3    v0.73.1         Rollback to 2
+4               Wed May 22 14:51:27 2024        superseded      kube-prometheus-stack-58.1.3    v0.73.1         Upgrade complete
+5               Tue Jun 11 08:31:58 2024        superseded      kube-prometheus-stack-58.1.3    v0.73.1         Upgrade complete
+6               Tue Jun 11 08:40:25 2024        superseded      kube-prometheus-stack-58.1.3    v0.73.1         Upgrade complete
+7               Tue Jun 11 13:16:26 2024        superseded      kube-prometheus-stack-60.0.2    v0.74.0         Upgrade complete
+8               Tue Jun 11 13:21:36 2024        superseded      kube-prometheus-stack-60.0.2    v0.74.0         Upgrade complete
+9               Mon Jun 17 15:44:09 2024        deployed        kube-prometheus-stack-60.1.0    v0.74.0         Upgrade complete
+
+
+darnold@DESKTOP-C08IW88:~/Git/Work/infrastructure/finoa-k8s-tools/prometheus$ helm upgrade prometheus prometheus-community/kube-prometheus-stack -f ./dev-values.yaml -n prometheus
+Release "prometheus" has been upgraded. Happy Helming!
+NAME: prometheus
+LAST DEPLOYED: Thu Jun 20 10:39:16 2024
+NAMESPACE: prometheus
+STATUS: deployed
+REVISION: 10
+TEST SUITE: None
+NOTES:
+kube-prometheus-stack has been installed. Check its status by running:
+  kubectl --namespace prometheus get pods -l "release=prometheus"
+
+Visit https://github.com/prometheus-operator/kube-prometheus for instructions on how to create & configure Alertmanager and Prometheus instances using the Operator.
+darnold@DESKTOP-C08IW88:~/Git/Work/infrastructure/finoa-k8s-tools/prometheus$
