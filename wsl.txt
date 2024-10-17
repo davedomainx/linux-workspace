@@ -1,3 +1,6 @@
+# in WSL
+wsl.exe -l -v
+
 # ~/.bashrc:
 
 /usr/bin/keychain -q --nogui ~/.ssh/key1
@@ -14,3 +17,7 @@ SSH_AGENT_PID=42; export SSH_AGENT_PID;
 
 ssh-add -l
 keychain --list
+
+=====
+
+Install Windows Terminal from Windows store

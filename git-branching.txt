@@ -1,4 +1,18 @@
+== Rebasing ==
+
+You checked out a branch from master and did some work to it. 
+In the meantime a colleague merged to master, changing the master branch.
+You now need to "rebase" your branch changes with the updated master branch.
+
+git checkout <branch>
+git pull --rebase origin master
+
 == Branching ==
+
+ # Easy create new branch and set remote
+ git config --global push.default current
+ git checkout -b mynewbranch
+ git push -u
 
 # show committed but not pushed
 https://stackoverflow.com/questions/2016901/viewing-unpushed-git-commits/21391629

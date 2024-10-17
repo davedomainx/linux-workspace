@@ -1,0 +1,32 @@
+#####
+
+Build + push image
+
+docker build -t <name> .
+# username=dockerhub username
+docker tag <name> <username>/<name>:<tag-version>
+
+# login to dockerhub, push tagged image and then run tagged image
+docker login -u <username>
+docker push <username>/<name>:<tag-version>
+docker run -ti <username>/<name>:<tag-version>
+
+#####
+
+
+https://fy.blackhats.net.au/blog/html/2019/07/05/using_389ds_with_docker.html
+
+https://spin.atomicobject.com/2018/10/04/docker-command-line/
+
+watch "docker container ls --format 'table {{.Names}}\t{{.Status}}'"
+
+docker run -d -p 9999:9999 training/webapp:latest python app.py
+
+# prints out docker-compose.yml with variables expanded
+docker-compose --env-file=some_folder/.env config
+
+# Show how an image was built
+docker image history --no-trunc image_name > image_history
+
+# CMD vs entrypoint
+https://www.bmc.com/blogs/docker-cmd-vs-entrypoint/
