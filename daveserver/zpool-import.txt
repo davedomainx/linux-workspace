@@ -1,0 +1,48 @@
+# imported a centos 8 zpool into a Debian12 system
+
+root@daveserver:/home/dave# zpool import -a
+cannot import 'data': pool was previously in use from another system.
+Last accessed by daveserver.davedomain (hostid=0) at Sun Aug 18 18:35:42 2024
+The pool can be imported, use 'zpool import -f' to import the pool.
+root@daveserver:/home/dave# zpool import -f
+   pool: data
+     id: 1829728891410489967
+  state: ONLINE
+status: Some supported features are not enabled on the pool.
+        (Note that they may be intentionally disabled if the
+        'compatibility' property is set.)
+ action: The pool can be imported using its name or numeric identifier, though
+        some features will not be available without an explicit 'zpool upgrade'.
+ config:
+
+        data                                        ONLINE
+          raidz2-0                                  ONLINE
+            ata-ST3000VN000-1HJ166_W6A17BE9         ONLINE
+            ata-ST3000VN000-1HJ166_W6A17B8N         ONLINE
+            ata-ST3000VN000-1HJ166_W6A17AMV         ONLINE
+            ata-ST3000VN000-1HJ166_W6A17MR1         ONLINE
+        cache
+          sdg2
+          sdh2
+        logs
+          mirror-1                                  ONLINE
+            ata-SATA3_64GB_SSD_2020032100031-part1  ONLINE
+            ata-SATA3_64GB_SSD_2020032100076-part1  ONLINE
+root@daveserver:/home/dave
+
+# needed to force import it by name to make it come good:
+
+root@daveserver:/home/dave# zpool import -f data
+cannot share 'data/backups: system error': NFS share creation failed
+cannot share 'data/home: system error': NFS share creation failed
+cannot share 'data/iso: system error': NFS share creation failed
+Import was successful, but unable to share some datasets
+root@daveserver:/home/dave# zfs list
+NAME                        USED  AVAIL  REFER  MOUNTPOINT
+data                       1.02T  4.62T  15.6G  /data
+data/backups               29.0G  71.0G  29.0G  /data/backups
+data/home                   432G   568G   432G  /data/home
+data/img                    972M  4.12T   972M  /data/img
+data/iso                   44.0G   156G  44.0G  /data/iso
+data/ns1.davedomain-disk1  10.3G  4.13T  2.35G  -
+data/windows-pool          6.78G   193G  6.78G  /data/windows-pool
